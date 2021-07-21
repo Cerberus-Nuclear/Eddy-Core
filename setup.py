@@ -4,7 +4,7 @@ with open("README.md", "r") as readme:
     long_description = readme.read()
 
 setuptools.setup(
-    name="eddy_mc_core",
+    name="eddy-mc-core",
     version="0.4.0",
     author="Cerberus Nuclear",
     author_email="nuclear@cerberusnuclear.com",
@@ -20,6 +20,5 @@ setuptools.setup(
         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
         "Operating System :: OS Independent",
     ],
-    scripts=['bin/eddy'],
     python_requires='>=3.6',
 )
