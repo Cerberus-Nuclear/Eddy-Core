@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+<head>
+    <meta charset="UTF-8">
+    <title>Criticality.out: MCNP Results</title>
+    
+<style type="text/css">
+
+/*----------------------------------------------------------------------
+    CSS RESET
+    http://meyerweb.com/eric/tools/css/reset/
+    v2.0 | 20110126
+    License: none (public domain)
+----------------------------------------------------------------------*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*----------------------------------------------------------------------*/
+/* End of CSS Reset */
+/*----------------------------------------------------------------------*/
+
+
+
+
+html, body {
+    height: 100%;
+    background-color: white;
+    font-family: "Work Sans", Raleway, sans-serif;
+    }
+
+p {
+    text-align: center;
+    color: #333333
+    }
+
+h1 {
+    text-align: center;
+    padding: 10px 0px;
+    color: #1c76bc;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 20px;
+    }
+
+details > summary {
+    text-align: center;
+    padding: 10px 0px;
+    color: #1c76bc;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+details > summary:focus {
+    outline: 0px
+}
+
+h2 {
+    text-align: center;
+    padding: 10px 0px;
+    color: #333333;
+    font-size: 20px;
+    font-weight: bold;
+    }
+
+h3 {
+    text-align: center;
+    padding: 10px 0px;
+    color: #333333;
+    font-size: 16px;
+    }
+
+table {
+    text-align:center;
+    border-collapse:collapse;
+    margin:auto;
+    /* line-height:10px; */
+    border:1px solid black;
+    }
+
+td {
+    padding:10px;
+    /* line-height: 120%; */
+    font-size:14px;
+    color: #333333;
+    border:1px solid black;
+    }
+
+th {
+    padding:10px;
+    line-height: 120%;
+    font-size:14px;
+    color: #333333;
+    border:1px solid black;
+    background-color: #cce0ff;
+    font-weight: bold;
+    }
+
+sup {
+    vertical-align: super;
+    font-size: smaller;
+    }
+
+div {
+    padding: 20px 0px;
+    }
+
+.navbar {
+    position: fixed;
+    background-color: #cce0ff;
+    margin: 0;
+    border-bottom: 1px solid #1c76bc ;
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    }
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    }
+
+.navbar li a {
+    padding: 5px 20px;
+    line-height: 170%;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    color: rgba(51,51,51,1);
+    }
+
+.navbar a:hover {
+    background-color: #1c76bc;
+    color: #FFFFFF;
+    }
+
+#logo {
+    text-align: center;
+    padding-top: 100px;
+    }
+
+#logo img{
+    display: inline-block;
+    width: 50%;
+    height: auto;
+    }
+
+#heading h1 {
+    font-size: 60px;
+    padding-top: 100px;
+}
+
+.details {
+    padding: 10px;
+    table-layout: fixed;
+    width: 50%;
+    text-align:center;
+    border-collapse:collapse;
+    }
+
+.details td {
+    font-size: 20px;
+    text-align:center;
+    width: 50%;
+    word-wrap: break-word;
+    vertical-align: middle;
+    }
+
+.tally {
+    padding-bottom: 50px;
+}
+
+.tally_results {
+    padding: 1px;
+}
+
+.tally_checks {
+    padding: 1px;
+}
+
+.termination_warning {
+    color: red;
+    font-size: 32px;
+}
+
+#warnings, #duplicates, #comments, #fatal_errors {
+    text-align: center;
+    }
+
+#warning_messages, #duplicate_messages, #comment_messages, #fatal_messages {
+    display:inline-block;
+    padding: 5px
+    }
+
+#fatal_messages, p {
+    text-align: left;
+    padding: 5px;
+    }
+
+#warning_messages, p {
+    text-align: left;
+    padding: 5px;
+    }
+
+#duplicate_messages, p {
+    text-align: left;
+    padding: 5px;
+    }
+
+#comment_messages p {
+    text-align: left;
+    padding: 5px;}
+
+#input_deck{
+    text-align: center;
+    margin: auto;
+    }
+
+#input {
+    display: inline-block;
+    }
+
+#input p {
+    white-space:pre;
+    font-family: Courier,monospace;
+    text-align:left;
+    }
+
+#cerberus_credit p {
+    text-align: center;
+    padding: 5px 50px 5px 50px;
+    line-height: 150%;
+    }
+
+
+</style>
+</head>
+
+<body>
+
+
+<div class="navbar">
+    <ul>
+      <li><a href="#top">Home</a></li>
+      
+      
+      <li><a href="#k_effective">K-Effective</a></li>
+      
+      
+      <li><a href="#cycles">Cycles</a></li>
+      
+      
+      <li><a href="#warnings">Warnings</a></li>
+      
+      
+      <li><a href="#comments">Comments</a></li>
+      
+      
+      <li><a href="#cells">Cells</a></li>
+      
+      <li><a href="#neutron">Neutrons</a></li>
+      
+      
+      <li><a href="#neutron_populations">Neutron Populations</a></li>
+      
+      <li><a href="#input_deck">MCNP Input</a><li>
+    </ul>
+</div>
+
+<!--
+<div id="logo">
+  <img class="logo" src="https://cerberusnuclear.com/wp-content/uploads/2020/10/EddyLinkedin.jpg" alt="Eddy logo" width=50% height=auto>
+</div>
+-->
+
+<div id="heading">
+    <h1>Criticality.out</h1>
+</div>
+
+
+<div id="details">
+<details open>
+    <summary>Summary</summary>
+    <table class="details">
+    <tr>
+      <td style="background-color: #cce0ff;">Input Generated from MCNP Case</td>
+      <td>mcnp_examples\Criticality.out</td>
+    </tr>
+    <tr>
+      <td style="background-color: #cce0ff;">MCNP Case Executed</td>
+      <td style="white-space: pre">2020/11/05   14:29:59</td>
+    </tr>
+    <tr>
+      <td style="background-color: #cce0ff;">HTML Output Created</td>
+      <td style="white-space: pre;">2021/07/21   12:05:15</td>
+    </tr>
+    <tr>
+      <td style="background-color: #cce0ff;">Scaling Factor: </td>
+      <td>1.500e+00 </td>
+    </tr>
+    
+    
+    </table>
+</details>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+<div id="k_effective">
+<details>
+    <summary>K-Effective</summary>
+    <table class="table">
+        <tr>
+            <th>Problem</th>
+            <th>K-Effective</th>
+            <th>Standard Deviation</th>
+        </tr>
+        <tr>
+            <td>First Half</td>
+            <td>0.7828</td>
+            <td>0.00061</td>
+        </tr>
+        <tr>
+            <td>Second Half</td>
+            <td>0.78235</td>
+            <td>0.00067</td>
+        </tr>
+        <tr>
+            <td>Final Result</td>
+            <td>0.78257</td>
+            <td>0.00045</td>
+        </tr>
+    </table>
+</details>
+</div>
+
+
+
+
+<div id="cycles">
+<details>
+    <summary>Cycles</summary>
+    <table class="table">
+        <tr>
+            <td>Inactive Cycles</td>
+            <td>16</td>
+        </tr>
+        <tr>
+            <td>Active Cycles</td>
+            <td>184</td>
+        </tr>
+        <tr>
+            <td>Total Cycles</td>
+            <td>200</td>
+        </tr>
+    </table>
+</details>
+</div>
+
+
+
+
+<div id="warnings">
+<details>
+    <summary>Warnings</summary>
+    <div id="warning_messages">
+        <p style="font-weight: bold">The following warning messages were generated:</p>
+        
+        
+        <p>Kcode usually needs s(a,b) physics (mt card)</p>
+        
+        
+        
+        <p>3 materials had unnormalized fractions. print table 40.</p>
+        
+        
+    </div>
+</details>
+</div>
+
+
+
+
+<div id="comments">
+<details>
+    <summary>Comments</summary>
+    <div id="comment_messages">
+        <p style="font-weight: bold">The following comments were generated:</p>
+        
+        <p>Physics models disabled.</p>
+        
+        <p>Total fission nubar data are being used.</p>
+        
+        <p>Setting up hash-based fast table search for xsec tables</p>
+        
+        <p>Entropy of the fission source distribution will be computed</p>
+        
+        <p>The mesh for source entropy is based on the site coordinates</p>
+        
+        <p>Using  7 x  7 x  7 =   343  mesh cells</p>
+        
+        <p>Xmin= -4.5432e+01     xmax=  2.3487e+02</p>
+        
+        <p>Ymin= -7.4983e+00     ymax=  7.4865e+00</p>
+        
+        <p>Zmin= -7.5282e+00     zmax=  7.4901e+00</p>
+        
+        <p>The mesh will be automatically expanded if necessary to</p>
+        
+        <p>Encompass the entire fission source distribution</p>
+        
+        <p>Average fission-source entropy for the last half of cycles:</p>
+        
+        <p>H=  4.29e+00  with population std.dev.=  1.08e-02</p>
+        
+        <p>Cycle   48 is the first cycle having fission-source</p>
+        
+        <p>Entropy within 1 std.dev. of the average</p>
+        
+        <p>Entropy for the last half of cycles.</p>
+        
+        <p>At least this many cycles should be discarded.</p>
+        
+        <p>Source entropy convergence check passed.</p>
+        
+    </div>
+</details>
+</div>
+
+
+
+
+
+
+<div id="cells">
+<details>
+    <summary>Cells</summary>
+    <table>
+        <!--header-->
+        <tr>
+            <th>Cell Number</th>
+            <th>Material</th>
+            <th>Mass (g)</th>
+            <th>Volume (cm^3)</th>
+        </tr>
+        <!--data-->
+        
+        <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>8.240e+03</td>
+            <td>6.945e+02</td>
+        </tr>
+        
+        <tr>
+            <td>11</td>
+            <td>2</td>
+            <td>3.181e+03</td>
+            <td>1.763e+02</td>
+        </tr>
+        
+        <tr>
+            <td>901</td>
+            <td>0</td>
+            <td>0.000e+00</td>
+            <td>0.000e+00</td>
+        </tr>
+        
+        <tr>
+            <td>902</td>
+            <td>3</td>
+            <td>9.842e+03</td>
+            <td>9.842e+03</td>
+        </tr>
+        
+        <tr>
+            <td>999</td>
+            <td>0</td>
+            <td>0.000e+00</td>
+            <td>0.000e+00</td>
+        </tr>
+        
+        <tr></tr>
+    </table>
+</details>
+</div>
+
+
+
+<div id="neutron">
+<details>
+    <summary>Neutron Summary</summary>
+    <div id="neutron_creation_table">
+        <h2>Neutron Creation</h2>
+        <table>
+            <tr>
+                <th>Source</th>
+                <th>Tracks</th>
+                <th>Weight</th>
+                <th>Energy</th>
+            </tr>
+            
+            
+            <tr>
+                <td>Source</td>
+                <td>1499377</td>
+                <td>1.0</td>
+                <td>2.1421</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Nucl. Interaction</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Particle Decay</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Weight Window</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Cell Importance</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Weight Cutoff</td>
+                <td>0</td>
+                <td>0.013463</td>
+                <td>0.00239</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>E Or T Importance</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Dxtran</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Forced Collisions</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Exp. Transform</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Upscattering</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>4.3066e-10</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Photonuclear</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>(N,Xn)</td>
+                <td>2286</td>
+                <td>0.00089617</td>
+                <td>0.0006548</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Prompt Fission</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Delayed Fission</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Prompt Photofis</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Tabular Boundary</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Tabular Sampling</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Total</td>
+                <td>1501663</td>
+                <td>1.0144</td>
+                <td>2.1452</td>
+            </tr>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </table>
+    </div>
+
+
+    <div id="neutron_loss_table">
+        <h2>Neutron Loss</h2>
+        <table>
+            <tr>
+                <th>Source</th>
+                <th>Tracks</th>
+                <th>Weight</th>
+                <th>Energy</th>
+            </tr>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <tr>
+                <td>Escape</td>
+                <td>1360524</td>
+                <td>0.71497</td>
+                <td>1.0904</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Energy Cutoff</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Time Cutoff</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Weight Window</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Cell Importance</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Weight Cutoff</td>
+                <td>139998</td>
+                <td>0.013484</td>
+                <td>0.0023421</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>E Or T Importance</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Dxtran</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Forced Collisions</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Exp. Transform</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Downscattering</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.65471</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Capture</td>
+                <td>0</td>
+                <td>0.033379</td>
+                <td>0.0074855</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Loss To (N,Xn)</td>
+                <td>1141</td>
+                <td>0.00044727</td>
+                <td>0.0036769</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Loss To Fission</td>
+                <td>0</td>
+                <td>0.25208</td>
+                <td>0.38652</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Nucl. Interaction</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Particle Decay</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Tabular Boundary</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Elastic Scatter</td>
+                <td>0</td>
+                <td>0.0</td>
+                <td>0.0</td>
+            </tr>
+            
+            
+            
+            <tr>
+                <td>Total</td>
+                <td>1501663</td>
+                <td>1.0144</td>
+                <td>2.1452</td>
+            </tr>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </table>
+    </div>
+</details>
+</div>
+
+
+
+ 
+
+<div id="neutron_populations">
+<details>
+    <summary>Neutron Populations</summary>
+    <table>
+        <tr>
+            <th>Cell</th>
+            <th>Tracks Entering</th>
+            <th>Populations</th>
+            <th>Collisions</th>
+        </tr>
+        
+        
+        <tr>
+            <td>1</td>
+            <td>1565137</td>
+            <td>1499209</td>
+            <td>4414261</td>
+        </tr>
+        
+        
+        
+        <tr>
+            <td>11</td>
+            <td>1482</td>
+            <td>1460</td>
+            <td>2052</td>
+        </tr>
+        
+        
+        
+        <tr>
+            <td>901</td>
+            <td>1658621</td>
+            <td>1390669</td>
+            <td>0</td>
+        </tr>
+        
+        
+        
+        <tr>
+            <td>902</td>
+            <td>1591379</td>
+            <td>1390661</td>
+            <td>2009572</td>
+        </tr>
+        
+        
+        
+        
+    </table>
+</details>
+</div>
+
+
+
+<div id="input_deck">
+<details>
+  <summary>MCNP Input</summary>
+  <div id="input">
+    
+      <p>Criticality example</p>
+    
+      <p>c</p>
+    
+      <p>c</p>
+    
+      <p>c Number of calculations:</p>
+    
+      <p>c  &lt;N=1:10:1&gt; (set second number to number of inputs to generate)</p>
+    
+      <p>c</p>
+    
+      <p>c ------10--------20--------30--------40--------50--------60--------70--------8</p>
+    
+      <p>c cell cards</p>
+    
+      <p>c ------10--------20--------30--------40--------50--------60--------70--------8</p>
+    
+      <p>c 00  Universe</p>
+    
+      <p>1      1  -11.864  -1          imp:n=1 $ Sphere A</p>
+    
+      <p>11     2  -18.046  -11         imp:n=1 $ Sphere B</p>
+    
+      <p>901    0           -901 1 11   imp:n=1 $ Inside reflector</p>
+    
+      <p>902    3  -1.0     -902 901    imp:n=1 $ reflector</p>
+    
+      <p>999    0            902        imp:n=0 $ Outside model</p>
+    
+      <p></p>
+    
+      <p>c ------10--------20--------30--------40--------50--------60--------70--------8</p>
+    
+      <p>c surface cards</p>
+    
+      <p>c ------10--------20--------30--------40--------50--------60--------70--------8</p>
+    
+      <p>c rpp xmin xmax ymin ymax zmin zmax</p>
+    
+      <p>c 00  A sphere</p>
+    
+      <p>1    sph 0 0 0 5.4937 $ A sphere</p>
+    
+      <p>c 10  B Sphere</p>
+    
+      <p>11   sph 191.39 0 0 3.4783 $ B sphere</p>
+    
+      <p>c 900  Universe</p>
+    
+      <p>901  rpp -5.5037 194.88</p>
+    
+      <p>         -5.5037 5.5037 -5.5037 5.5037 $ refl inner</p>
+    
+      <p>902  rpp -6.4926 195.87</p>
+    
+      <p>         -6.4926 6.4926 -6.4926 6.4926 $ refl outer</p>
+    
+      <p></p>
+    
+      <p>c ------10--------20--------30--------40--------50--------60--------70--------8</p>
+    
+      <p>c Materials</p>
+    
+      <p>c ------10--------20--------30--------40--------50--------60--------70--------8</p>
+    
+      <p>m1   94239.    -11.44 $ Pu239 and water</p>
+    
+      <p>      1001.    -0.047041 $ H    Water</p>
+    
+      <p>      8016.    -0.37633 $ O</p>
+    
+      <p>m2   94239.    -17.95 $ Pu239 and water</p>
+    
+      <p>      1001.    -0.010582 $ H    Water</p>
+    
+      <p>      8016.    -0.084657 $ O</p>
+    
+      <p>m3    1001.     2.0 $ H    Water</p>
+    
+      <p>      8016.     1.0 $ O</p>
+    
+      <p>c ------10--------20--------30--------40--------50--------60--------70--------8</p>
+    
+      <p>c KCode</p>
+    
+      <p>c ------10--------20--------30--------40--------50--------60--------70--------8</p>
+    
+      <p>ksrc  0 0 0</p>
+    
+      <p>      191.39 0 0</p>
+    
+      <p>kcode 10000 1.0 50 200</p>
+    
+      <p>c</p>
+    
+  </div>
+</details>
+</div>
+
+<div id="cerberus_credit">
+    <p>Eddy, the MCNP and SCALE output HTML Generator, was created by
+      <a href="https://cerberusnuclear.com/" target="_blank">Cerberus Nuclear</a>.
+    </p>
+    <p>Unless the results in this document were calculated directly by Cerberus Nuclear,
+        Cerberus accepts no responsibility for the accuracy of any results presented.
+    </p>
+    <p>This software is provided by Cerberus Nuclear Limited "as is" and any express or implied
+     warranties, including, but not limited to, the implied warranties of merchantability and fitness for a particular
+     purpose are disclaimed.
+     In no event shall cerberus nuclear limited be liable for any direct, indirect, incidental, special, exemplary,
+     or consequential damages (including, but not limited to, procurement of substitute goods or services; loss of use,
+     data, or profits; or business interruption) however caused and on any theory of liability, whether in contract,
+     strict liability, or tort (including negligence or otherwise) arising in any way out of the use of this software,
+     even if advised of the possibility of such damage.
+    </p>
+</div>
+
+</body>
+</html>
