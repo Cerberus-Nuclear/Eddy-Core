@@ -284,6 +284,48 @@ def single_mixture_multigroup_623(tmpdir):
         "",
     ]
 
+
+@pytest.fixture
+def simple_tally_section(tmpdir):
+    return [
+        " Final Tally Results Summary",
+        " ============================",
+        "",
+        "     Final Statistical Checks (fits are over the last half of the simulation)",
+        "",
+        "     quantity                 check                     goal         passing",
+        "     -----------------------  -----------------------  -----  --------------",
+        "     1 mean                   rel slope of linear fit   0.00  |slope| < 0.10",
+        "     2 standard deviation     exponent of power fit    -0.50     R**2 > 0.99",
+        "     3 relative uncertainty   final value               0.05    value < 0.05",
+        "     4 relative VOV           exponent of power fit    -1.00     R**2 > 0.95",
+        "     5 relative VOV           final value               0.10    value < 0.10",
+        "     6 figure-of-merit (FOM)  rel slope of linear fit   0.00  |slope| < 0.10",
+        "     -----------------------  -----------------------  -----  --------------",
+        "",
+        "",
+        " Neutron Region Tally 1.  ",
+        "                         average      standard     relat      FOM    stat checks",
+        "    tally/quantity        value       deviation    uncert   (/min)   1 2 3 4 5 6",
+        "    ------------------  -----------  -----------  -------  --------  -----------",
+        "    average track-leng  1.13155E-01  1.28804E-04  0.00114  1.65E+08  X X X - X -",
+        "    neutron collisions  0.00000E+00",
+        "    vol*response 1      1.64270E-01  2.52384E-04  0.00154  9.04E+07  X X X X X -",
+        "    ------------------  -----------  -----------  -------  --------  -----------",
+        "",
+        " Photon Region Tally 2.  ",
+        "                         average      standard     relat      FOM    stat checks",
+        "    tally/quantity        value       deviation    uncert   (/min)   1 2 3 4 5 6",
+        "    ------------------  -----------  -----------  -------  --------  -----------",
+        "    average track-leng  1.23471E-02  5.28036E-04  0.04277  1.17E+05  X X X X X -",
+        "    neutron collisions  0.00000E+00",
+        "    vol*response 2      2.61189E-04  1.34464E-05  0.05148  8.05E+04  X - - - X -",
+        "    ------------------  -----------  -----------  -------  --------  -----------",
+        "",
+        "",
+    ]
+
+
 #####################################################################
 # End of Fixtures --------------------------------------------------#
 #####################################################################
@@ -320,14 +362,24 @@ def test_get_input(simple_case):
     assert len(actual_input) == 392
 
 
-def test_get_tally_data():
-    # todo: implement
-    pass
+def test_get_tally_data(simple_case, simple_tally_section):
+    # arrange
+    # act
+    result = simple_case.get_tally_data()
+    # assert
+    assert result == simple_tally_section
 
 
-def test_create_tallies():
-    # todo: implement
-    pass
+def test_create_tallies(simple_case, simple_tally_section, mocker):
+    # arrange
+    simple_case.tally_data = simple_tally_section
+    tally_mock = mocker.patch('eddymc_core.scale.eddy_scale_case.Tally')
+    # act
+    tally_list = simple_case.create_tallies()
+    # assert
+    tally_mock.assert_called()
+    assert len(tally_list) == 2
+    assert tally_mock.call_count == 2
 
 
 def test_scale_tally_results_with_scaling_factor(simple_case, mocker):

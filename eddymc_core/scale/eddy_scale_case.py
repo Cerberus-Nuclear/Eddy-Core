@@ -45,7 +45,7 @@ class EddySCALECase:
         for n, line in enumerate(self.file):
             if "Input Data:" in line:
                 for m, other_line in enumerate(self.file[n + 1:], start=n + 1):
-                    if other_line.lower() == 'end\n':
+                    if other_line.lower() in ['end\n', 'end']:
                         input_data = self.file[n + 2:m + 1]
                         return input_data
 
