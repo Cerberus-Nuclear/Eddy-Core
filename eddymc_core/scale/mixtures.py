@@ -103,22 +103,3 @@ def get_mixture_data(output_data):
             for m, other_line in enumerate(output_data[n+1:], start=n+1):
                 if "Cross section" in other_line or "*****" in other_line:
                     return output_data[n:m+1]
-
-
-def create_mixtures(mix_data):
-    """Create Mixture objects from the SCALE output data
-
-    Args:
-        mix_data (list): The lines from output_data concerning mixtures
-
-    Returns:
-        None, but creates Mixture objects
-    """
-    for n, line in enumerate(mix_data):
-        if "mixture = " in line:
-            for m, other_line in enumerate(mix_data[n+1:], start=n+1):
-                if "mixture" in other_line or "Cross section" in other_line or "*****" in other_line:
-                    mix = mix_data[n:m]
-                    Mixture(mix)
-                    break
-
