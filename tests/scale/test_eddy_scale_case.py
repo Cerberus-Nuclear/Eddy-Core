@@ -1,6 +1,6 @@
 import pytest
 from eddymc_core.scale.eddy_scale_case import EddySCALECase
-# from eddymc_core.scale import eddy_scale_case
+from eddymc_core.scale import eddy_scale_case
 from tests import scale_examples
 
 try:
@@ -330,9 +330,36 @@ def test_create_tallies():
     pass
 
 
-def test_scale_tally_results():
-    # todo: implement
-    pass
+def test_scale_tally_results_with_scaling_factor(simple_case, mocker):
+    # arrange
+    class MockTally(eddy_scale_case.Tally):
+        def __init__(self):
+            pass
+    tally_mock = mocker.patch('eddymc_core.scale.eddy_scale_case.Tally.scale_results')
+    case = simple_case
+    simple_case.tally_list = [MockTally(), MockTally(), MockTally()]
+    # act
+    case.scale_tally_results()
+    # assert
+    tally_mock.assert_called()
+    assert tally_mock.call_count == 3
+    assert tally_mock.call_args_list[0][0][0] == 1234
+    assert tally_mock.call_args_list[1][0][0] == 1234
+    assert tally_mock.call_args_list[2][0][0] == 1234
+
+
+def test_scale_tally_results_with_scaling_factor_of_1(mocker):
+    # arrange
+    case = MockEddySCALECase(
+        filepath="scale_examples/cylinder_ce.out",
+        scaling_factor=1,
+        file=ce_623_file,
+    )
+    tally_mock = mocker.patch('eddymc_core.scale.eddy_scale_case.Tally.scale_results')
+    # act
+    case.scale_tally_results()
+    # assert
+    tally_mock.assert_not_called()
 
 
 def test_get_mixture_data(simple_case):
