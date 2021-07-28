@@ -497,3 +497,82 @@ def test_get_tallies_adds_f6_to_types_list(f6_file):
     assert "F5" not in c.f_types
     assert "F6" in c.f_types
     assert "F6+" in c.f_types
+
+
+def test_sort_mcnp_particle_data_photon():
+    # arrange
+    photon_data = [
+        " photon creation     tracks      weight        energy            photon loss         tracks      weight        energy",
+        "                                 (per source particle)                                           (per source particle)",
+        "",
+        " source           270405830    9.9998E-01    7.0000E-01          escape           850580789    2.1083E-04    1.3119E-04",
+        " nucl. interaction        0    0.            0.                  energy cutoff            0    0.            1.6935E-04",
+        " particle decay           0    0.            0.                  time cutoff              0    0.            0.        ",
+        " weight window   1696665907    3.1375E+00    4.6920E-01          weight window   1425250916    3.4950E+00    4.8488E-01",
+        " cell importance          0    0.            0.                  cell importance          0    0.            0.        ",
+        " weight cutoff            0    0.            0.                  weight cutoff            0    0.            0.        ",
+        " e or t importance        0    0.            0.                  e or t importance        0    0.            0.        ",
+        " dxtran                   0    0.            0.                  dxtran                   0    0.            0.        ",
+        " forced collisions        0    0.            0.                  forced collisions        0    0.            0.        ",
+        " exp. transform           0    0.            0.                  exp. transform           0    0.            0.        ",
+        " from neutrons            0    0.            0.                  compton scatter          0    0.            2.5303E-01",
+        " bremsstrahlung   636241108    7.2229E-01    2.2337E-02          capture          937397477    2.5458E+00    5.0365E-01",
+        " p-annihilation           0    0.            0.                  pair production          0    0.            0.        ",
+        " photonuclear             0    0.            0.                  photonuclear abs         0    0.            0.        ",
+        " electron x-rays          0    0.            0.                  loss to photofis         0    0.            0.        ",
+        " compton fluores          0    0.            0.                                                                        ",
+        " muon capt fluores        0    0.            0.                                                                        ",
+        " 1st fluorescence 499130636    1.0263E+00    4.8942E-02                                                                ",
+        " 2nd fluorescence 110785701    1.5495E-01    1.3748E-03                                                                ",
+        " cerenkov                 0    0.            0.                                                                        ",
+        " (gamma,xgamma)           0    0.            0.                                                                        ",
+        " tabular sampling         0    0.            0.                                                                        ",
+        " prompt photofis          0    0.            0.                                                                        ",
+        "     total       3213229182    6.0411E+00    1.2419E+00              total       3213229182    6.0411E+00    1.2419E+00",
+        "",
+        "   number of photons banked               1387271558        average time of (shakes)              cutoffs",
+        "   photon tracks per source particle      1.1883E+01          escape            7.9923E-01          tco   1.0000E+33",
+        "   photon collisions per source particle  7.3562E+00          capture           4.5397E-03          eco   1.0000E-03",
+        "   total photon collisions                1989149770          capture or escape 4.6055E-03          wc1  -5.0000E-01",
+        "                                                              any termination   6.1178E-03          wc2  -2.5000E-01",
+    ]
+    # act
+    output = EddyMCNPCase.sort_mcnp_particle_data('photon', photon_data)
+    # assert
+    assert len(output) == 3
+    assert type(output) == tuple
+
+
+def test_sort_mcnp_particle_data_electron():
+    # arrange
+    electron_data = [
+        " electron creation   tracks      weight        energy            electron loss       tracks      weight        energy",
+        "                                 (per source particle)                                           (per source particle)",
+        "",
+        " source             3007765    1.0000E+00    2.5000E+00          escape             1712187    5.6801E-01    1.0007E+00",
+        " nucl. interaction        0    0.            0.                  energy cutoff     36491422    1.1395E+01    1.1022E-01",
+        " particle decay           0    0.            0.                  time cutoff              0    0.            0.        ",
+        " weight window            0    0.            0.                  weight window            0    0.            0.        ",
+        " cell importance          0    0.            0.                  cell importance          0    0.            0.        ",
+        " weight cutoff            0    0.            0.                  weight cutoff            0    0.            0.        ",
+        " e or t importance        0    0.            0.                  e or t importance        0    0.            0.        ",
+        " pair production       5052    7.9651E-04    3.1791E-04          scattering               0    0.            1.6555E+00",
+        " compton recoil      482887    9.5123E-02    2.2020E-02          bremsstrahlung           0    0.            2.0352E-01",
+        " photo-electric     4224040    1.0514E+00    8.0468E-02          p-annihilation        2491    3.9283E-04    3.7860E-06",
+        " photon auger         72949    1.6452E-02    7.7262E-04          atomic excitation        0    0.            0.        ",
+        " electron auger       10785    3.5243E-03    1.6551E-04                                                                ",
+        " knock-on          30402622    9.7959E+00    3.6612E-01          electroionization        0    0.            0.        ",
+        " (gamma,xelectron)        0    0.            0.                  rejection &gt; emax         0    0.            0.        ",
+        "     total         38206100    1.1963E+01    2.9699E+00              total         38206100    1.1963E+01    2.9699E+00",
+        "",
+        "   number of electrons banked               35198335                                              cutoffs",
+        "   electron tracks per source particle    1.2702E+01                                                tco   1.0000E+33",
+        "   electron sub-steps per source particle 1.7167E+03                                                eco   1.0000E-02",
+        "   total electron sub-steps               5163404862                                                wc1   0.0000E+00",
+        "                                                                                                    wc2   0.0000E+00",
+    ]
+    # act
+    output = EddyMCNPCase.sort_mcnp_particle_data('electron', electron_data)
+    # assert
+    assert len(output) == 3
+    assert type(output) == tuple

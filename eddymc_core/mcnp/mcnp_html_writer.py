@@ -75,5 +75,6 @@ def get_html(case):
         particle_list=case.particle_list,
         input_deck=case.mcnp_input,
         cycles=case.cycles,
+        error_log=case.error_log,
         )
     return html

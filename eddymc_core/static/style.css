@@ -222,11 +222,11 @@ div {
     font-size: 32px;
 }
 
-#warnings, #duplicates, #comments, #fatal_errors {
+#warnings, #duplicates, #comments, #fatal_errors, #error_log {
     text-align: center;
     }
 
-#warning_messages, #duplicate_messages, #comment_messages, #fatal_messages {
+#warning_messages, #duplicate_messages, #comment_messages, #fatal_messages, #error_log_messages {
     display:inline-block;
     padding: 5px
     }

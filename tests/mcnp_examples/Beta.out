@@ -1,0 +1,468 @@
+          Code Name & Version = MCNP_6.20, 6.2.0
+  
+     _/      _/        _/_/_/       _/      _/       _/_/_/         _/_/_/ 
+    _/_/  _/_/      _/             _/_/    _/       _/    _/     _/        
+   _/  _/  _/      _/             _/  _/  _/       _/_/_/       _/_/_/     
+  _/      _/      _/             _/    _/_/       _/           _/    _/    
+ _/      _/        _/_/_/       _/      _/       _/             _/_/       
+  
+  +-----------------------------------------------------------------------+
+  | Copyright (2018).  Los Alamos National Security, LLC.  All rights     !
+  | reserved.                                                             !
+  |  This material was produced under U.S. Government contract            !
+  | DE-AC52-06NA25396 for Los Alamos National Laboratory, which is        !
+  | operated by Los Alamos National Security, LLC for the U.S.            !
+  | Department of Energy. The Government is granted for itself and        !
+  | others acting on its behalf a paid-up, nonexclusive, irrevocable      !
+  | worldwide license in this material to reproduce, prepare derivative   !
+  | works, and perform publicly and display publicly. Beginning five (5)  !
+  | years after February 14, 2018, subject to additional five-year        !
+  | worldwide renewals, the Government is granted for itself and others   !
+  | acting on its behalf a paid-up, nonexclusive, irrevocable worldwide   !
+  | license in this material to reproduce, prepare derivative works,      !
+  | distribute copies to the public, perform publicly and display         !
+  | publicly, and to permit others to do so. NEITHER THE UNITED STATES    !
+  | NOR THE UNITED STATES DEPARTMENT OF ENERGY, NOR LOS ALAMOS NATIONAL   !
+  | SECURITY, LLC, NOR ANY OF THEIR EMPLOYEES, MAKES ANY WARRANTY,        !
+  | EXPRESS OR IMPLIED, OR ASSUMES ANY LEGAL LIABILITY OR RESPONSIBILITY  !
+  | FOR THE ACCURACY, COMPLETENESS, OR USEFULNESS OF ANY INFORMATION,     !
+  | APPARATUS, PRODUCT, OR PROCESS DISCLOSED, OR REPRESENTS THAT ITS USE  !
+  | WOULD NOT INFRINGE PRIVATELY OWNED RIGHTS.                            !
+  +-----------------------------------------------------------------------+
+  
+1mcnp     version 6     ld=02/20/18                     04/02/20 16:34:57 
+ *************************************************************************                 probid =  04/02/20 16:34:57 
+ inp=Beta.mcnp out=Beta.out name=Beta. TASKS 8 mesh=Beta.meshtal
+
+ 
+  comment.  Physics models disabled.
+         1-       McCad 0.5.1 generated Input
+         2-       c ===================================================================
+         3-       c     * Material cells  ---- 4
+         4-       c     * Void cells  -------- 0
+         5-       c     * Surfaces    -------- 9
+         6-       c     * Outer Void  -------- 1
+         7-       c =================================================================
+         8-       c o---------------------------- Cells Card -------------------------o
+         9-       c
+        10-       c =================================================================
+        11-       c         Component:    NewComponent
+        12-       c         Contain Group:
+        13-       c                       Beta
+        14-       c =================================================================
+        15-       c             ======================================================
+        16-       c            Group:    Beta
+        17-       c            Contains 4 cells.
+        18-       c             ======================================================
+        19-       c Part:Beta-1
+        20-       1     3  -2.32    (-4 2 3 1 -9 -6)
+        21-             imp:n=1 imp:p=1 imp:e=1
+        22-       c Part:Beta-2
+        23-       2     1  -0.00128  (-5 -6 3 4 1 -9 7)
+        24-             imp:n=1 imp:p=1 imp:e=1
+        25-       c Part:Beta-3
+        26-       3     1  -0.00128  (5 -6 3 1 -9 -8)
+        27-             imp:n=1 imp:p=1 imp:e=1
+        28-       c Part:Beta-4
+        29-       4     2  -1.0    (-7 4 -5)
+        30-             imp:n=1 imp:p=1 imp:e=1
+        31-       c Part:Outside
+        32-       5    0 (-1:6:-2:8:-3:9)
+        33-             imp:n=0 imp:p=0 imp:e=0
+        34-       c
+        35-       
+        36-       c ============================== Surfaces Card ====================
+        37-       c
+        38-       1         PY      -97.4000000
+        39-       2         PZ      -10.0000000
+        40-       3         PX       -1.6000000
+        41-       4         PZ        0.0000000
+        42-       5         PZ        0.5000000
+        43-       6         PY        2.6000000
+        44-       7         C/Z      48.4000000     -46.9000000      25.0000000
+        45-       8         PZ       60.0000000
+        46-       9         PX       98.4000000
+        47-       c == END OF COMPUTER GENERATED INPUT
+        48-       
+        49-       c ============================= Data Card =========================
+        50-       c M1 Air
+        51-       M1    8017         -9.485E-05
+        52-             8016         -2.343E-01
+        53-             28064        -7.721E-03
+        54-             28062        -2.935E-02
+        55-             28061        -9.059E-03
+        56-             28060        -2.050E-01
+        57-             28058        -5.144E-01
+        58-             6000         -1.257E-04
+        59-       c
+        60-       c M2 Water
+        61-       M2      8017         -3.593E-04
+        62-               8016         -8.875E-01
+        63-               1002         -3.360E-05
+        64-               1001         -1.121E-01
+        65-       c
+        66-       c M3 Concrete
+        67-       M3      1001    -0.010000     $ H-1
+        68-               6000    -0.001000     $ C
+        69-               8016    -0.529107     $ O-16
+        70-              11023    -0.016000     $ Na-23
+        71-              12024    -0.002000     $ Mg-24
+        72-              13027    -0.033872     $ Al-27
+        73-              14028    -0.337021     $ Si-28
+        74-              19039    -0.013000     $ K-39
+        75-              20040    -0.044000     $ Ca-40
+        76-              26056    -0.014000     $ Fe-56
+        77-       c
+        78-       mode p e
+        79-       c
+        80-       c SOURCE SPECIFICATION
+        81-       c
+        82-       SDEF POS = 48.4 -46.9 0.25
+        83-            AXS = 0 0 1
+        84-            EXT = D2
+        85-            RAD = D1
+        86-            PAR = E
+        87-            ERG = D3
+        88-       c
+        89-       c RADIAL SOURCE DISTRIBUTION
+        90-       SI1 0 25.0
+        91-       SP1 -21 1
+        92-       c
+        93-       c AXIAL SOURCE DISTRIBUTION
+        94-       SI2 0.0 0.5
+        95-       SP2 0 1
+        96-       c
+        97-       c SOURCE ENERGY DISTRIBUTIONS
+        98-       SI3 L   0.1104   0.136343 0.17698  0.201311 0.205794
+        99-               0.28027  0.283267 0.295956 0.308455 0.316506
+       100-               0.32917  0.374485 0.416469 0.42052  0.468069
+       101-               0.484575 0.48906  0.588581 0.59349  0.59941
+       102-               0.604411 0.612462 0.7658   0.884536 1.06148
+       103-               1.0899   1.3782
+       104-       c
+       105-       SP3     0.0122   0.199    0.0043   0.473    3.339997
+       106-               0.009    0.266    28.71996 29.68003 82.75
+       107-               0.0174   0.726    0.669    0.069    47.80997
+       108-               3.189003 0.438    4.517    0.0421   0.0039
+       109-               8.200004 5.339998 0.0013   0.291    0.053
+       110-               0.0012   0.0012
+       111-       c
+       112-       c PHOTON ENERGY DISTRIBUTION FROM PR-142
+       113-       SI4 L   0.0108015 0.0324045 0.0540075 0.0756105 0.097216
+       114-               0.11882 0.14042 0.16202 0.183625 0.20523
+       115-               0.22683 0.248435 0.27004 0.29164 0.313245
+       116-               0.33485 0.35645 0.37805 0.399655 0.42126
+       117-               0.44286 0.464465 0.48607 0.50767 0.529275
+       118-               0.55088 0.57248 0.59408 0.615685 0.63729
+       119-               0.65889 0.680495 0.7021 0.72370 0.745305
+       120-               0.76691 0.78851 0.81011 0.831715 0.85332
+       121-               0.87492 0.896525 0.91813 0.93973 0.96133
+       122-               0.982935 1.00452 1.0261 1.0477 1.06935
+       123-               1.091 1.1126 1.1342 1.1558 1.1774
+       124-               1.199 1.2206 1.2422 1.2638 1.2854
+       125-               1.307 1.3286 1.3502 1.3718 1.3934
+       126-               1.415 1.4366 1.4582 1.4798 1.5014
+       127-               1.523 1.5446 1.5662 1.5878 1.6094
+       128-               1.631 1.6526 1.6742 1.695 1.7174
+       129-               1.739 1.7606 1.7822 1.80385 1.8255
+       130-               1.8471 1.8687 1.8903 1.9119 1.9335
+       131-               1.9551 1.9767 1.9983 2.0199 2.0415
+       132-               2.0631 2.0847 2.1063 2.1279 2.1495
+       133-       c
+       134-       SP4 D   0.012613344 0.012833694 0.013060094 0.013297727 0.01354346
+       135-               0.013767192 0.01396742 0.014138712 0.014291125 0.014406552
+       136-               0.01450418 0.014583941 0.01462708 0.014655384 0.014670813
+       137-               0.014654952 0.014629896 0.014591448 0.014548284 0.014483232
+       138-               0.01441908 0.014358332 0.014283648 0.014217336 0.01416319
+       139-               0.014107176 0.014072616 0.01404756 0.014031373 0.013999392
+       140-               0.0139676 0.01393391 0.01387929 0.013824864 0.013770972
+       141-               0.013698504 0.013626576 0.013549248 0.013473187 0.013379472
+       142-               0.013287456 0.013196795 0.013089384 0.012983544 0.012873168
+       143-               0.012764379 0.012615618 0.012515256 0.012386736 0.012310193
+       144-               0.0121154 0.011972448 0.011824488 0.011670912 0.011511936
+       145-               0.011347344 0.011176704 0.011000232 0.01081728 0.010627632
+       146-               0.010431504 0.010228248 0.01001808 0.009800352 0.009575496
+       147-               0.009342864 0.009102672 0.008854704 0.00859896 0.008335656
+       148-               0.008064576 0.00778572 0.00749952 0.007206192 0.006905952
+       149-               0.006599016 0.006286032 0.005967432 0.005643864 0.005315976
+       150-               0.004984416 0.00465048 0.004314816 0.00399714 0.003643272
+       151-               0.0033102 0.002980584 0.002656584 0.002339712 0.002031977
+       152-               0.001735517 0.001452492 0.001185883 0.000938736 0.000713297
+       153-               0.000510991 0.00033467 0.000193095 9.58046E-05 3.78994E-05
+       154-       c
+       155-       c
+       156-       c ------------------Tallies -------------------------------------
+       157-       c
+       158-       c
+       159-       FMESH4:E                                  &
+       160-       GEOM = XYZ                                &
+       161-       ORIGIN = -1.6 -97.4 -10.0                 &
+       162-       IMESH -0.6 100i 97.4                      &
+       163-       JMESH -96.4 100i 1.6                      &
+       164-       KMESH -9 70i 59.0
+       165-       c
+       166-       FMESH14:E                                 &
+       167-       GEOM = XYZ                                &
+       168-       ORIGIN = -1.6 -97.4 -10.0                 &
+       169-       IMESH -0.6 100i 97.4                      &
+       170-       JMESH -96.4 100i 1.6                      &
+       171-       KMESH -9 70i 59.0
+       172-       c
+       173-       FMESH24:P                                 &
+       174-       GEOM = XYZ                                &
+       175-       ORIGIN = -1.6 -97.4 -10.0                 &
+       176-       IMESH -0.6 100i 97.4                      &
+       177-       JMESH -96.4 100i 1.6                      &
+       178-       KMESH -9 70i 59.0
+       179-       c
+       180-       c ICRP 119 SKIN ABSORBED DOSE PER FLUENCE FOR ELECTRONS (ANNEX K) pGy.cm2
+       181-       DE4 0.1 0.4 0.6 1.0 1.5 2.0 4.0 10.0
+       182-       DF4 8 98 171 154 158 153 150 165
+       183-       c
+       184-       c ICRP 119 EFFECTIVE DOSE PER FLUENCE FOR ELECTRONS (ANNEX K) pSv.cm2
+       185-       DE14 0.1 0.4 0.6 1.0 1.5 2.0 4.0 10.0
+       186-       DF14 0.1 1 1.5 2.7 5.9 11 44 131
+       187-       c
+       188-       c  ICRP H*(10) FLUX TO DOSE CONVERSION FACTORS
+       189-       DE24 1.000E-02 1.500E-02 2.000E-02 3.000E-02 4.000E-02 5.000E-02 6.000E-02 &
+       190-           8.000E-02 1.000E-01 1.500E-01 2.000E-01 3.000E-01 4.000E-01 5.000E-01  &
+       191-           6.000E-01 8.000E-01 1.000E+00 1.500E+00 2.000E+00 3.000E+00 4.000E+00  &
+       192-           5.000E+00 6.000E+00 8.000E+00 1.000E+01
+       193-       DF24 2.196E-04 2.988E-03 3.780E-03 2.916E-03 2.304E-03 1.980E-03 1.836E-03 &
+       194-           1.908E-03 2.196E-03 3.204E-03 4.320E-03 6.480E-03 8.568E-03 1.055E-02  &
+       195-           1.238E-02 1.577E-02 1.872E-02 2.484E-02 3.096E-02 3.996E-02 4.824E-02  &
+       196-           5.580E-02 6.336E-02 7.776E-02 9.216E-02
+       197-       c
+       198-       ctme 2
+       199-       RAND SEED=1059985448589
+       200-       c
+       201-       c
+
+ ***************************************************
+ * Random Number Generator  =                    1 *
+ * Random Number Seed       =        1059985448589 *
+ * Random Number Multiplier =       19073486328125 *
+ * Random Number Adder      =                    0 *
+ * Random Number Bits Used  =                   48 *
+ * Random Number Stride     =               152917 *
+ ***************************************************
+
+ 
+  warning.  source distribution        4 is not used in this problem.
+ 
+  warning.    1 materials had unnormalized fractions. print table 40.
+1cells                                                                                                  print table 60
+
+                               atom        gram                                            neutron    photon     electron              
+              cell      mat   density     density     volume       mass            pieces importance importance importance             
+
+        1        1        3  8.22221E-02 2.32000E+00 1.00000E+05 2.32000E+05           0  1.0000E+00 1.0000E+00 1.0000E+00             
+        2        2        1  2.13563E-05 1.28000E-03 0.00000E+00 0.00000E+00           0  1.0000E+00 1.0000E+00 1.0000E+00             
+        3        3        1  2.13563E-05 1.28000E-03 5.95000E+05 7.61600E+02           0  1.0000E+00 1.0000E+00 1.0000E+00             
+        4        4        2  1.00421E-01 1.00000E+00 9.81748E+02 9.81748E+02           1  1.0000E+00 1.0000E+00 1.0000E+00             
+        5        5        0  0.00000E+00 0.00000E+00 0.00000E+00 0.00000E+00           0  0.0000E+00 0.0000E+00 0.0000E+00             
+
+ total                                               6.95982E+05 2.33743E+05
+
+    minimum source weight = 1.0000E+00    maximum source weight = 1.0000E+00
+ 
+  comment.  threading will be used when possible in portions of mcnp6.
+ 
+  comment.  threading will be used for n/p/e table physics.
+ 
+  comment.  threading will generally not be used for model physics.
+
+         2 warning messages so far.
+1cross-section tables                                                                                   print table 100
+     XSDIR used: C:\MY_MCNP\MCNP_DATA/xsdir_mcnp6.2
+
+     table    length
+
+                        tables from file xdata/mcplib84                                                  
+
+   1000.84p    1974  Update of MCPLIB04 Photon Compton Broadening Data For MCNP5 see LA-UR-    12-00018        01/03/12
+                     Energy range:   1.00000E-03  to  1.00000E+05 MeV.
+   6000.84p    3228  Update of MCPLIB04 Photon Compton Broadening Data For MCNP5 see LA-UR-    12-00018        01/03/12
+                     Energy range:   1.00000E-03  to  1.00000E+05 MeV.
+   8000.84p    3348  Update of MCPLIB04 Photon Compton Broadening Data For MCNP5 see LA-UR-    12-00018        01/03/12
+                     Energy range:   1.00000E-03  to  1.00000E+05 MeV.
+  11000.84p    4071  Update of MCPLIB04 Photon Compton Broadening Data For MCNP5 see LA-UR-    12-00018        01/03/12
+                     Energy range:   1.00000E-03  to  1.00000E+05 MeV.
+  12000.84p    3857  Update of MCPLIB04 Photon Compton Broadening Data For MCNP5 see LA-UR-    12-00018        01/03/12
+                     Energy range:   1.00000E-03  to  1.00000E+05 MeV.
+  13000.84p    4922  Update of MCPLIB04 Photon Compton Broadening Data For MCNP5 see LA-UR-    12-00018        01/03/12
+                     Energy range:   1.00000E-03  to  1.00000E+05 MeV.
+  14000.84p    4868  Update of MCPLIB04 Photon Compton Broadening Data For MCNP5 see LA-UR-    12-00018        01/03/12
+                     Energy range:   1.00000E-03  to  1.00000E+05 MeV.
+  19000.84p    5123  Update of MCPLIB04 Photon Compton Broadening Data For MCNP5 see LA-UR-    12-00018        01/03/12
+                     Energy range:   1.00000E-03  to  1.00000E+05 MeV.
+  20000.84p    5089  Update of MCPLIB04 Photon Compton Broadening Data For MCNP5 see LA-UR-    12-00018        01/03/12
+                     Energy range:   1.00000E-03  to  1.00000E+05 MeV.
+  26000.84p    5794  Update of MCPLIB04 Photon Compton Broadening Data For MCNP5 see LA-UR-    12-00018        01/03/12
+                     Energy range:   1.00000E-03  to  1.00000E+05 MeV.
+  28000.84p    5902  Update of MCPLIB04 Photon Compton Broadening Data For MCNP5 see LA-UR-    12-00018        01/03/12
+                     Energy range:   1.00000E-03  to  1.00000E+05 MeV.
+
+  total       48176
+
+ maximum photon energy set to    100.0 mev (maximum electron energy)
+
+                        tables from file xdata/el03                                                      
+
+   1000.03e    2329                                                                                          6/6/98    
+                     Energy range:   1.00000E-03  to  1.00000E+03 MeV.
+   6000.03e    2333                                                                                          6/6/98    
+                     Energy range:   1.00000E-03  to  1.00000E+03 MeV.
+   8000.03e    2333                                                                                          6/6/98    
+                     Energy range:   1.00000E-03  to  1.00000E+03 MeV.
+  11000.03e    2337                                                                                          6/6/98    
+                     Energy range:   1.00000E-03  to  1.00000E+03 MeV.
+  12000.03e    2337                                                                                          6/6/98    
+                     Energy range:   1.00000E-03  to  1.00000E+03 MeV.
+  13000.03e    2337                                                                                          6/6/98    
+                     Energy range:   1.00000E-03  to  1.00000E+03 MeV.
+  14000.03e    2339                                                                                          6/6/98    
+                     Energy range:   1.00000E-03  to  1.00000E+03 MeV.
+  19000.03e    2343                                                                                          6/6/98    
+                     Energy range:   1.00000E-03  to  1.00000E+03 MeV.
+  20000.03e    2343                                                                                          6/6/98    
+                     Energy range:   1.00000E-03  to  1.00000E+03 MeV.
+  26000.03e    2345                                                                                          6/6/98    
+                     Energy range:   1.00000E-03  to  1.00000E+03 MeV.
+  28000.03e    2347                                                                                          6/6/98    
+                     Energy range:   1.00000E-03  to  1.00000E+03 MeV.
+
+1particles and energy limits                                                                            print table 101
+
+                         particle      maximum       smallest      largest       always        always
+                         cutoff        particle      table         table         use table     use model
+   particle type         energy        energy        maximum       maximum       below         above
+
+    2  p    photon      1.0000E-03    1.0000E+02    1.0000E+05    1.0000E+05    1.0000E+36    1.0000E+36
+    3  e    electron    1.0000E-03    1.0000E+02    1.0000E+02    1.0000E+02    1.0000E+36    1.0000E+36
+ 
+
+ ***********************************************************************************************************************
+
+ dump no.    1 on file Beta.r     nps =           0     coll =              0     ctm =        0.00   nrn =             
+    0
+
+         2 warning messages so far.
+1problem summary                                                                                                           
+
+      run terminated when it had used  2.0  minutes of computer time.
++                                                                                                    04/02/20 16:35:13 
+
+ =====>      16.89 M histories/hr    (based on wall-clock time in mcrun)
+
+
+      McCad 0.5.1 generated Input     probid =  04/02/20 16:34:57 
+
+ photon creation     tracks      weight        energy            photon loss         tracks      weight        energy
+                                 (per source particle)                                           (per source particle)
+
+ source                   0    0.            0.                  escape                 669    8.9760E-03    5.1906E-04
+ nucl. interaction        0    0.            0.                  energy cutoff            0    0.            1.3627E-05
+ particle decay           0    0.            0.                  time cutoff              0    0.            0.        
+ weight window            0    0.            0.                  weight window            0    0.            0.        
+ cell importance          0    0.            0.                  cell importance          0    0.            0.        
+ weight cutoff            0    0.            0.                  weight cutoff            0    0.            0.        
+ e or t importance        0    0.            0.                  e or t importance        0    0.            0.        
+ dxtran                   0    0.            0.                  dxtran                   0    0.            0.        
+ forced collisions        0    0.            0.                  forced collisions        0    0.            0.        
+ exp. transform           0    0.            0.                  exp. transform           0    0.            0.        
+ from neutrons            0    0.            0.                  compton scatter          0    0.            6.7560E-05
+ bremsstrahlung        3436    4.6101E-02    9.8468E-04          capture               4398    5.9008E-02    5.4816E-04
+ p-annihilation           0    0.            0.                  pair production          0    0.            0.        
+ photonuclear             0    0.            0.                  photonuclear abs         0    0.            0.        
+ electron x-rays       1564    2.0984E-02    1.5759E-04          loss to photofis         0    0.            0.        
+ compton fluores          0    0.            0.                                                                        
+ muon capt fluores        0    0.            0.                                                                        
+ 1st fluorescence        67    8.9894E-04    6.1334E-06                                                                
+ 2nd fluorescence         0    0.            0.                                                                        
+ cerenkov                 0    0.            0.                                                                        
+ (gamma,xgamma)           0    0.            0.                                                                        
+ tabular sampling         0    0.            0.                                                                        
+ prompt photofis          0    0.            0.                                                                        
+     total             5067    6.7984E-02    1.1484E-03              total             5067    6.7984E-02    1.1484E-03
+
+   number of photons banked                     5000        average time of (shakes)              cutoffs
+   photon tracks per source particle      6.7984E-02          escape            3.0414E-01          tco   1.0000E+33
+   photon collisions per source particle  6.7058E-02          capture           1.4346E-01          eco   1.0000E-03
+   total photon collisions                      4998          capture or escape 1.6467E-01          wc1  -5.0000E-01
+                                                              any termination   1.6467E-01          wc2  -2.5000E-01
+
+ electron creation   tracks      weight        energy            electron loss       tracks      weight        energy
+                                 (per source particle)                                           (per source particle)
+
+ source               74532    1.0000E+00    3.7211E-01          escape                9748    1.3079E-01    3.0260E-02
+ nucl. interaction        0    0.            0.                  energy cutoff      1976074    2.6513E+01    2.5198E-02
+ particle decay           0    0.            0.                  time cutoff              0    0.            0.        
+ weight window            0    0.            0.                  weight window            0    0.            0.        
+ cell importance          0    0.            0.                  cell importance          0    0.            0.        
+ weight cutoff            0    0.            0.                  weight cutoff            0    0.            0.        
+ e or t importance        0    0.            0.                  e or t importance        0    0.            0.        
+ pair production          0    0.            0.                  scattering               0    0.            4.1377E-01
+ compton recoil         379    5.0851E-03    6.7134E-05          bremsstrahlung           0    0.            9.8468E-04
+ photo-electric        4376    5.8713E-02    5.2720E-04          p-annihilation           0    0.            0.        
+ photon auger           128    1.7174E-03    1.2647E-05          atomic excitation        0    0.            0.        
+ electron auger        2784    3.7353E-02    2.8207E-04                                                                
+ knock-on           1903623    2.5541E+01    9.7216E-02          electroionization        0    0.            0.        
+ (gamma,xelectron)        0    0.            0.                  rejection > emax         0    0.            0.        
+     total          1985822    2.6644E+01    4.7021E-01              total          1985822    2.6644E+01    4.7021E-01
+
+   number of electrons banked                1911290                                              cutoffs
+   electron tracks per source particle    2.6644E+01                                                tco   1.0000E+33
+   electron sub-steps per source particle 1.0502E+03                                                eco   1.0000E-03
+   total electron sub-steps                 78276051                                                wc1   0.0000E+00
+                                                                                                    wc2   0.0000E+00
+
+ computer time so far in this run     2.13 minutes            maximum number ever in bank        74
+ computer time in mcrun               2.07 minutes            bank overflows to backup file       0
+ source particles per minute            3.6073E+04
+ random numbers generated                691858283            most random numbers used was       45296 in history       48898
+
+ range of sampled source weights = 1.0000E+00 to 1.0000E+00
+
+ number of histories processed by each thread
+        9228        9434        9288        9248        9270        9484        9394        9186
+1photon   activity in each cell                                                                         print table 126
+
+                       tracks     population   collisions   collisions     number        flux        average      average
+              cell    entering                               * weight     weighted     weighted   track weight   track mfp
+                                                          (per history)    energy       energy     (relative)      (cm)
+
+        1        1         438          595          925    1.2411E-02   1.0016E-01   1.0016E-01   1.0000E+00   2.1088E+00
+        2        2         248          251           15    2.0126E-04   3.7500E-02   3.7500E-02   1.0000E+00   5.1229E+02
+        3        3         364         3480         2556    3.4294E-02   4.1879E-02   4.1879E-02   1.0000E+00   6.5069E+02
+        4        4         238         1895         1502    2.0152E-02   5.3274E-02   5.3274E-02   1.0000E+00   3.3940E+00
+
+           total          1288         6221         4998    6.7058E-02
+1electron activity in each cell                                                                         print table 126
+
+                       tracks     population    substeps     substeps      number        flux        average      average
+              cell    entering                               * weight     weighted     weighted   track weight    substep 
+                                                          (per history)    energy       energy     (relative)      (cm)
+
+        1        1        5522        91651      4039865    5.4203E+01   1.6730E-01   2.0354E-01   1.0000E+00   8.7449E-04
+        2        2        7479         7796       132670    1.7800E+00   2.0877E-01   2.4943E-01   1.0000E+00   1.5656E+00
+        3        3       49276       454011     24522136    3.2901E+02   2.1710E-01   2.5806E-01   1.0000E+00   1.6349E+00
+        4        4       61938      1469977     49581380    6.6524E+02   2.1181E-01   2.4967E-01   1.0000E+00   2.9931E-03
+
+           total        124215      2023435     78276051    1.0502E+03
+
+ Mesh tallies written to file Beta.meshtal
+
+ ***********************************************************************************************************************
+
+ dump no.    2 on file Beta.r     nps =       74532     coll =       78281049     ctm =        2.07   nrn =        
+ 691858283
+
+         2 warning messages so far.
+
+
+ run terminated when it had used  2.0  minutes of computer time.
+
+ computer time =    2.32 minutes
+
+ mcnp     version 6     02/20/18                     04/02/20 16:35:23                     probid =  04/02/20 16:34:57 
