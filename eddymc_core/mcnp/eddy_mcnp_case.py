@@ -497,25 +497,27 @@ class EddyMCNPCase:
             # Separate creation data
             creation = data[line_num][:55]
             # split the line into 4 columns
-            creation = [creation[indices[i]:indices[i + 1]].strip() for i in range(len(indices) - 1)]
-            creation_dict[creation[0]] = {'tracks': int(creation[1]),
+            try:
+                creation = [creation[indices[i]:indices[i + 1]].strip() for i in range(len(indices) - 1)]
+                creation_dict[creation[0]] = {'tracks': int(creation[1]),
                                           'weight': float(creation[2]),
                                           'energy': float(creation[3]),
                                           }
+            except ValueError:
+                print("Error: could not find all data in creation tables.")
             # Separate loss data
             loss_line = data[line_num][64:]
             # for photons there are fewer loss values than creation values, so we check if the line has contents
             if loss_line.isspace() is False:
-                # One of the electron lines has an '>' character; sanitizing the input will
-                # change this to '&gt;' which will interfere with thye fixed indices, so we need to change it back
-                if '&gt;' in loss_line:
-                    loss_line = loss_line.replace('&gt;', '>')
                 # split the line into 4 columns
-                loss = [loss_line[indices[i]:indices[i + 1]].strip() for i in range(len(indices) - 1)]
-                loss_dict[loss[0]] = {'tracks': int(loss[1]),
-                                      'weight': float(loss[2]),
-                                      'energy': float(loss[3]),
-                                      }
+                try:
+                    loss = [loss_line[indices[i]:indices[i + 1]].strip() for i in range(len(indices) - 1)]
+                    loss_dict[loss[0]] = {'tracks': int(loss[1]),
+                                          'weight': float(loss[2]),
+                                          'energy': float(loss[3]),
+                                          }
+                except ValueError:
+                    print("Error: could not find all data in loss tables.")
 
         # get summary data for particle
         total_dict = {}
