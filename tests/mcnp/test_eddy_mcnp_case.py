@@ -61,10 +61,10 @@ def f5_file(tmpdir):
 
 
 @pytest.fixture
-def f5z_file(tmpdir):
+def f5a_file(tmpdir):
     # noinspection PyTypeChecker
-    f5z = pkg_resources.read_text(mcnp_examples, 'F5z_ring_tally.out')
-    return f5z.split('\n')
+    f5a = pkg_resources.read_text(mcnp_examples, 'F5z_ring_tally.out')
+    return f5a.split('\n')
 
 
 @pytest.fixture
@@ -421,21 +421,21 @@ def test_get_tallies_f5(f5_file):
     assert len(c.tallies['F5_tallies']['electrons']) == 0
 
 
-def test_get_tallies_f5z(f5z_file):
+def test_get_tallies_f5a(f5a_file):
     # arrange
     c = MockEddyMCNPCase(
-        filepath="mcnp_examples/F5z_ring_tally.out",
+        filepath="mcnp_examples/F5a_ring_tally.out",
         scaling_factor=1234,
-        file=f5z_file,
+        file=f5a_file,
         crit_case=False)
     # act
     c.tallies = c.get_tallies()
     # assert
     assert len(c.tallies['tally_list']) == 10
     assert c.tallies['f_types'] == ['F5']
-    assert len(c.tallies['F5z_tallies']['neutrons']) == 0
-    assert len(c.tallies['F5z_tallies']['photons']) == 10
-    assert len(c.tallies['F5z_tallies']['electrons']) == 0
+    assert len(c.tallies['F5a_tallies']['neutrons']) == 0
+    assert len(c.tallies['F5a_tallies']['photons']) == 10
+    assert len(c.tallies['F5a_tallies']['electrons']) == 0
 
 
 def test_get_tallies_f6(f6_file):

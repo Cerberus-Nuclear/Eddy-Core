@@ -197,7 +197,7 @@ class F4Tally(Tally):
 
 
 class F5Tally(Tally):
-    # Point tallies only; F5z ring tallies have a separate subclass
+    # Point tallies only; F5a ring tallies have a separate subclass
     def __init__(self, data):
         super().__init__(data)
 
@@ -230,8 +230,8 @@ class F5Tally(Tally):
             detector['result'] *= scaling_factor
 
 
-class F5zTally(Tally):
-    # F5z ring tallies
+class F5aTally(Tally):
+    # F5a ring tallies
     def __init__(self, data):
         super().__init__(data)
 

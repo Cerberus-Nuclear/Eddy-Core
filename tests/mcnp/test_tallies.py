@@ -34,10 +34,10 @@ def f5_file(tmpdir):
 
 
 @pytest.fixture
-def f5z_file(tmpdir):
+def f5a_file(tmpdir):
     # noinspection PyTypeChecker
-    f5z = pkg_resources.read_text(mcnp_examples, 'F5z_ring_tally.out')
-    return f5z.split('\n')
+    f5a = pkg_resources.read_text(mcnp_examples, 'F5a_ring_tally.out')
+    return f5a.split('\n')
 
 
 @pytest.fixture
@@ -300,7 +300,7 @@ def f5_tally_data(tmpdir):
 
 
 @pytest.fixture
-def f5z_tally_data(tmpdir):
+def f5a_tally_data(tmpdir):
     tally_data = [
         "1tally        5        nps =     1000000",
         "           tally type 5    particle flux at a ring  detector.                                  ",
@@ -927,21 +927,21 @@ def test_f5_tally_scale_result(f5_tally_data):
     assert F5_object.results[0]["result"] == 4.38636E-03 * 3
 
 
-def test_f5z_init_calls_subclass_results(mocker, f5z_tally_data):
+def test_f5a_init_calls_subclass_results(mocker, f5a_tally_data):
     # arrange
-    tally_data = f5z_tally_data
-    mocked_subclass_get_results = mocker.patch('eddymc_core.mcnp.tallies.F5zTally.get_results', return_value=None)
+    tally_data = f5a_tally_data
+    mocked_subclass_get_results = mocker.patch('eddymc_core.mcnp.tallies.F5aTally.get_results', return_value=None)
     mocked_superclass_get_results = mocker.patch('eddymc_core.mcnp.tallies.Tally.get_results', return_value=None)
     # act
-    tallies.F5zTally(tally_data)
+    tallies.F5aTally(tally_data)
     # assert
     mocked_subclass_get_results.assert_any_call()
     mocked_superclass_get_results.assert_not_called()
 
 
-def test_f5z_tally_get_results(f5z_tally_data):
+def test_f5a_tally_get_results(f5a_tally_data):
     # arrange
-    tally = tallies.F5zTally(f5z_tally_data)
+    tally = tallies.F5aTally(f5a_tally_data)
     # act
     tally.results = tally.get_results()
     # assert
@@ -951,13 +951,13 @@ def test_f5z_tally_get_results(f5z_tally_data):
     assert tally.results[0]['variance'] == 0.0094
 
 
-def test_f5z_tally_scale_result(f5z_tally_data):
+def test_f5a_tally_scale_result(f5a_tally_data):
     # arrange
-    F5z_object = tallies.F5zTally(f5z_tally_data)
+    F5a_object = tallies.F5aTally(f5a_tally_data)
     # act
-    F5z_object.scale_result(scaling_factor=3)
+    F5a_object.scale_result(scaling_factor=3)
     # assert
-    assert F5z_object.results[0]["result"] == 1.70186E-18 * 3
+    assert F5a_object.results[0]["result"] == 1.70186E-18 * 3
 
 
 def test_f6_init_creates_object(f6_tally_data):

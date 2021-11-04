@@ -9,7 +9,7 @@
 import re
 from .cells import Cell
 from .particles import Particle
-from .tallies import F2Tally, F4Tally, F5Tally, F5zTally, F6Tally
+from .tallies import F2Tally, F4Tally, F5Tally, F5aTally, F6Tally
 
 
 class EddyMCNPCase:
@@ -83,7 +83,7 @@ class EddyMCNPCase:
             self.F2_tallies = tallies['F2_tallies']
             self.F4_tallies = tallies['F4_tallies']
             self.F5_tallies = tallies['F5_tallies']
-            self.F5z_tallies = tallies['F5z_tallies']
+            self.F5a_tallies = tallies['F5a_tallies']
             self.F6_tallies = tallies['F6_tallies']
             # apply scaling factor
             if self.scaling_factor != 1:
@@ -97,7 +97,7 @@ class EddyMCNPCase:
             self.F2_tallies = None
             self.F4_tallies = None
             self.F5_tallies = None
-            self.F5z_tallies = None
+            self.F5a_tallies = None
             self.F6_tallies = None
 
 
@@ -427,7 +427,7 @@ class EddyMCNPCase:
         F2_tallies = {'neutrons': [], 'photons': [], 'electrons': []}
         F4_tallies = {'neutrons': [], 'photons': [], 'electrons': []}
         F5_tallies = {'neutrons': [], 'photons': [], 'electrons': []}
-        F5z_tallies = {'neutrons': [], 'photons': [], 'electrons': []}
+        F5a_tallies = {'neutrons': [], 'photons': [], 'electrons': []}
         F6_tallies = {'neutrons': [], 'photons': [], 'electrons': [], 'Collision Heating': []}
 
         PATTERN_run_terminated = re.compile(r'^\+\s+\d\d/\d\d/\d\d(.+)')
@@ -461,8 +461,8 @@ class EddyMCNPCase:
                                 new_tally = F5Tally(tally_data)
                                 F5_tallies[new_tally.particles].append(new_tally)
                             elif "particle flux at a ring  detector" in tally_data[1]:
-                                new_tally = F5zTally(tally_data)
-                                F5z_tallies[new_tally.particles].append(new_tally)
+                                new_tally = F5aTally(tally_data)
+                                F5a_tallies[new_tally.particles].append(new_tally)
                         elif tally_type == "6" or tally_type == "6+":
                             new_tally = F6Tally(tally_data)
                             F6_tallies[new_tally.particles].append(new_tally)
@@ -479,7 +479,7 @@ class EddyMCNPCase:
             'F2_tallies': F2_tallies,
             'F4_tallies': F4_tallies,
             'F5_tallies': F5_tallies,
-            'F5z_tallies': F5z_tallies,
+            'F5a_tallies': F5a_tallies,
             'F6_tallies': F6_tallies,
         }
         return tallies

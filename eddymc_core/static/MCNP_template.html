@@ -232,15 +232,15 @@
         {% endfor %}
     </table>
     {% endfor %}
-    {% for particle in f5z_tallies if f5z_tallies[particle] %}
-    <h2>F5z Tally {{particle.capitalize()[:-1]}} Values</h2>
+    {% for particle in f5a_tallies if f5a_tallies[particle] %}
+    <h2>F5a Tally {{particle.capitalize()[:-1]}} Values</h2>
     <table>
         <tr>
             <th>Tally Number</th>
             <th>Value (uSv/h)</th>
             <th>Error</th>
         </tr>
-        {% for tally in f5z_tallies[particle] %}
+        {% for tally in f5a_tallies[particle] %}
         {% for detector in tally.results %}
         <tr>
             <td>{{tally.tally_number}}</td>
@@ -254,7 +254,7 @@
             </td>
         </tr>
         {% endfor %} {# This was "for detector in tally.results" #}
-        {% endfor %} {# This was "for tally in f5z_tallies{particle}" #}
+        {% endfor %} {# This was "for tally in f5a_tallies{particle}" #}
     </table>
     {% endfor %}
     {% endif %}
@@ -506,8 +506,8 @@
         {% endfor %} {# This was "for tally in particle" #}
         {% endfor %} {# This was "for particle in F5_tallies" #}
 
-        {% for particle in f5z_tallies %}
-        {% for tally in f5z_tallies[particle] %}
+        {% for particle in f5a_tallies %}
+        {% for tally in f5a_tallies[particle] %}
         <div class="tally_breakdown">
             <div class="tally_results">
                 <h2>Results for {{tally.particles.capitalize()[:-1]}} {{tally.tally_type[:-1].title()}}, Tally Number: {{tally.tally_number}}</h2>
