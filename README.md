@@ -3,14 +3,17 @@
 
 [![PyPI version](https://badge.fury.io/py/eddy-mc-core.svg)](https://badge.fury.io/py/eddy-mc-core)
 
-Eddy is an HTML output generator for MCNP and SCALE, it imports an MCNP or SCALE output file, extracts the important data, and writes it to a user-friendly HTML file.
+Eddy is an HTML output generator for MCNP and SCALE, it imports an MCNP or SCALE output file, extracts the important 
+data, and writes it to a user-friendly HTML file.
 
-This repository contains the core source code version of Eddy. It is intended to be accessed via PIP and used as a python module. 
-A stand-alone version of Eddy is also available (it has this package as one of its requirements), and Eddy is also available as [a pre-compiled executable](https://github.com/Cerberus-Nuclear/Eddy).
+This repository contains the core source code version of Eddy. It is intended to be accessed via PIP and used as a 
+python module. 
+A stand-alone version of Eddy is also available [here](https://github.com/Cerberus-Nuclear/Eddy-Wrapper) (it has this 
+package as one of its requirements), and Eddy is also available 
+as [a pre-compiled executable](https://github.com/Cerberus-Nuclear/Eddy).
 
-Eddy can be run from the command line with the output file and any applicable scaling factor as optional arguments; if no such arguments are supplied a GUI will appear to request them.
-
-This package is available on the PyPI Python Package index as eddy-mc-core, in order to allow easier integration into other programs. It can be installed using pip:
+This package is available on the PyPI Python Package index as eddy-mc-core, in order to allow easier integration 
+into other programs. It can be installed using pip:
 
 ```bash
 pip install eddy-mc-core
@@ -25,7 +28,7 @@ eddy.main()
 
 where `eddy.main()` has one non-optional argument; the filepath for the MCNP output, and one optional argument; a scaling factor to multiply any tally results by.
 Features include:
-- Eddy can convert F2, F4, F5, F6 and F6+ tallies
+- Eddy can convert F2, F4, F5, F5a, F6 and F6+ tallies
 - Eddy can accept average tallies, given in the form `F4:N (4 5)`
 - Eddy can take an MCNP criticality output and show k-effective for the 
 first half, second half and total calculation.

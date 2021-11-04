@@ -34,6 +34,13 @@ def f5_file(tmpdir):
 
 
 @pytest.fixture
+def f5a_file(tmpdir):
+    # noinspection PyTypeChecker
+    f5a = pkg_resources.read_text(mcnp_examples, 'F5a_ring_tally.out')
+    return f5a.split('\n')
+
+
+@pytest.fixture
 def f4_f5_file(tmpdir):
     # noinspection PyTypeChecker
     f4_f5 = pkg_resources.read_text(mcnp_examples, 'F4_F5_param.out')
@@ -289,6 +296,105 @@ def f5_tally_data(tmpdir):
         " fom = (histories/minute)*(f(x) signal-to-noise ratio)**2 = (6.703E+06)*( 1.338E+00)**2 = (6.703E+06)*(1.789E+00) = 1.200E+07",
         "",
     ]
+    return tally_data
+
+
+@pytest.fixture
+def f5a_tally_data(tmpdir):
+    tally_data = ["1tally       15        nps =     2867170",
+"           tally type 5    particle flux at a ring  detector.                                  ",
+"           particle(s): photons  ",
+"           this tally is modified by dose function DE15 and DF15.",
+" ",
+" detector symmetric about x-axis located at x = 0.00000E+00 with radius = 1.00000E+01",
+"                 1.06956E-05 0.0000",
+" ",
+" detector symmetric about x-axis located at x = 0.00000E+00 with radius = 1.00000E+01",
+" uncollided photon flux",
+"                 1.06868E-05 0.0000",
+" ",
+" detector score diagnostics                  cumulative          tally         cumulative",
+"                                             fraction of         per           fraction of",
+"   times average score     transmissions     transmissions       history       total tally",
+"        1.00000E-01               4873         0.00169        1.33162E-07        0.00017",
+"        1.00000E+00            2871857         0.99932        7.95369E-04        0.99894",
+"        2.00000E+00                666         0.99955        2.49358E-07        0.99926",
+"        5.00000E+00                240         0.99963        1.92555E-07        0.99950",
+"        1.00000E+01                 38         0.99965        7.38670E-08        0.99959",
+"        1.00000E+02                 11         0.99965        4.75601E-08        0.99965",
+"        1.00000E+03                  0         0.99965        0.00000E+00        0.99965",
+"        1.00000E+38                  0         0.99965        0.00000E+00        0.99965",
+" before dd roulette               1009         1.00000        2.77407E-07        1.00000",
+"",
+" average tally per history = 7.96343E-04            largest score = 2.30701E-02",
+" (largest score)/(average tally) = 2.89700E+01      nps of largest score =      553236",
+"",
+" score contributions by cell",
+"        cell      misses        hits    tally per history    weight per hit",
+"     1     1       15707     2878694       7.96343E-04         7.93155E-04",
+"       total       15707     2878694       7.96343E-04         7.93155E-04",
+"",
+" score misses",
+"   russian roulette on pd                        0",
+"   psc=0.                                       36",
+"   russian roulette in transmission          15669",
+"   underflow in transmission                     2",
+"   hit a zero-importance cell                    0",
+"   energy cutoff                                 0",
+"",
+"",
+" ===================================================================================================================================",
+"",
+"           results of 10 statistical checks for the estimated answer for the tally fluctuation chart (tfc) bin of tally       15",
+"",
+" tfc bin     --mean--      ---------relative error---------      ----variance of the variance----      --figure of merit--     -pdf-",
+" behavior    behavior      value   decrease   decrease rate      value   decrease   decrease rate       value     behavior     slope",
+"",
+" desired      random       <0.05      yes      1/sqrt(nps)       <0.10      yes        1/nps           constant    random      >3.00",
+" observed     random        0.00      yes          yes            0.00      yes         yes            constant    random       3.99",
+" passed?        yes          yes      yes          yes             yes      yes         yes               yes        yes         yes",
+"",
+" ===================================================================================================================================",
+"",
+"",
+" this tally meets the statistical criteria used to form confidence intervals: check the tally fluctuation chart to verify.",
+" the results in other bins associated with this tally may not meet these statistical criteria.",
+"",
+" ----- estimated confidence intervals:  -----",
+"",
+" estimated asymmetric confidence interval(1,2,3 sigma): 1.0696E-05 to 1.0696E-05; 1.0696E-05 to 1.0696E-05; 1.0696E-05 to 1.0696E-05",
+" estimated  symmetric confidence interval(1,2,3 sigma): 1.0696E-05 to 1.0696E-05; 1.0696E-05 to 1.0696E-05; 1.0696E-05 to 1.0696E-05",
+"",
+"1analysis of the results in the tally fluctuation chart bin (tfc) for tally 15 with nps = 2867170            print table 160",
+"",
+"",
+" normed average tally per history  = 1.06956E-05          unnormed average tally per history  = 1.06956E-05",
+" estimated tally relative error    = 0.0000               estimated variance of the variance  = 0.0000",
+" relative error from zero tallies  = 0.0000               relative error from nonzero scores  = 0.0000",
+"",
+" number of nonzero history tallies =     2867170          efficiency for the nonzero tallies  = 1.0000",
+" history number of largest  tally  =     2735517          largest  unnormalized history tally = 2.84893E-04",
+" (largest  tally)/(average tally)  = 2.66365E+01          (largest  tally)/(avg nonzero tally)= 2.66365E+01",
+"",
+" (confidence interval shift)/mean  = 0.0000               shifted confidence interval center  = 1.06956E-05",
+"",
+"",
+" if the largest  history score sampled so far were to occur on the next history, the tfc bin quantities would change as follows:",
+"",
+"      estimated quantities           value at nps           value at nps+1           value(nps+1)/value(nps)-1.",
+"",
+"      mean                            1.06956E-05             1.06957E-05                     0.000009",
+"      relative error                  0.00000E+00             0.00000E+00                     0.000000",
+"      variance of the variance        0.00000E+00             0.00000E+00                     0.000000",
+"      shifted center                  1.06956E-05             1.06956E-05                     0.000000",
+"      figure of merit                 1.00000E+30             1.00000E+30                     0.000000",
+"",
+" the estimated inverse power slope of the 200 largest  tallies starting at 2.99203E-05 is 3.9909",
+" the history score probability density function appears to have an unsampled region at the largest  history scores:",
+" please examine. see print table 161.",
+"",
+" relative error is 0! fom and f(x) signal-to-noise ratio are both undefined. histories/minute = 2.791E+06",
+"",]
     return tally_data
 
 
@@ -788,6 +894,39 @@ def test_f5_tally_scale_result(f5_tally_data):
     F5_object.scale_result(scaling_factor=3)
     # assert
     assert F5_object.results[0]["result"] == 4.38636E-03 * 3
+
+
+def test_f5a_init_calls_subclass_results(mocker, f5a_tally_data):
+    # arrange
+    tally_data = f5a_tally_data
+    mocked_subclass_get_results = mocker.patch('eddymc_core.mcnp.tallies.F5aTally.get_results', return_value=None)
+    mocked_superclass_get_results = mocker.patch('eddymc_core.mcnp.tallies.Tally.get_results', return_value=None)
+    # act
+    tallies.F5aTally(tally_data)
+    # assert
+    mocked_subclass_get_results.assert_any_call()
+    mocked_superclass_get_results.assert_not_called()
+
+
+def test_f5a_tally_get_results(f5a_tally_data):
+    # arrange
+    tally = tallies.F5aTally(f5a_tally_data)
+    # act
+    tally.results = tally.get_results()
+    # assert
+    assert type(tally.results) == list
+    assert type(tally.results[0]) == dict
+    assert tally.results[0]['result'] == 1.06956E-05
+    assert tally.results[0]['variance'] == 0.00
+
+
+def test_f5a_tally_scale_result(f5a_tally_data):
+    # arrange
+    F5a_object = tallies.F5aTally(f5a_tally_data)
+    # act
+    F5a_object.scale_result(scaling_factor=3)
+    # assert
+    assert F5a_object.results[0]["result"] == 1.06956E-05 * 3
 
 
 def test_f6_init_creates_object(f6_tally_data):

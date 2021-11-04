@@ -68,6 +68,7 @@ def get_html(case):
         f2_tallies=case.F2_tallies,
         f4_tallies=case.F4_tallies,
         f5_tallies=case.F5_tallies,
+        f5a_tallies=case.F5a_tallies,
         f6_tallies=case.F6_tallies,
         warnings=case.warnings,
         comments=case.comments,

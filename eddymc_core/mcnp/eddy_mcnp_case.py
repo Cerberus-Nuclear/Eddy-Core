@@ -9,7 +9,7 @@
 import re
 from .cells import Cell
 from .particles import Particle
-from .tallies import F2Tally, F4Tally, F5Tally, F6Tally
+from .tallies import F2Tally, F4Tally, F5Tally, F5aTally, F6Tally
 
 
 class EddyMCNPCase:
@@ -76,21 +76,30 @@ class EddyMCNPCase:
                     self.particle_list.append(particle)
 
         # Tallies
-        # initialise empty variables
-        self.tally_list = []   # list of all tallies
-        self.f_types = []
-        self.F2_tallies = {'neutrons': [], 'photons': [], 'electrons': []}
-        self.F4_tallies = {'neutrons': [], 'photons': [], 'electrons': []}
-        self.F5_tallies = {'neutrons': [], 'photons': [], 'electrons': []}
-        self.F6_tallies = {'neutrons': [], 'photons': [], 'electrons': [], 'Collision Heating': []}
-        # get tallies
         if self.crit_case is False:
-            # TODO: sort this monstrosity of a function call out
-            self.tally_list, self.f_types, self.F2_tallies, self.F4_tallies, self.F5_tallies, self.F6_tallies = self.get_tallies()
-        # apply scaling factor
+            tallies = self.get_tallies()  # returns a dict with various tally info
+            self.tally_list = tallies['tally_list']
+            self.f_types    = tallies['f_types']
+            self.F2_tallies = tallies['F2_tallies']
+            self.F4_tallies = tallies['F4_tallies']
+            self.F5_tallies = tallies['F5_tallies']
+            self.F5a_tallies = tallies['F5a_tallies']
+            self.F6_tallies = tallies['F6_tallies']
+            # apply scaling factor
             if self.scaling_factor != 1:
                 for tally in self.tally_list:
                     tally.scale_result(self.scaling_factor)
+        # if self.crit_case is True
+        else:
+            # TODO: Find a way to avoid passing all this to the HTML writer for crit cases?
+            self.tally_list = None
+            self.f_types    = None
+            self.F2_tallies = None
+            self.F4_tallies = None
+            self.F5_tallies = None
+            self.F5a_tallies = None
+            self.F6_tallies = None
+
 
     def __repr__(self):
         return (f"This Eddy MCNP case considers file {self.name}\n"
@@ -411,13 +420,14 @@ class EddyMCNPCase:
         """Find the tally sections in the MCNP output.
 
         Returns:
-            tuple: the tally_list, f_types, F2_tallies, F4_tallies, F5_tallies, F6_tallies variables
+            dict: {tally_list, f_types, F2_tallies, F4_tallies, F5_tallies, F6_tallies}
         """
         tally_list = []   # list of all tallies
         f_types = []
         F2_tallies = {'neutrons': [], 'photons': [], 'electrons': []}
         F4_tallies = {'neutrons': [], 'photons': [], 'electrons': []}
         F5_tallies = {'neutrons': [], 'photons': [], 'electrons': []}
+        F5a_tallies = {'neutrons': [], 'photons': [], 'electrons': []}
         F6_tallies = {'neutrons': [], 'photons': [], 'electrons': [], 'Collision Heating': []}
 
         PATTERN_run_terminated = re.compile(r'^\+\s+\d\d/\d\d/\d\d(.+)')
@@ -447,8 +457,12 @@ class EddyMCNPCase:
                             new_tally = F4Tally(tally_data)
                             F4_tallies[new_tally.particles].append(new_tally)
                         elif tally_type == "5":
-                            new_tally = F5Tally(tally_data)
-                            F5_tallies[new_tally.particles].append(new_tally)
+                            if "particle flux at a point detector" in tally_data[1]:
+                                new_tally = F5Tally(tally_data)
+                                F5_tallies[new_tally.particles].append(new_tally)
+                            elif "particle flux at a ring  detector" in tally_data[1]:
+                                new_tally = F5aTally(tally_data)
+                                F5a_tallies[new_tally.particles].append(new_tally)
                         elif tally_type == "6" or tally_type == "6+":
                             new_tally = F6Tally(tally_data)
                             F6_tallies[new_tally.particles].append(new_tally)
@@ -459,7 +473,16 @@ class EddyMCNPCase:
                         if new_tally.f_type not in f_types:
                             f_types.append(new_tally.f_type)
                 break
-        return tally_list, f_types, F2_tallies, F4_tallies, F5_tallies, F6_tallies
+        tallies = {
+            'tally_list': tally_list,
+            'f_types': f_types,
+            'F2_tallies': F2_tallies,
+            'F4_tallies': F4_tallies,
+            'F5_tallies': F5_tallies,
+            'F5a_tallies': F5a_tallies,
+            'F6_tallies': F6_tallies,
+        }
+        return tallies
 
     @staticmethod
     def sort_mcnp_particle_data(particle, data):
@@ -509,6 +532,10 @@ class EddyMCNPCase:
             loss_line = data[line_num][64:]
             # for photons there are fewer loss values than creation values, so we check if the line has contents
             if loss_line.isspace() is False:
+                # One of the electron lines has an '>' character; sanitizing the input will
+                # change this to '&gt;' which will interfere with the fixed indices, so we need to change it back
+                if '&gt;' in loss_line:
+                    loss_line = loss_line.replace('&gt;', '>')
                 # split the line into 4 columns
                 try:
                     loss = [loss_line[indices[i]:indices[i + 1]].strip() for i in range(len(indices) - 1)]

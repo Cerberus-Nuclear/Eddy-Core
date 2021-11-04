@@ -1,0 +1,1363 @@
+          Code Name & Version = MCNP_6.20, 6.2.0
+  
+     _/      _/        _/_/_/       _/      _/       _/_/_/         _/_/_/ 
+    _/_/  _/_/      _/             _/_/    _/       _/    _/     _/        
+   _/  _/  _/      _/             _/  _/  _/       _/_/_/       _/_/_/     
+  _/      _/      _/             _/    _/_/       _/           _/    _/    
+ _/      _/        _/_/_/       _/      _/       _/             _/_/       
+  
+  +-----------------------------------------------------------------------+
+  | Copyright (2018).  Los Alamos National Security, LLC.  All rights     !
+  | reserved.                                                             !
+  |  This material was produced under U.S. Government contract            !
+  | DE-AC52-06NA25396 for Los Alamos National Laboratory, which is        !
+  | operated by Los Alamos National Security, LLC for the U.S.            !
+  | Department of Energy. The Government is granted for itself and        !
+  | others acting on its behalf a paid-up, nonexclusive, irrevocable      !
+  | worldwide license in this material to reproduce, prepare derivative   !
+  | works, and perform publicly and display publicly. Beginning five (5)  !
+  | years after February 14, 2018, subject to additional five-year        !
+  | worldwide renewals, the Government is granted for itself and others   !
+  | acting on its behalf a paid-up, nonexclusive, irrevocable worldwide   !
+  | license in this material to reproduce, prepare derivative works,      !
+  | distribute copies to the public, perform publicly and display         !
+  | publicly, and to permit others to do so. NEITHER THE UNITED STATES    !
+  | NOR THE UNITED STATES DEPARTMENT OF ENERGY, NOR LOS ALAMOS NATIONAL   !
+  | SECURITY, LLC, NOR ANY OF THEIR EMPLOYEES, MAKES ANY WARRANTY,        !
+  | EXPRESS OR IMPLIED, OR ASSUMES ANY LEGAL LIABILITY OR RESPONSIBILITY  !
+  | FOR THE ACCURACY, COMPLETENESS, OR USEFULNESS OF ANY INFORMATION,     !
+  | APPARATUS, PRODUCT, OR PROCESS DISCLOSED, OR REPRESENTS THAT ITS USE  !
+  | WOULD NOT INFRINGE PRIVATELY OWNED RIGHTS.                            !
+  +-----------------------------------------------------------------------+
+  
+1mcnp     version 6     ld=02/20/18                     11/04/21 12:49:31 
+ *************************************************************************                 probid =  11/04/21 12:49:31 
+ inp=F5a_ring_tally.mcnp out=F5a_ring_tally.out name=F5a_ring_tally. TASKS 7
+
+ 
+  comment.  Physics models disabled.
+         1-       F5a ring detector test case
+         2-       c
+         3-       c
+         4-       c ================================= CELL CARD ==================================
+         5-       c ==============================================================================
+         6-       c
+         7-       c
+         8-       1      1  -0.001205  -1                  imp:p=1  $Air
+         9-       999    0              1                  imp:p=0  $World Limit
+        10-       
+        11-       c ==============================================================================
+        12-       c ================================ SURFACE CARD ================================
+        13-       c ==============================================================================
+        14-       c
+        15-       1   so    100
+        16-       
+        17-       c ==============================================================================
+        18-       c ================================ CONTROL CARDS ===============================
+        19-       c ==============================================================================
+        20-       c
+        21-       c ==============================================================================
+        22-       c ================================ MATERIAL CARD ===============================
+        23-       c ==============================================================================
+        24-       c
+        25-       m1     6000    0.000150     $air
+        26-              7014    0.781574
+        27-              7015    0.002855
+        28-              8016    0.210238
+        29-              8017    0.000080
+        30-              8018    0.000432
+        31-              18000   0.004671
+        32-       c
+        33-       c ==============================================================================
+        34-       c ================================= SOURCE CARD ================================
+        35-       c ==============================================================================
+        36-       c
+        37-       mode p
+        38-       c
+        39-       sdef pos=0 0 0 erg=0.661657 par=p
+        40-       c
+        41-       c
+        42-       c ==============================================================================
+        43-       c ================================ CUT OFF CARD ================================
+        44-       c ==============================================================================
+        45-       c
+        46-       ctme 1
+        47-       c
+        48-       c ==============================================================================
+        49-       c ================================  TALLY CARD =================================
+        50-       c ==============================================================================
+        51-       c
+        52-       c Ring detectors about x axis
+        53-       f15x:p   00  10  1
+        54-       f25x:p   20  20  4
+        55-       f35x:p   40  40  10
+        56-       c Ring detectors about Y axis
+        57-       f65y:p   05  05  1
+        58-       f75y:p   30  30  1
+        59-       f85y:p   60  60  1
+        60-       c Multiple Ring Detectors about Z axis
+        61-       f95z:p   -33  20  2  -43 20 2  -53 20 2
+        62-       F105z:p  -33  78  4  -43 78 4  -53 78 4
+        63-       c
+        64-       c
+        65-       c ICRP H*(10) flux to dose conversion factors
+        66-       de0 1.000E-02 1.500E-02 2.000E-02 3.000E-02 4.000E-02 5.000E-02 6.000E-02      &
+        67-           8.000E-02 1.000E-01 1.500E-01 2.000E-01 3.000E-01 4.000E-01 5.000E-01      &
+        68-           6.000E-01 8.000E-01 1.000E+00 1.500E+00 2.000E+00 3.000E+00 4.000E+00      &
+        69-           5.000E+00 6.000E+00 8.000E+00 1.000E+01
+        70-       df0 2.196E-04 2.988E-03 3.780E-03 2.916E-03 2.304E-03 1.980E-03 1.836E-03      &
+        71-           1.908E-03 2.196E-03 3.204E-03 4.320E-03 6.480E-03 8.568E-03 1.055E-02      &
+        72-           1.238E-02 1.577E-02 1.872E-02 2.484E-02 3.096E-02 3.996E-02 4.824E-02      &
+        73-           5.580E-02 6.336E-02 7.776E-02 9.216E-02
+        74-       c
+        75-       c
+        76-       c
+        77-       c
+        78-       c ==============================================================================
+        79-       c ========================== RANDOM NUMBER GENERATOR ===========================
+        80-       c ==============================================================================
+        81-       RAND SEED=6176687684250
+        82-       c ==============================================================================
+        83-       c ========================== RANDOM NUMBER GENERATOR ===========================
+        84-       c ==============================================================================
+        85-       c
+ 
+  warning.  random seed is even, adding 1 to it
+
+ ***************************************************
+ * Random Number Generator  =                    1 *
+ * Random Number Seed       =        6176687684251 *
+ * Random Number Multiplier =       19073486328125 *
+ * Random Number Adder      =                    0 *
+ * Random Number Bits Used  =                   48 *
+ * Random Number Stride     =               152917 *
+ ***************************************************
+
+1cells                                                                                                  print table 60
+
+                               atom        gram                                            photon                                      
+              cell      mat   density     density     volume       mass            pieces importance                                   
+
+        1        1        1  4.98817E-05 1.20500E-03 4.18879E+06 5.04749E+03           1  1.0000E+00                                   
+        2      999        0  0.00000E+00 0.00000E+00 0.00000E+00 0.00000E+00           0  0.0000E+00                                   
+
+ total                                               4.18879E+06 5.04749E+03
+
+    minimum source weight = 1.0000E+00    maximum source weight = 1.0000E+00
+ 
+  comment.  threading will be used when possible in portions of mcnp6.
+ 
+  comment.  threading will be used for n/p/e table physics.
+ 
+  comment.  threading will generally not be used for model physics.
+
+          1 warning message so far.
+1cross-section tables                                                                                   print table 100
+     XSDIR used: C:\MY_MCNP\MCNP_DATA/xsdir_mcnp6.2
+
+     table    length
+
+                        tables from file xdata/mcplib84                                                  
+
+   6000.84p    3228  Update of MCPLIB04 Photon Compton Broadening Data For MCNP5 see LA-UR-    12-00018        01/03/12
+                     Energy range:   1.00000E-03  to  1.00000E+05 MeV.
+   7000.84p    3270  Update of MCPLIB04 Photon Compton Broadening Data For MCNP5 see LA-UR-    12-00018        01/03/12
+                     Energy range:   1.00000E-03  to  1.00000E+05 MeV.
+   8000.84p    3348  Update of MCPLIB04 Photon Compton Broadening Data For MCNP5 see LA-UR-    12-00018        01/03/12
+                     Energy range:   1.00000E-03  to  1.00000E+05 MeV.
+  18000.84p    4772  Update of MCPLIB04 Photon Compton Broadening Data For MCNP5 see LA-UR-    12-00018        01/03/12
+                     Energy range:   1.00000E-03  to  1.00000E+05 MeV.
+
+  total       14618
+
+ maximum photon energy set to    100.0 mev (maximum electron energy)
+
+                        tables from file xdata/el03                                                      
+
+   6000.03e    2333                                                                                          6/6/98    
+                     Energy range:   1.00000E-03  to  1.00000E+03 MeV.
+   7000.03e    2333                                                                                          6/6/98    
+                     Energy range:   1.00000E-03  to  1.00000E+03 MeV.
+   8000.03e    2333                                                                                          6/6/98    
+                     Energy range:   1.00000E-03  to  1.00000E+03 MeV.
+  18000.03e    2341                                                                                          6/6/98    
+                     Energy range:   1.00000E-03  to  1.00000E+03 MeV.
+
+1particles and energy limits                                                                            print table 101
+
+                         particle      maximum       smallest      largest       always        always
+                         cutoff        particle      table         table         use table     use model
+   particle type         energy        energy        maximum       maximum       below         above
+
+    2  p    photon      1.0000E-03    1.0000E+02    1.0000E+05    1.0000E+05    1.0000E+36    1.0000E+36
+    3  e    electron    1.0000E-03    1.0000E+02    1.0000E+02    1.0000E+02    1.0000E+36    1.0000E+36
+ 
+
+ ***********************************************************************************************************************
+
+ dump no.    1 on file F5a_ring_tally.r     nps =           0     coll =              0     ctm =        0.00   nrn =   
+              0
+
+          1 warning message so far.
+1problem summary                                                                                                           
+
+      run terminated when it had used  1.0  minutes of computer time.
++                                                                                                    11/04/21 12:49:41 
+
+ =====>    1080.03 M histories/hr    (based on wall-clock time in mcrun)
+
+
+      F5a ring detector test case     probid =  11/04/21 12:49:31 
+
+ photon creation     tracks      weight        energy            photon loss         tracks      weight        energy
+                                 (per source particle)                                           (per source particle)
+
+ source             2867170    1.0000E+00    6.6166E-01          escape             2867431    1.0001E+00    6.5933E-01
+ nucl. interaction        0    0.            0.                  energy cutoff            0    0.            5.9957E-08
+ particle decay           0    0.            0.                  time cutoff              0    0.            0.        
+ weight window            0    0.            0.                  weight window            0    0.            0.        
+ cell importance          0    0.            0.                  cell importance          0    0.            0.        
+ weight cutoff            0    0.            0.                  weight cutoff            0    0.            0.        
+ e or t importance        0    0.            0.                  e or t importance        0    0.            0.        
+ dxtran                   0    0.            0.                  dxtran                   0    0.            0.        
+ forced collisions        0    0.            0.                  forced collisions        0    0.            0.        
+ exp. transform           0    0.            0.                  exp. transform           0    0.            0.        
+ from neutrons            0    0.            0.                  compton scatter          0    0.            2.3285E-03
+ bremsstrahlung         568    1.9810E-04    3.8164E-06          capture                311    1.0847E-04    8.4800E-07
+ p-annihilation           0    0.            0.                  pair production          0    0.            0.        
+ photonuclear             0    0.            0.                  photonuclear abs         0    0.            0.        
+ electron x-rays          0    0.            0.                  loss to photofis         0    0.            0.        
+ compton fluores          0    0.            0.                                                                        
+ muon capt fluores        0    0.            0.                                                                        
+ 1st fluorescence         4    1.3951E-06    4.1119E-09                                                                
+ 2nd fluorescence         0    0.            0.                                                                        
+ cerenkov                 0    0.            0.                                                                        
+ (gamma,xgamma)           0    0.            0.                                                                        
+ tabular sampling         0    0.            0.                                                                        
+ prompt photofis          0    0.            0.                                                                        
+     total          2867742    1.0002E+00    6.6166E-01              total          2867742    1.0002E+00    6.6166E-01
+
+   number of photons banked                      568        average time of (shakes)              cutoffs
+   photon tracks per source particle      1.0002E+00          escape            3.3429E-01          tco   1.0000E+33
+   photon collisions per source particle  9.4065E-03          capture           1.7971E-01          eco   1.0000E-03
+   total photon collisions                     26970          capture or escape 3.3427E-01          wc1  -5.0000E-01
+                                                              any termination   3.3427E-01          wc2  -2.5000E-01
+
+ computer time so far in this run     1.10 minutes            maximum number ever in bank         1
+ computer time in mcrun               1.03 minutes            bank overflows to backup file       0
+ source particles per minute            2.7909E+06
+ random numbers generated                 46311960            most random numbers used was         231 in history      272832
+
+ range of sampled source weights = 1.0000E+00 to 1.0000E+00
+
+ number of histories processed by each thread
+      402212      409157      411695      410225      412579      410262      411040
+1photon   activity in each cell                                                                         print table 126
+
+                       tracks     population   collisions   collisions     number        flux        average      average
+              cell    entering                               * weight     weighted     weighted   track weight   track mfp
+                                                          (per history)    energy       energy     (relative)      (cm)
+
+        1        1     2867170      2867738        26970    9.4065E-03   6.5959E-01   6.5959E-01   1.0000E+00   1.0753E+04
+
+           total       2867170      2867738        26970    9.4065E-03
+
+1tally       15        nps =     2867170
+           tally type 5    particle flux at a ring  detector.                                  
+           particle(s): photons  
+           this tally is modified by dose function DE15 and DF15.
+ 
+ detector symmetric about x-axis located at x = 0.00000E+00 with radius = 1.00000E+01
+                 1.06956E-05 0.0000
+ 
+ detector symmetric about x-axis located at x = 0.00000E+00 with radius = 1.00000E+01
+ uncollided photon flux
+                 1.06868E-05 0.0000
+ 
+ detector score diagnostics                  cumulative          tally         cumulative
+                                             fraction of         per           fraction of
+   times average score     transmissions     transmissions       history       total tally
+        1.00000E-01               4873         0.00169        1.33162E-07        0.00017
+        1.00000E+00            2871857         0.99932        7.95369E-04        0.99894
+        2.00000E+00                666         0.99955        2.49358E-07        0.99926
+        5.00000E+00                240         0.99963        1.92555E-07        0.99950
+        1.00000E+01                 38         0.99965        7.38670E-08        0.99959
+        1.00000E+02                 11         0.99965        4.75601E-08        0.99965
+        1.00000E+03                  0         0.99965        0.00000E+00        0.99965
+        1.00000E+38                  0         0.99965        0.00000E+00        0.99965
+ before dd roulette               1009         1.00000        2.77407E-07        1.00000
+
+ average tally per history = 7.96343E-04            largest score = 2.30701E-02
+ (largest score)/(average tally) = 2.89700E+01      nps of largest score =      553236
+
+ score contributions by cell
+        cell      misses        hits    tally per history    weight per hit
+     1     1       15707     2878694       7.96343E-04         7.93155E-04
+       total       15707     2878694       7.96343E-04         7.93155E-04
+
+ score misses
+   russian roulette on pd                        0
+   psc=0.                                       36
+   russian roulette in transmission          15669
+   underflow in transmission                     2
+   hit a zero-importance cell                    0
+   energy cutoff                                 0
+
+
+ ===================================================================================================================================
+
+           results of 10 statistical checks for the estimated answer for the tally fluctuation chart (tfc) bin of tally       15
+
+ tfc bin     --mean--      ---------relative error---------      ----variance of the variance----      --figure of merit--     -pdf-
+ behavior    behavior      value   decrease   decrease rate      value   decrease   decrease rate       value     behavior     slope
+
+ desired      random       <0.05      yes      1/sqrt(nps)       <0.10      yes        1/nps           constant    random      >3.00
+ observed     random        0.00      yes          yes            0.00      yes         yes            constant    random       3.99
+ passed?        yes          yes      yes          yes             yes      yes         yes               yes        yes         yes
+
+ ===================================================================================================================================
+
+
+ this tally meets the statistical criteria used to form confidence intervals: check the tally fluctuation chart to verify.
+ the results in other bins associated with this tally may not meet these statistical criteria.
+
+ ----- estimated confidence intervals:  -----
+
+ estimated asymmetric confidence interval(1,2,3 sigma): 1.0696E-05 to 1.0696E-05; 1.0696E-05 to 1.0696E-05; 1.0696E-05 to 1.0696E-05
+ estimated  symmetric confidence interval(1,2,3 sigma): 1.0696E-05 to 1.0696E-05; 1.0696E-05 to 1.0696E-05; 1.0696E-05 to 1.0696E-05
+
+1analysis of the results in the tally fluctuation chart bin (tfc) for tally 15 with nps = 2867170            print table 160
+
+
+ normed average tally per history  = 1.06956E-05          unnormed average tally per history  = 1.06956E-05
+ estimated tally relative error    = 0.0000               estimated variance of the variance  = 0.0000
+ relative error from zero tallies  = 0.0000               relative error from nonzero scores  = 0.0000
+
+ number of nonzero history tallies =     2867170          efficiency for the nonzero tallies  = 1.0000
+ history number of largest  tally  =     2735517          largest  unnormalized history tally = 2.84893E-04
+ (largest  tally)/(average tally)  = 2.66365E+01          (largest  tally)/(avg nonzero tally)= 2.66365E+01
+
+ (confidence interval shift)/mean  = 0.0000               shifted confidence interval center  = 1.06956E-05
+
+
+ if the largest  history score sampled so far were to occur on the next history, the tfc bin quantities would change as follows:
+
+      estimated quantities           value at nps           value at nps+1           value(nps+1)/value(nps)-1.
+
+      mean                            1.06956E-05             1.06957E-05                     0.000009
+      relative error                  0.00000E+00             0.00000E+00                     0.000000
+      variance of the variance        0.00000E+00             0.00000E+00                     0.000000
+      shifted center                  1.06956E-05             1.06956E-05                     0.000000
+      figure of merit                 1.00000E+30             1.00000E+30                     0.000000
+
+ the estimated inverse power slope of the 200 largest  tallies starting at 2.99203E-05 is 3.9909
+ the history score probability density function appears to have an unsampled region at the largest  history scores:
+ please examine. see print table 161.
+
+ relative error is 0! fom and f(x) signal-to-noise ratio are both undefined. histories/minute = 2.791E+06
+
+1tally       25        nps =     2867170
+           tally type 5    particle flux at a ring  detector.                                  
+           particle(s): photons  
+           this tally is modified by dose function DE25 and DF25.
+ 
+ detector symmetric about x-axis located at x = 2.00000E+01 with radius = 2.00000E+01
+                 1.33678E-06 0.0001
+ 
+ detector symmetric about x-axis located at x = 2.00000E+01 with radius = 2.00000E+01
+ uncollided photon flux
+                 1.33359E-06 0.0000
+ 
+ detector score diagnostics                  cumulative          tally         cumulative
+                                             fraction of         per           fraction of
+   times average score     transmissions     transmissions       history       total tally
+        1.00000E-01               5649         0.00195        1.90261E-08        0.00019
+        1.00000E+00            2880895         0.99855        9.93469E-05        0.99699
+        2.00000E+00               2086         0.99927        1.02149E-07        0.99801
+        5.00000E+00                877         0.99957        8.65052E-08        0.99888
+        1.00000E+01                170         0.99963        4.01431E-08        0.99928
+        1.00000E+02                 58         0.99965        3.69606E-08        0.99965
+        1.00000E+03                  0         0.99965        0.00000E+00        0.99965
+        1.00000E+38                  0         0.99965        0.00000E+00        0.99965
+ before dd roulette               1009         1.00000        3.46848E-08        1.00000
+
+ average tally per history = 9.96664E-05            largest score = 5.46996E-03
+ (largest score)/(average tally) = 5.48826E+01      nps of largest score =      825758
+
+ score contributions by cell
+        cell      misses        hits    tally per history    weight per hit
+     1     1        3657     2890744       9.96664E-05         9.88536E-05
+       total        3657     2890744       9.96664E-05         9.88536E-05
+
+ score misses
+   russian roulette on pd                        0
+   psc=0.                                       36
+   russian roulette in transmission           3607
+   underflow in transmission                    14
+   hit a zero-importance cell                    0
+   energy cutoff                                 0
+
+
+ ===================================================================================================================================
+
+           results of 10 statistical checks for the estimated answer for the tally fluctuation chart (tfc) bin of tally       25
+
+ tfc bin     --mean--      ---------relative error---------      ----variance of the variance----      --figure of merit--     -pdf-
+ behavior    behavior      value   decrease   decrease rate      value   decrease   decrease rate       value     behavior     slope
+
+ desired      random       <0.05      yes      1/sqrt(nps)       <0.10      yes        1/nps           constant    random      >3.00
+ observed     random        0.00      yes          yes            0.00      yes         yes            constant    random       3.26
+ passed?        yes          yes      yes          yes             yes      yes         yes               yes        yes         yes
+
+ ===================================================================================================================================
+
+
+ this tally meets the statistical criteria used to form confidence intervals: check the tally fluctuation chart to verify.
+ the results in other bins associated with this tally may not meet these statistical criteria.
+
+ ----- estimated confidence intervals:  -----
+
+ estimated asymmetric confidence interval(1,2,3 sigma): 1.3368E-06 to 1.3368E-06; 1.3368E-06 to 1.3368E-06; 1.3368E-06 to 1.3368E-06
+ estimated  symmetric confidence interval(1,2,3 sigma): 1.3368E-06 to 1.3368E-06; 1.3368E-06 to 1.3368E-06; 1.3368E-06 to 1.3368E-06
+
+1analysis of the results in the tally fluctuation chart bin (tfc) for tally 25 with nps = 2867170            print table 160
+
+
+ normed average tally per history  = 1.33678E-06          unnormed average tally per history  = 1.33678E-06
+ estimated tally relative error    = 0.0000               estimated variance of the variance  = 0.0000
+ relative error from zero tallies  = 0.0000               relative error from nonzero scores  = 0.0000
+
+ number of nonzero history tallies =     2867170          efficiency for the nonzero tallies  = 1.0000
+ history number of largest  tally  =      627405          largest  unnormalized history tally = 7.15263E-05
+ (largest  tally)/(average tally)  = 5.35065E+01          (largest  tally)/(avg nonzero tally)= 5.35065E+01
+
+ (confidence interval shift)/mean  = 0.0000               shifted confidence interval center  = 1.33678E-06
+
+
+ if the largest  history score sampled so far were to occur on the next history, the tfc bin quantities would change as follows:
+
+      estimated quantities           value at nps           value at nps+1           value(nps+1)/value(nps)-1.
+
+      mean                            1.33678E-06             1.33680E-06                     0.000018
+      relative error                  0.00000E+00             0.00000E+00                     0.000000
+      variance of the variance        0.00000E+00             0.00000E+00                     0.000000
+      shifted center                  1.33678E-06             1.33678E-06                     0.000001
+      figure of merit                 1.00000E+30             1.00000E+30                     0.000000
+
+ the estimated inverse power slope of the 200 largest  tallies starting at 6.40871E-06 is 3.2599
+ the large score tail of the empirical history score probability density function appears to have no unsampled regions.
+
+ relative error is 0! fom and f(x) signal-to-noise ratio are both undefined. histories/minute = 2.791E+06
+
+1tally       35        nps =     2867170
+           tally type 5    particle flux at a ring  detector.                                  
+           particle(s): photons  
+           this tally is modified by dose function DE35 and DF35.
+ 
+ detector symmetric about x-axis located at x = 4.00000E+01 with radius = 4.00000E+01
+                 3.34003E-07 0.0001
+ 
+ detector symmetric about x-axis located at x = 4.00000E+01 with radius = 4.00000E+01
+ uncollided photon flux
+                 3.32524E-07 0.0000
+ 
+ detector score diagnostics                  cumulative          tally         cumulative
+                                             fraction of         per           fraction of
+   times average score     transmissions     transmissions       history       total tally
+        1.00000E-01                949         0.00033        6.71645E-10        0.00003
+        1.00000E+00            2885774         0.99748        2.48003E-05        0.99448
+        2.00000E+00               4121         0.99890        5.09495E-08        0.99652
+        5.00000E+00               1715         0.99949        4.28909E-08        0.99824
+        1.00000E+01                368         0.99962        2.14799E-08        0.99910
+        1.00000E+02                 91         0.99965        1.35527E-08        0.99965
+        1.00000E+03                  0         0.99965        0.00000E+00        0.99965
+        1.00000E+38                  0         0.99965        0.00000E+00        0.99965
+ before dd roulette               1009         1.00000        8.78324E-09        1.00000
+
+ average tally per history = 2.49387E-05            largest score = 1.17881E-03
+ (largest score)/(average tally) = 4.72683E+01      nps of largest score =      692460
+
+ score contributions by cell
+        cell      misses        hits    tally per history    weight per hit
+     1     1         374     2894027       2.49387E-05         2.47072E-05
+       total         374     2894027       2.49387E-05         2.47072E-05
+
+ score misses
+   russian roulette on pd                        0
+   psc=0.                                       36
+   russian roulette in transmission            276
+   underflow in transmission                    62
+   hit a zero-importance cell                    0
+   energy cutoff                                 0
+
+
+ ===================================================================================================================================
+
+           results of 10 statistical checks for the estimated answer for the tally fluctuation chart (tfc) bin of tally       35
+
+ tfc bin     --mean--      ---------relative error---------      ----variance of the variance----      --figure of merit--     -pdf-
+ behavior    behavior      value   decrease   decrease rate      value   decrease   decrease rate       value     behavior     slope
+
+ desired      random       <0.05      yes      1/sqrt(nps)       <0.10      yes        1/nps           constant    random      >3.00
+ observed     random        0.00      yes          yes            0.00      yes         yes            constant    random       2.99
+ passed?        yes          yes      yes          yes             yes      yes         yes               yes        yes          no
+
+ ===================================================================================================================================
+
+
+ warning.  the tally in the tally fluctuation chart bin did not pass  1 of the 10 statistical checks.
+
+1analysis of the results in the tally fluctuation chart bin (tfc) for tally 35 with nps = 2867170            print table 160
+
+
+ normed average tally per history  = 3.34003E-07          unnormed average tally per history  = 3.34003E-07
+ estimated tally relative error    = 0.0000               estimated variance of the variance  = 0.0000
+ relative error from zero tallies  = 0.0000               relative error from nonzero scores  = 0.0000
+
+ number of nonzero history tallies =     2867170          efficiency for the nonzero tallies  = 1.0000
+ history number of largest  tally  =      692460          largest  unnormalized history tally = 1.58971E-05
+ (largest  tally)/(average tally)  = 4.75957E+01          (largest  tally)/(avg nonzero tally)= 4.75957E+01
+
+ (confidence interval shift)/mean  = 0.0000               shifted confidence interval center  = 3.34004E-07
+
+
+ if the largest  history score sampled so far were to occur on the next history, the tfc bin quantities would change as follows:
+
+      estimated quantities           value at nps           value at nps+1           value(nps+1)/value(nps)-1.
+
+      mean                            3.34003E-07             3.34009E-07                     0.000016
+      relative error                  0.00000E+00             0.00000E+00                     0.000000
+      variance of the variance        0.00000E+00             0.00000E+00                     0.000000
+      shifted center                  3.34004E-07             3.34004E-07                     0.000000
+      figure of merit                 1.00000E+30             1.00000E+30                     0.000000
+
+ the estimated inverse power slope of the 200 largest  tallies starting at 2.23441E-06 is 2.9875
+ the large score tail of the empirical history score probability density function appears to have no unsampled regions.
+
+ relative error is 0! fom and f(x) signal-to-noise ratio are both undefined. histories/minute = 2.791E+06
+
+1unnormed tally density for tally 35          nonzero tally mean(m) = 3.340E-07   nps = 2867170              print table 161
+
+ abscissa              ordinate   log plot of tally probability density function in tally fluctuation chart bin(d=decade,slope= 3.0)
+  tally  number num den log den:d----------d-----------d-----------d------------d-----------d-----------d-----------d-----------d---
+ 3.98-07 2.9+06 1.22+07   7.085 mmmmmmmmmmm|mmmmmmmmmmm|mmmmmmmmmmm|mmmmmmmmmmmm|mmmmmmmmmmm|mmmmmmmmmmm|mmmmmmmmmmm|mmmmmmmmmmm|mmm
+ 5.01-07   6198 2.10+04   4.322 ***********|***********|***********|************|***********|*****      |           |           |   
+ 6.31-07   2169 5.83+03   3.766 ***********|***********|***********|************|***********|           |           |           |   
+ 7.94-07   1242 2.65+03   3.423 ***********|***********|***********|************|*******    |           |           |           |   
+ 1.00-06    961 1.63+03   3.212 ***********|***********|***********|************|****       |           |           |           |   
+ 1.26-06    486 6.55+02   2.816 ***********|***********|***********|************|           |           |           |           |   
+ 1.58-06    279 2.99+02   2.475 ***********|***********|***********|********    |           |           |           |           |   
+ 2.00-06    157 1.33+02   2.125 ***********|***********|***********|****        |           |           |           |           |   
+ 2.51-06    106 7.16+01   1.855 ***********|***********|***********|*         s |           |           |           |           |   
+ 3.16-06     65 3.49+01   1.542 ***********|***********|*********  |        s   |           |           |           |           |   
+ 3.98-06     36 1.53+01   1.186 ***********|***********|****       |     s      |           |           |           |           |   
+ 5.01-06     18 6.09+00   0.785 ***********|***********|           |   s        |           |           |           |           |   
+ 6.31-06     10 2.69+00   0.429 ***********|*******    |           |s           |           |           |           |           |   
+ 7.94-06      3 6.40-01  -0.194 ***********|           |         s |            |           |           |           |           |   
+ 1.00-05      7 1.19+00   0.074 ***********|***        |      s    |            |           |           |           |           |   
+ 1.26-05      4 5.39-01  -0.269 ***********|           |   s       |            |           |           |           |           |   
+ 1.58-05      1 1.07-01  -0.971 **         |           |s          |            |           |           |           |           |   
+ 2.00-05      1 8.50-02  -1.071 *          |        s  |           |            |           |           |           |           |   
+  total 2867170 1.00+00         d----------d-----------d-----------d------------d-----------d-----------d-----------d-----------d---
+
+1tally       65        nps =     2867170
+           tally type 5    particle flux at a ring  detector.                                  
+           particle(s): photons  
+           this tally is modified by dose function DE65 and DF65.
+ 
+ detector symmetric about y-axis located at y = 5.00000E+00 with radius = 5.00000E+00
+                 2.13923E-05 0.0000
+ 
+ detector symmetric about y-axis located at y = 5.00000E+00 with radius = 5.00000E+00
+ uncollided photon flux
+                 2.13794E-05 0.0000
+ 
+ detector score diagnostics                  cumulative          tally         cumulative
+                                             fraction of         per           fraction of
+   times average score     transmissions     transmissions       history       total tally
+        1.00000E-01               3860         0.00134        2.10980E-07        0.00013
+        1.00000E+00            2869868         0.99939        1.59064E-03        0.99901
+        2.00000E+00                494         0.99956        3.93772E-07        0.99926
+        5.00000E+00                199         0.99963        3.16658E-07        0.99946
+        1.00000E+01                 40         0.99964        1.49936E-07        0.99955
+        1.00000E+02                 18         0.99965        1.58737E-07        0.99965
+        1.00000E+03                  0         0.99965        0.00000E+00        0.99965
+        1.00000E+38                  0         0.99965        0.00000E+00        0.99965
+ before dd roulette               1009         1.00000        5.54869E-07        1.00000
+
+ average tally per history = 1.59243E-03            largest score = 4.66336E-02
+ (largest score)/(average tally) = 2.92846E+01      nps of largest score =     2558665
+
+ score contributions by cell
+        cell      misses        hits    tally per history    weight per hit
+     1     1       18913     2875488       1.59243E-03         1.58782E-03
+       total       18913     2875488       1.59243E-03         1.58782E-03
+
+ score misses
+   russian roulette on pd                        0
+   psc=0.                                       36
+   russian roulette in transmission          18877
+   underflow in transmission                     0
+   hit a zero-importance cell                    0
+   energy cutoff                                 0
+
+
+ ===================================================================================================================================
+
+           results of 10 statistical checks for the estimated answer for the tally fluctuation chart (tfc) bin of tally       65
+
+ tfc bin     --mean--      ---------relative error---------      ----variance of the variance----      --figure of merit--     -pdf-
+ behavior    behavior      value   decrease   decrease rate      value   decrease   decrease rate       value     behavior     slope
+
+ desired      random       <0.05      yes      1/sqrt(nps)       <0.10      yes        1/nps           constant    random      >3.00
+ observed     random        0.00      yes          yes            0.00      yes         yes            constant    random       3.11
+ passed?        yes          yes      yes          yes             yes      yes         yes               yes        yes         yes
+
+ ===================================================================================================================================
+
+
+ this tally meets the statistical criteria used to form confidence intervals: check the tally fluctuation chart to verify.
+ the results in other bins associated with this tally may not meet these statistical criteria.
+
+ ----- estimated confidence intervals:  -----
+
+ estimated asymmetric confidence interval(1,2,3 sigma): 2.1392E-05 to 2.1392E-05; 2.1392E-05 to 2.1392E-05; 2.1392E-05 to 2.1392E-05
+ estimated  symmetric confidence interval(1,2,3 sigma): 2.1392E-05 to 2.1392E-05; 2.1392E-05 to 2.1392E-05; 2.1392E-05 to 2.1392E-05
+
+1analysis of the results in the tally fluctuation chart bin (tfc) for tally 65 with nps = 2867170            print table 160
+
+
+ normed average tally per history  = 2.13923E-05          unnormed average tally per history  = 2.13923E-05
+ estimated tally relative error    = 0.0000               estimated variance of the variance  = 0.0000
+ relative error from zero tallies  = 0.0000               relative error from nonzero scores  = 0.0000
+
+ number of nonzero history tallies =     2867170          efficiency for the nonzero tallies  = 1.0000
+ history number of largest  tally  =     2558665          largest  unnormalized history tally = 5.31982E-04
+ (largest  tally)/(average tally)  = 2.48679E+01          (largest  tally)/(avg nonzero tally)= 2.48679E+01
+
+ (confidence interval shift)/mean  = 0.0000               shifted confidence interval center  = 2.13924E-05
+
+
+ if the largest  history score sampled so far were to occur on the next history, the tfc bin quantities would change as follows:
+
+      estimated quantities           value at nps           value at nps+1           value(nps+1)/value(nps)-1.
+
+      mean                            2.13923E-05             2.13925E-05                     0.000008
+      relative error                  0.00000E+00             0.00000E+00                     0.000000
+      variance of the variance        0.00000E+00             0.00000E+00                     0.000000
+      shifted center                  2.13924E-05             2.13924E-05                     0.000000
+      figure of merit                 1.00000E+30             1.00000E+30                     0.000000
+
+ the estimated inverse power slope of the 200 largest  tallies starting at 5.71137E-05 is 3.1096
+ the large score tail of the empirical history score probability density function appears to have no unsampled regions.
+
+ relative error is 0! fom and f(x) signal-to-noise ratio are both undefined. histories/minute = 2.791E+06
+
+1tally       75        nps =     2867170
+           tally type 5    particle flux at a ring  detector.                                  
+           particle(s): photons  
+           this tally is modified by dose function DE75 and DF75.
+ 
+ detector symmetric about y-axis located at y = 3.00000E+01 with radius = 3.00000E+01
+                 5.94109E-07 0.0001
+ 
+ detector symmetric about y-axis located at y = 3.00000E+01 with radius = 3.00000E+01
+ uncollided photon flux
+                 5.91929E-07 0.0000
+ 
+ detector score diagnostics                  cumulative          tally         cumulative
+                                             fraction of         per           fraction of
+   times average score     transmissions     transmissions       history       total tally
+        1.00000E-01               2041         0.00071        2.87062E-09        0.00006
+        1.00000E+00            2885826         0.99806        4.41303E-05        0.99554
+        2.00000E+00               3010         0.99910        6.58394E-08        0.99703
+        5.00000E+00               1237         0.99953        5.54134E-08        0.99828
+        1.00000E+01                268         0.99962        2.83912E-08        0.99892
+        1.00000E+02                 78         0.99965        2.37165E-08        0.99945
+        1.00000E+03                  4         0.99965        8.79324E-09        0.99965
+        1.00000E+38                  0         0.99965        0.00000E+00        0.99965
+ before dd roulette               1009         1.00000        1.54717E-08        1.00000
+
+ average tally per history = 4.43308E-05            largest score = 7.83737E-03
+ (largest score)/(average tally) = 1.76793E+02      nps of largest score =      118508
+
+ score contributions by cell
+        cell      misses        hits    tally per history    weight per hit
+     1     1         928     2893473       4.43308E-05         4.39278E-05
+       total         928     2893473       4.43308E-05         4.39278E-05
+
+ score misses
+   russian roulette on pd                        0
+   psc=0.                                       36
+   russian roulette in transmission            847
+   underflow in transmission                    45
+   hit a zero-importance cell                    0
+   energy cutoff                                 0
+
+
+ ===================================================================================================================================
+
+           results of 10 statistical checks for the estimated answer for the tally fluctuation chart (tfc) bin of tally       75
+
+ tfc bin     --mean--      ---------relative error---------      ----variance of the variance----      --figure of merit--     -pdf-
+ behavior    behavior      value   decrease   decrease rate      value   decrease   decrease rate       value     behavior     slope
+
+ desired      random       <0.05      yes      1/sqrt(nps)       <0.10      yes        1/nps           constant    random      >3.00
+ observed     random        0.00      yes          yes            0.10      yes         yes            constant    random       2.56
+ passed?        yes          yes      yes          yes              no      yes         yes               yes        yes          no
+
+ ===================================================================================================================================
+
+
+ warning.  the tally in the tally fluctuation chart bin did not pass  2 of the 10 statistical checks.
+
+1analysis of the results in the tally fluctuation chart bin (tfc) for tally 75 with nps = 2867170            print table 160
+
+
+ normed average tally per history  = 5.94109E-07          unnormed average tally per history  = 5.94109E-07
+ estimated tally relative error    = 0.0001               estimated variance of the variance  = 0.1022
+ relative error from zero tallies  = 0.0000               relative error from nonzero scores  = 0.0001
+
+ number of nonzero history tallies =     2867170          efficiency for the nonzero tallies  = 1.0000
+ history number of largest  tally  =      118508          largest  unnormalized history tally = 9.00340E-05
+ (largest  tally)/(average tally)  = 1.51545E+02          (largest  tally)/(avg nonzero tally)= 1.51545E+02
+
+ (confidence interval shift)/mean  = 0.0000               shifted confidence interval center  = 5.94118E-07
+
+
+ if the largest  history score sampled so far were to occur on the next history, the tfc bin quantities would change as follows:
+
+      estimated quantities           value at nps           value at nps+1           value(nps+1)/value(nps)-1.
+
+      mean                            5.94109E-07             5.94140E-07                     0.000053
+      relative error                  1.11768E-04             1.23480E-04                     0.104791
+      variance of the variance        1.02201E-01             1.01273E-01                    -0.009081
+      shifted center                  5.94118E-07             5.94119E-07                     0.000002
+      figure of merit                 7.79201E+07             6.38394E+07                    -0.180706
+
+ the estimated inverse power slope of the 200 largest  tallies starting at 3.75301E-06 is 2.5618
+ the history score probability density function appears to have an unsampled region at the largest  history scores:
+ please examine. see print table 161.
+
+ fom = (histories/minute)*(f(x) signal-to-noise ratio)**2 = (2.791E+06)*( 5.284E+00)**2 = (2.791E+06)*(2.792E+01) = 7.792E+07
+
+1unnormed tally density for tally 75          nonzero tally mean(m) = 5.941E-07   nps = 2867170              print table 161
+
+ abscissa              ordinate   log plot of tally probability density function in tally fluctuation chart bin(d=decade,slope= 2.6)
+  tally  number num den log den:d----------d----------d-----------d----------d-----------d----------d-----------d-----------d-------
+ 6.31-07 2.8+06 7.66+06   6.884 mmmmmmmmmmm|mmmmmmmmmm|mmmmmmmmmmm|mmmmmmmmmm|mmmmmmmmmmm|mmmmmmmmmm|mmmmmmmmmmm|mmmmmmmmmmm|mmmmmmm
+ 7.94-07  12039 2.57+04   4.410 ***********|**********|***********|**********|***********|**********|**         |           |       
+ 1.00-06   2426 4.11+03   3.614 ***********|**********|***********|**********|***********|****      |           |           |       
+ 1.26-06   1175 1.58+03   3.199 ***********|**********|***********|**********|***********|          |           |           |       
+ 1.58-06    806 8.62+02   2.936 ***********|**********|***********|**********|********   |          |           |           |       
+ 2.00-06    479 4.07+02   2.610 ***********|**********|***********|**********|*****      |          |           |           |       
+ 2.51-06    255 1.72+02   2.236 ***********|**********|***********|**********|           |          |           |           |       
+ 3.16-06    146 7.83+01   1.894 ***********|**********|***********|*******   |           |          |           |           |       
+ 3.98-06     92 3.92+01   1.593 ***********|**********|***********|****      |  s        |          |           |           |       
+ 5.01-06     79 2.67+01   1.427 ***********|**********|***********|**        |s          |          |           |           |       
+ 6.31-06     42 1.13+01   1.053 ***********|**********|********** |         s|           |          |           |           |       
+ 7.94-06     20 4.27+00   0.630 ***********|**********|*****      |       s  |           |          |           |           |       
+ 1.00-05     12 2.03+00   0.309 ***********|**********|*          |     s    |           |          |           |           |       
+ 1.26-05      9 1.21+00   0.084 ***********|********* |           |   s      |           |          |           |           |       
+ 1.58-05      4 4.28-01  -0.369 ***********|****      |           |s         |           |          |           |           |       
+ 2.00-05      6 5.10-01  -0.292 ***********|*****     |          s|          |           |          |           |           |       
+ 2.51-05      3 2.03-01  -0.694 ***********|          |       s   |          |           |          |           |           |       
+ 3.16-05      1 5.36-02  -1.271 ******     |          |    s      |          |           |          |           |           |       
+ 3.98-05      1 4.26-02  -1.371 ****       |          |  s        |          |           |          |           |           |       
+ 5.01-05      0 0.00+00   0.000            |          s           |          |           |          |           |           |       
+ 6.31-05      1 2.69-02  -1.571 **         |       s  |           |          |           |          |           |           |       
+ 7.94-05      1 2.13-02  -1.671 *          |    s     |           |          |           |          |           |           |       
+ 1.00-04      2 3.39-02  -1.470 ***        | s        |           |          |           |          |           |           |       
+  total 2867170 1.00+00         d----------d----------d-----------d----------d-----------d----------d-----------d-----------d-------
+
+1tally       85        nps =     2867170
+           tally type 5    particle flux at a ring  detector.                                  
+           particle(s): photons  
+           this tally is modified by dose function DE85 and DF85.
+ 
+ detector symmetric about y-axis located at y = 6.00000E+01 with radius = 6.00000E+01
+                 1.48383E-07 0.0002
+ 
+ detector symmetric about y-axis located at y = 6.00000E+01 with radius = 6.00000E+01
+ uncollided photon flux
+                 1.47401E-07 0.0000
+ 
+ detector score diagnostics                  cumulative          tally         cumulative
+                                             fraction of         per           fraction of
+   times average score     transmissions     transmissions       history       total tally
+        1.00000E-01                378         0.00013        6.82134E-11        0.00001
+        1.00000E+00            2884106         0.99663        1.09948E-05        0.99159
+        2.00000E+00               5549         0.99855        3.05452E-08        0.99434
+        5.00000E+00               2480         0.99941        2.79103E-08        0.99686
+        1.00000E+01                537         0.99959        1.40229E-08        0.99812
+        1.00000E+02                169         0.99965        1.21462E-08        0.99922
+        1.00000E+03                  5         0.99965        4.81769E-09        0.99965
+        1.00000E+38                  0         0.99965        0.00000E+00        0.99965
+ before dd roulette               1009         1.00000        3.85714E-09        1.00000
+
+ average tally per history = 1.10882E-05            largest score = 4.80985E-03
+ (largest score)/(average tally) = 4.33782E+02      nps of largest score =      252074
+
+ score contributions by cell
+        cell      misses        hits    tally per history    weight per hit
+     1     1         168     2894233       1.10882E-05         1.09845E-05
+       total         168     2894233       1.10882E-05         1.09845E-05
+
+ score misses
+   russian roulette on pd                        0
+   psc=0.                                       36
+   russian roulette in transmission             60
+   underflow in transmission                    72
+   hit a zero-importance cell                    0
+   energy cutoff                                 0
+
+
+ ===================================================================================================================================
+
+           results of 10 statistical checks for the estimated answer for the tally fluctuation chart (tfc) bin of tally       85
+
+ tfc bin     --mean--      ---------relative error---------      ----variance of the variance----      --figure of merit--     -pdf-
+ behavior    behavior      value   decrease   decrease rate      value   decrease   decrease rate       value     behavior     slope
+
+ desired      random       <0.05      yes      1/sqrt(nps)       <0.10      yes        1/nps           constant    random      >3.00
+ observed     random        0.00      yes          yes            0.22      yes         yes            constant   increase      2.23
+ passed?        yes          yes      yes          yes              no      yes         yes               yes         no          no
+
+ ===================================================================================================================================
+
+
+ warning.  the tally in the tally fluctuation chart bin did not pass  3 of the 10 statistical checks.
+
+1analysis of the results in the tally fluctuation chart bin (tfc) for tally 85 with nps = 2867170            print table 160
+
+
+ normed average tally per history  = 1.48383E-07          unnormed average tally per history  = 1.48383E-07
+ estimated tally relative error    = 0.0002               estimated variance of the variance  = 0.2176
+ relative error from zero tallies  = 0.0000               relative error from nonzero scores  = 0.0002
+
+ number of nonzero history tallies =     2867170          efficiency for the nonzero tallies  = 1.0000
+ history number of largest  tally  =      252074          largest  unnormalized history tally = 5.68711E-05
+ (largest  tally)/(average tally)  = 3.83272E+02          (largest  tally)/(avg nonzero tally)= 3.83272E+02
+
+ (confidence interval shift)/mean  = 0.0000               shifted confidence interval center  = 1.48389E-07
+
+
+ if the largest  history score sampled so far were to occur on the next history, the tfc bin quantities would change as follows:
+
+      estimated quantities           value at nps           value at nps+1           value(nps+1)/value(nps)-1.
+
+      mean                            1.48383E-07             1.48403E-07                     0.000133
+      relative error                  2.10386E-04             2.49041E-04                     0.183738
+      variance of the variance        2.17589E-01             1.92862E-01                    -0.113641
+      shifted center                  1.48389E-07             1.48390E-07                     0.000007
+      figure of merit                 2.19914E+07             1.56943E+07                    -0.286345
+
+ the estimated inverse power slope of the 200 largest  tallies starting at 1.20917E-06 is 2.2344
+ the history score probability density function appears to have an unsampled region at the largest  history scores:
+ please examine. see print table 161.
+
+ fom = (histories/minute)*(f(x) signal-to-noise ratio)**2 = (2.791E+06)*( 2.807E+00)**2 = (2.791E+06)*(7.880E+00) = 2.199E+07
+
+1unnormed tally density for tally 85          nonzero tally mean(m) = 1.484E-07   nps = 2867170              print table 161
+
+ abscissa              ordinate   log plot of tally probability density function in tally fluctuation chart bin(d=decade,slope= 2.2)
+  tally  number num den log den:d---------d----------d----------d----------d----------d----------d----------d---------d----------d--
+ 1.58-07 2.8+06 3.04+07   7.483 mmmmmmmmmm|mmmmmmmmmm|mmmmmmmmmm|mmmmmmmmmm|mmmmmmmmmm|mmmmmmmmmm|mmmmmmmmmm|mmmmmmmmm|mmmmmmmmmm|mm
+ 2.00-07  13472 1.14+05   5.059 **********|**********|**********|**********|**********|**********|*******   |         |          |  
+ 2.51-07   4350 2.94+04   4.468 **********|**********|**********|**********|**********|**********|*         |         |          |  
+ 3.16-07   2260 1.21+04   4.083 **********|**********|**********|**********|**********|********  |          |         |          |  
+ 3.98-07   1591 6.78+03   3.831 **********|**********|**********|**********|**********|*****     |          |         |          |  
+ 5.01-07    935 3.16+03   3.500 **********|**********|**********|**********|**********|*         |          |         |          |  
+ 6.31-07    525 1.41+03   3.150 **********|**********|**********|**********|********* |          |          |         |          |  
+ 7.94-07    317 6.77+02   2.830 **********|**********|**********|**********|*****     |          |          |         |          |  
+ 1.00-06    216 3.66+02   2.564 **********|**********|**********|**********|**        |          |          |         |          |  
+ 1.26-06    145 1.95+02   2.291 **********|**********|**********|**********|        s |          |          |         |          |  
+ 1.58-06     72 7.70+01   1.887 **********|**********|**********|******    |      s   |          |          |         |          |  
+ 2.00-06     41 3.48+01   1.542 **********|**********|**********|**        |     s    |          |          |         |          |  
+ 2.51-06     21 1.42+01   1.152 **********|**********|********* |          |   s      |          |          |         |          |  
+ 3.16-06     13 6.97+00   0.843 **********|**********|*****     |          | s        |          |          |         |          |  
+ 3.98-06      9 3.83+00   0.584 **********|**********|***       |          s          |          |          |         |          |  
+ 5.01-06      8 2.71+00   0.432 **********|**********|*         |       s  |          |          |          |         |          |  
+ 6.31-06      5 1.34+00   0.128 **********|********* |          |     s    |          |          |          |         |          |  
+ 7.94-06      2 4.27-01  -0.370 **********|***       |          |   s      |          |          |          |         |          |  
+ 1.00-05      2 3.39-01  -0.470 **********|**        |          | s        |          |          |          |         |          |  
+ 1.26-05      1 1.35-01  -0.871 ********* |          |         s|          |          |          |          |         |          |  
+ 1.58-05      1 1.07-01  -0.971 ********  |          |       s  |          |          |          |          |         |          |  
+ 2.00-05      1 8.50-02  -1.071 ******    |          |     s    |          |          |          |          |         |          |  
+ 2.51-05      0 0.00+00   0.000           |          |  s       |          |          |          |          |         |          |  
+ 3.16-05      1 5.36-02  -1.271 ****      |          |s         |          |          |          |          |         |          |  
+ 3.98-05      0 0.00+00   0.000           |         s|          |          |          |          |          |         |          |  
+ 5.01-05      1 3.38-02  -1.471 **        |      s   |          |          |          |          |          |         |          |  
+ 6.31-05      1 2.69-02  -1.571 *         |    s     |          |          |          |          |          |         |          |  
+  total 2867170 1.00+00         d---------d----------d----------d----------d----------d----------d----------d---------d----------d--
+
+1tally       95        nps =     2867170
+           tally type 5    particle flux at a ring  detector.                                  
+           particle(s): photons  
+           this tally is modified by dose function DE95 and DF95.
+ 
+ detector symmetric about z-axis located at z =-3.30000E+01 with radius = 2.00000E+01
+                 7.18213E-07 0.0001
+ 
+ detector symmetric about z-axis located at z =-3.30000E+01 with radius = 2.00000E+01
+ uncollided photon flux
+                 7.15820E-07 0.0000
+ 
+ detector score diagnostics                  cumulative          tally         cumulative
+                                             fraction of         per           fraction of
+   times average score     transmissions     transmissions       history       total tally
+        1.00000E-01               3320         0.00115        5.82474E-09        0.00011
+        1.00000E+00            2884547         0.99831        5.33514E-05        0.99575
+        2.00000E+00               2079         0.99903        5.38412E-08        0.99675
+        5.00000E+00               1438         0.99953        7.95306E-08        0.99824
+        1.00000E+01                261         0.99962        3.26889E-08        0.99885
+        1.00000E+02                 89         0.99965        3.59366E-08        0.99952
+        1.00000E+03                  3         0.99965        7.26775E-09        0.99965
+        1.00000E+38                  0         0.99965        0.00000E+00        0.99965
+ before dd roulette               1009         1.00000        1.86566E-08        1.00000
+
+ average tally per history = 5.35852E-05            largest score = 7.59890E-03
+ (largest score)/(average tally) = 1.41810E+02      nps of largest score =      327484
+
+ score contributions by cell
+        cell      misses        hits    tally per history    weight per hit
+     1     1        1655     2892746       5.35852E-05         5.31114E-05
+       total        1655     2892746       5.35852E-05         5.31114E-05
+
+ score misses
+   russian roulette on pd                        0
+   psc=0.                                       36
+   russian roulette in transmission           1592
+   underflow in transmission                    27
+   hit a zero-importance cell                    0
+   energy cutoff                                 0
+ 
+ detector symmetric about z-axis located at z =-4.30000E+01 with radius = 2.00000E+01
+                 4.75399E-07 0.0001
+ 
+ detector symmetric about z-axis located at z =-4.30000E+01 with radius = 2.00000E+01
+ uncollided photon flux
+                 4.73535E-07 0.0000
+ 
+ detector score diagnostics                  cumulative          tally         cumulative
+                                             fraction of         per           fraction of
+   times average score     transmissions     transmissions       history       total tally
+        1.00000E-01               2359         0.00082        2.68313E-09        0.00008
+        1.00000E+00            2885411         0.99809        3.53030E-05        0.99499
+        2.00000E+00               2420         0.99893        4.11144E-08        0.99615
+        5.00000E+00               1568         0.99947        5.98376E-08        0.99783
+        1.00000E+01                391         0.99961        3.15372E-08        0.99872
+        1.00000E+02                129         0.99965        2.81187E-08        0.99952
+        1.00000E+03                  2         0.99965        4.79195E-09        0.99965
+        1.00000E+38                  0         0.99965        0.00000E+00        0.99965
+ before dd roulette               1009         1.00000        1.23810E-08        1.00000
+
+ average tally per history = 3.54835E-05            largest score = 9.03245E-03
+ (largest score)/(average tally) = 2.54553E+02      nps of largest score =     1266380
+
+ score contributions by cell
+        cell      misses        hits    tally per history    weight per hit
+     1     1        1112     2893289       3.54835E-05         3.51632E-05
+       total        1112     2893289       3.54835E-05         3.51632E-05
+
+ score misses
+   russian roulette on pd                        0
+   psc=0.                                       36
+   russian roulette in transmission           1035
+   underflow in transmission                    41
+   hit a zero-importance cell                    0
+   energy cutoff                                 0
+ 
+ detector symmetric about z-axis located at z =-5.30000E+01 with radius = 2.00000E+01
+                 3.33143E-07 0.0001
+ 
+ detector symmetric about z-axis located at z =-5.30000E+01 with radius = 2.00000E+01
+ uncollided photon flux
+                 3.31589E-07 0.0000
+ 
+ detector score diagnostics                  cumulative          tally         cumulative
+                                             fraction of         per           fraction of
+   times average score     transmissions     transmissions       history       total tally
+        1.00000E-01               1883         0.00065        1.45522E-09        0.00006
+        1.00000E+00            2885652         0.99786        2.47246E-05        0.99396
+        2.00000E+00               2772         0.99882        3.28442E-08        0.99528
+        5.00000E+00               1690         0.99941        4.44241E-08        0.99707
+        1.00000E+01                512         0.99958        2.98053E-08        0.99827
+        1.00000E+02                197         0.99965        3.20467E-08        0.99956
+        1.00000E+03                  2         0.99965        2.39817E-09        0.99965
+        1.00000E+38                  0         0.99965        0.00000E+00        0.99965
+ before dd roulette               1009         1.00000        8.66077E-09        1.00000
+
+ average tally per history = 2.48763E-05            largest score = 4.38128E-03
+ (largest score)/(average tally) = 1.76123E+02      nps of largest score =      339474
+
+ score contributions by cell
+        cell      misses        hits    tally per history    weight per hit
+     1     1         684     2893717       2.48763E-05         2.46481E-05
+       total         684     2893717       2.48763E-05         2.46481E-05
+
+ score misses
+   russian roulette on pd                        0
+   psc=0.                                       36
+   russian roulette in transmission            598
+   underflow in transmission                    50
+   hit a zero-importance cell                    0
+   energy cutoff                                 0
+
+
+ ===================================================================================================================================
+
+           results of 10 statistical checks for the estimated answer for the tally fluctuation chart (tfc) bin of tally       95
+
+ tfc bin     --mean--      ---------relative error---------      ----variance of the variance----      --figure of merit--     -pdf-
+ behavior    behavior      value   decrease   decrease rate      value   decrease   decrease rate       value     behavior     slope
+
+ desired      random       <0.05      yes      1/sqrt(nps)       <0.10      yes        1/nps           constant    random      >3.00
+ observed     random        0.00      yes          yes            0.00      yes         yes            constant    random       2.55
+ passed?        yes          yes      yes          yes             yes      yes         yes               yes        yes          no
+
+ ===================================================================================================================================
+
+
+ warning.  the tally in the tally fluctuation chart bin did not pass  1 of the 10 statistical checks.
+
+1analysis of the results in the tally fluctuation chart bin (tfc) for tally 95 with nps = 2867170            print table 160
+
+
+ normed average tally per history  = 7.18213E-07          unnormed average tally per history  = 7.18213E-07
+ estimated tally relative error    = 0.0000               estimated variance of the variance  = 0.0000
+ relative error from zero tallies  = 0.0000               relative error from nonzero scores  = 0.0000
+
+ number of nonzero history tallies =     2867170          efficiency for the nonzero tallies  = 1.0000
+ history number of largest  tally  =      327484          largest  unnormalized history tally = 8.52034E-05
+ (largest  tally)/(average tally)  = 1.18633E+02          (largest  tally)/(avg nonzero tally)= 1.18633E+02
+
+ (confidence interval shift)/mean  = 0.0000               shifted confidence interval center  = 7.18220E-07
+
+
+ if the largest  history score sampled so far were to occur on the next history, the tfc bin quantities would change as follows:
+
+      estimated quantities           value at nps           value at nps+1           value(nps+1)/value(nps)-1.
+
+      mean                            7.18213E-07             7.18242E-07                     0.000041
+      relative error                  0.00000E+00             0.00000E+00                     0.000000
+      variance of the variance        0.00000E+00             0.00000E+00                     0.000000
+      shifted center                  7.18220E-07             7.18221E-07                     0.000002
+      figure of merit                 1.00000E+30             1.00000E+30                     0.000000
+
+ the estimated inverse power slope of the 200 largest  tallies starting at 4.23917E-06 is 2.5546
+ the history score probability density function appears to have an unsampled region at the largest  history scores:
+ please examine. see print table 161.
+
+ relative error is 0! fom and f(x) signal-to-noise ratio are both undefined. histories/minute = 2.791E+06
+
+1unnormed tally density for tally 95          nonzero tally mean(m) = 7.182E-07   nps = 2867170              print table 161
+
+ abscissa              ordinate   log plot of tally probability density function in tally fluctuation chart bin(d=decade,slope= 2.6)
+  tally  number num den log den:d----------d----------d-----------d----------d-----------d----------d-----------d-----------d-------
+ 7.94-07 2.9+06 6.10+06   6.785 mmmmmmmmmmm|mmmmmmmmmm|mmmmmmmmmmm|mmmmmmmmmm|mmmmmmmmmmm|mmmmmmmmmm|mmmmmmmmmmm|mmmmmmmmmmm|mmmmmmm
+ 1.00-06   7045 1.19+04   4.077 ***********|**********|***********|**********|***********|**********|           |           |       
+ 1.26-06   1576 2.12+03   3.327 ***********|**********|***********|**********|***********|**        |           |           |       
+ 1.58-06    807 8.63+02   2.936 ***********|**********|***********|**********|*********  |          |           |           |       
+ 2.00-06    569 4.84+02   2.684 ***********|**********|***********|**********|*******    |          |           |           |       
+ 2.51-06    482 3.25+02   2.512 ***********|**********|***********|**********|*****      |          |           |           |       
+ 3.16-06    293 1.57+02   2.196 ***********|**********|***********|**********|*          |          |           |           |       
+ 3.98-06    132 5.62+01   1.750 ***********|**********|***********|*******   |           |          |           |           |       
+ 5.01-06     90 3.05+01   1.484 ***********|**********|***********|****      |  s        |          |           |           |       
+ 6.31-06     56 1.51+01   1.178 ***********|**********|***********|          |s          |          |           |           |       
+ 7.94-06     26 5.55+00   0.744 ***********|**********|*******    |         s|           |          |           |           |       
+ 1.00-05     21 3.56+00   0.552 ***********|**********|*****      |       s  |           |          |           |           |       
+ 1.26-05     15 2.02+00   0.305 ***********|**********|**         |     s    |           |          |           |           |       
+ 1.58-05      8 8.56-01  -0.068 ***********|********* |           |   s      |           |          |           |           |       
+ 2.00-05      3 2.55-01  -0.594 ***********|***       |           |s         |           |          |           |           |       
+ 2.51-05      2 1.35-01  -0.870 ***********|          |          s|          |           |          |           |           |       
+ 3.16-05      6 3.22-01  -0.492 ***********|****      |       s   |          |           |          |           |           |       
+ 3.98-05      2 8.52-02  -1.070 *********  |          |    s      |          |           |          |           |           |       
+ 5.01-05      2 6.77-02  -1.170 ********   |          |  s        |          |           |          |           |           |       
+ 6.31-05      0 0.00+00   0.000            |          s           |          |           |          |           |           |       
+ 7.94-05      1 2.13-02  -1.671 **         |       s  |           |          |           |          |           |           |       
+ 1.00-04      1 1.70-02  -1.771 *          |    s     |           |          |           |          |           |           |       
+  total 2867170 1.00+00         d----------d----------d-----------d----------d-----------d----------d-----------d-----------d-------
+
+1tally      105        nps =     2867170
+           tally type 5    particle flux at a ring  detector.                                  
+           particle(s): photons  
+           this tally is modified by dose function DE105 and DF105.
+ 
+ detector symmetric about z-axis located at z =-3.30000E+01 with radius = 7.80000E+01
+                 1.48897E-07 0.0001
+ 
+ detector symmetric about z-axis located at z =-3.30000E+01 with radius = 7.80000E+01
+ uncollided photon flux
+                 1.47960E-07 0.0000
+ 
+ detector score diagnostics                  cumulative          tally         cumulative
+                                             fraction of         per           fraction of
+   times average score     transmissions     transmissions       history       total tally
+        1.00000E-01                247         0.00009        2.04684E-11        0.00000
+        1.00000E+00            2884270         0.99663        1.10437E-05        0.99257
+        2.00000E+00               5934         0.99868        3.10358E-08        0.99536
+        5.00000E+00               2287         0.99947        2.62387E-08        0.99772
+        1.00000E+01                374         0.99960        9.70040E-09        0.99859
+        1.00000E+02                143         0.99965        1.08930E-08        0.99957
+        1.00000E+03                  2         0.99965        9.60115E-10        0.99965
+        1.00000E+38                  0         0.99965        0.00000E+00        0.99965
+ before dd roulette               1009         1.00000        3.86712E-09        1.00000
+
+ average tally per history = 1.11264E-05            largest score = 1.59864E-03
+ (largest score)/(average tally) = 1.43680E+02      nps of largest score =     1304681
+
+ score contributions by cell
+        cell      misses        hits    tally per history    weight per hit
+     1     1         135     2894266       1.11264E-05         1.10223E-05
+       total         135     2894266       1.11264E-05         1.10223E-05
+
+ score misses
+   russian roulette on pd                        0
+   psc=0.                                       35
+   russian roulette in transmission             25
+   underflow in transmission                    75
+   hit a zero-importance cell                    0
+   energy cutoff                                 0
+ 
+ detector symmetric about z-axis located at z =-4.30000E+01 with radius = 7.80000E+01
+                 1.34604E-07 0.0001
+ 
+ detector symmetric about z-axis located at z =-4.30000E+01 with radius = 7.80000E+01
+ uncollided photon flux
+                 1.33730E-07 0.0000
+ 
+ detector score diagnostics                  cumulative          tally         cumulative
+                                             fraction of         per           fraction of
+   times average score     transmissions     transmissions       history       total tally
+        1.00000E-01                260         0.00009        2.23490E-11        0.00000
+        1.00000E+00            2883619         0.99641        9.97914E-06        0.99218
+        2.00000E+00               6365         0.99861        3.00234E-08        0.99517
+        5.00000E+00               2400         0.99944        2.46789E-08        0.99762
+        1.00000E+01                467         0.99960        1.09371E-08        0.99871
+        1.00000E+02                137         0.99965        8.70756E-09        0.99957
+        1.00000E+03                  2         0.99965        8.00103E-10        0.99965
+        1.00000E+38                  0         0.99965        0.00000E+00        0.99965
+ before dd roulette               1009         1.00000        3.50566E-09        1.00000
+
+ average tally per history = 1.00578E-05            largest score = 1.23812E-03
+ (largest score)/(average tally) = 1.23100E+02      nps of largest score =     2420068
+
+ score contributions by cell
+        cell      misses        hits    tally per history    weight per hit
+     1     1         142     2894259       1.00578E-05         9.96368E-06
+       total         142     2894259       1.00578E-05         9.96368E-06
+
+ score misses
+   russian roulette on pd                        0
+   psc=0.                                       35
+   russian roulette in transmission             31
+   underflow in transmission                    76
+   hit a zero-importance cell                    0
+   energy cutoff                                 0
+ 
+ detector symmetric about z-axis located at z =-5.30000E+01 with radius = 7.80000E+01
+                 1.20025E-07 0.0001
+ 
+ detector symmetric about z-axis located at z =-5.30000E+01 with radius = 7.80000E+01
+ uncollided photon flux
+                 1.19236E-07 0.0000
+ 
+ detector score diagnostics                  cumulative          tally         cumulative
+                                             fraction of         per           fraction of
+   times average score     transmissions     transmissions       history       total tally
+        1.00000E-01                260         0.00009        2.19267E-11        0.00000
+        1.00000E+00            2883285         0.99630        8.89579E-06        0.99193
+        2.00000E+00               6656         0.99860        2.83001E-08        0.99508
+        5.00000E+00               2414         0.99943        2.21969E-08        0.99756
+        1.00000E+01                487         0.99960        1.01654E-08        0.99869
+        1.00000E+02                145         0.99965        8.60514E-09        0.99965
+        1.00000E+03                  0         0.99965        0.00000E+00        0.99965
+        1.00000E+38                  0         0.99965        0.00000E+00        0.99965
+ before dd roulette               1009         1.00000        3.13092E-09        1.00000
+
+ average tally per history = 8.96821E-06            largest score = 7.22289E-04
+ (largest score)/(average tally) = 8.05388E+01      nps of largest score =      530194
+
+ score contributions by cell
+        cell      misses        hits    tally per history    weight per hit
+     1     1         145     2894256       8.96821E-06         8.88428E-06
+       total         145     2894256       8.96821E-06         8.88428E-06
+
+ score misses
+   russian roulette on pd                        0
+   psc=0.                                       35
+   russian roulette in transmission             32
+   underflow in transmission                    78
+   hit a zero-importance cell                    0
+   energy cutoff                                 0
+
+
+ ===================================================================================================================================
+
+           results of 10 statistical checks for the estimated answer for the tally fluctuation chart (tfc) bin of tally      105
+
+ tfc bin     --mean--      ---------relative error---------      ----variance of the variance----      --figure of merit--     -pdf-
+ behavior    behavior      value   decrease   decrease rate      value   decrease   decrease rate       value     behavior     slope
+
+ desired      random       <0.05      yes      1/sqrt(nps)       <0.10      yes        1/nps           constant    random      >3.00
+ observed     random        0.00      yes          yes            0.04      yes         yes            constant   increase      2.88
+ passed?        yes          yes      yes          yes             yes      yes         yes               yes         no          no
+
+ ===================================================================================================================================
+
+
+ warning.  the tally in the tally fluctuation chart bin did not pass  2 of the 10 statistical checks.
+
+1analysis of the results in the tally fluctuation chart bin (tfc) for tally 105 with nps = 2867170           print table 160
+
+
+ normed average tally per history  = 1.48897E-07          unnormed average tally per history  = 1.48897E-07
+ estimated tally relative error    = 0.0001               estimated variance of the variance  = 0.0360
+ relative error from zero tallies  = 0.0000               relative error from nonzero scores  = 0.0001
+
+ number of nonzero history tallies =     2867170          efficiency for the nonzero tallies  = 1.0000
+ history number of largest  tally  =      767473          largest  unnormalized history tally = 1.46980E-05
+ (largest  tally)/(average tally)  = 9.87126E+01          (largest  tally)/(avg nonzero tally)= 9.87126E+01
+
+ (confidence interval shift)/mean  = 0.0000               shifted confidence interval center  = 1.48898E-07
+
+
+ if the largest  history score sampled so far were to occur on the next history, the tfc bin quantities would change as follows:
+
+      estimated quantities           value at nps           value at nps+1           value(nps+1)/value(nps)-1.
+
+      mean                            1.48897E-07             1.48902E-07                     0.000034
+      relative error                  1.12291E-04             1.17344E-04                     0.045005
+      variance of the variance        3.60354E-02             3.73265E-02                     0.035829
+      shifted center                  1.48898E-07             1.48899E-07                     0.000001
+      figure of merit                 7.71962E+07             7.06902E+07                    -0.084278
+
+ the estimated inverse power slope of the 200 largest  tallies starting at 1.11678E-06 is 2.8815
+ the history score probability density function appears to have an unsampled region at the largest  history scores:
+ please examine. see print table 161.
+
+ fom = (histories/minute)*(f(x) signal-to-noise ratio)**2 = (2.791E+06)*( 5.259E+00)**2 = (2.791E+06)*(2.766E+01) = 7.720E+07
+
+1unnormed tally density for tally 105          nonzero tally mean(m) = 1.489E-07   nps = 2867170             print table 161
+
+ abscissa              ordinate   log plot of tally probability density function in tally fluctuation chart bin(d=decade,slope= 2.9)
+  tally  number num den log den:d----------d-----------d-----------d-----------d-----------d-----------d-----------d-----------d----
+ 1.58-07 2.8+06 3.04+07   7.483 mmmmmmmmmmm|mmmmmmmmmmm|mmmmmmmmmmm|mmmmmmmmmmm|mmmmmmmmmmm|mmmmmmmmmmm|mmmmmmmmmmm|mmmmmmmmmmm|mmmm
+ 2.00-07  13630 1.16+05   5.064 ***********|***********|***********|***********|***********|***********|           |           |    
+ 2.51-07   6010 4.06+04   4.608 ***********|***********|***********|***********|***********|******     |           |           |    
+ 3.16-07   2341 1.26+04   4.099 ***********|***********|***********|***********|***********|           |           |           |    
+ 3.98-07   1472 6.27+03   3.797 ***********|***********|***********|***********|********   |           |           |           |    
+ 5.01-07    896 3.03+03   3.482 ***********|***********|***********|***********|****       |           |           |           |    
+ 6.31-07    525 1.41+03   3.150 ***********|***********|***********|***********|           |           |           |           |    
+ 7.94-07    314 6.70+02   2.826 ***********|***********|***********|********   |           |           |           |           |    
+ 1.00-06    178 3.02+02   2.480 ***********|***********|***********|****       |           |           |           |           |    
+ 1.26-06    103 1.39+02   2.142 ***********|***********|***********|         s |           |           |           |           |    
+ 1.58-06     57 6.10+01   1.785 ***********|***********|********   |       s   |           |           |           |           |    
+ 2.00-06     38 3.23+01   1.509 ***********|***********|****       |     s     |           |           |           |           |    
+ 2.51-06     26 1.76+01   1.244 ***********|***********|*          |   s       |           |           |           |           |    
+ 3.16-06     12 6.44+00   0.809 ***********|********   |           |s          |           |           |           |           |    
+ 3.98-06      6 2.56+00   0.408 ***********|***        |         s |           |           |           |           |           |    
+ 5.01-06      5 1.69+00   0.228 ***********|*          |       s   |           |           |           |           |           |    
+ 6.31-06      1 2.69-01  -0.571 ***        |           |    s      |           |           |           |           |           |    
+ 7.94-06      2 4.27-01  -0.370 ******     |           | s         |           |           |           |           |           |    
+ 1.00-05      1 1.70-01  -0.771 *          |          s|           |           |           |           |           |           |    
+ 1.26-05      0 0.00+00   0.000            |       s   |           |           |           |           |           |           |    
+ 1.58-05      5 5.35-01  -0.272 *******    |   s       |           |           |           |           |           |           |    
+  total 2867170 1.00+00         d----------d-----------d-----------d-----------d-----------d-----------d-----------d-----------d----
+
+1status of the statistical checks used to form confidence intervals for the mean for each tally bin
+
+
+ tally   result of statistical checks for the tfc bin (the first check not passed is listed) and error magnitude check for all bins
+
+       15   passed the 10 statistical checks for the tally fluctuation chart bin result               
+         passed all bin error check:     2 tally bins all have relative errors less than 0.05 with no zero bins
+
+       25   passed the 10 statistical checks for the tally fluctuation chart bin result               
+         passed all bin error check:     2 tally bins all have relative errors less than 0.05 with no zero bins
+
+       35   missed  1 of 10 tfc bin checks: the slope of decrease of largest tallies is less than the minimum acceptable value of 3.0 
+         passed all bin error check:     2 tally bins all have relative errors less than 0.05 with no zero bins
+
+       65   passed the 10 statistical checks for the tally fluctuation chart bin result               
+         passed all bin error check:     2 tally bins all have relative errors less than 0.05 with no zero bins
+
+       75   missed  2 of 10 tfc bin checks: the variance of the variance exceeds the recommended value of 0.1                         
+         passed all bin error check:     2 tally bins all have relative errors less than 0.05 with no zero bins
+
+       85   missed  3 of 10 tfc bin checks: the variance of the variance exceeds the recommended value of 0.1                         
+         passed all bin error check:     2 tally bins all have relative errors less than 0.05 with no zero bins
+
+       95   missed  1 of 10 tfc bin checks: the slope of decrease of largest tallies is less than the minimum acceptable value of 3.0 
+         passed all bin error check:     6 tally bins all have relative errors less than 0.05 with no zero bins
+
+      105   missed  2 of 10 tfc bin checks: the figure of merit has a trend during the last half of the problem                       
+         passed all bin error check:     6 tally bins all have relative errors less than 0.05 with no zero bins
+
+
+ the 10 statistical checks are only for the tally fluctuation chart bin and do not apply to other tally bins.
+
+ warning.       5 of the     8 tally fluctuation chart bins did not pass all 10 statistical checks.
+1tally fluctuation charts                              
+
+                            tally       15                          tally       25                          tally       35
+          nps      mean     error   vov  slope    fom      mean     error   vov  slope    fom      mean     error   vov  slope    fom
+       256000   1.0694E-05 0.0000 0.0000  2.5 1.0E+30   1.3365E-06 0.0001 0.0435  4.0 5.5E+08   3.3394E-07 0.0002 0.0616  3.2 2.1E+08
+       512000   1.0694E-05 0.0000 0.0000  2.8 1.0E+30   1.3365E-06 0.0000 0.0000  3.8 1.0E+30   3.3393E-07 0.0002 0.0393  3.8 2.2E+08
+       768000   1.0696E-05 0.0000 0.0000  3.2 1.0E+30   1.3369E-06 0.0001 0.1202  3.0 2.6E+08   3.3394E-07 0.0001 0.0544  3.8 2.0E+08
+      1024000   1.0696E-05 0.0000 0.0000  3.5 1.0E+30   1.3370E-06 0.0001 0.0743  3.1 2.1E+08   3.3398E-07 0.0001 0.0326  4.3 2.0E+08
+      1280000   1.0695E-05 0.0000 0.0000  3.4 1.0E+30   1.3368E-06 0.0000 0.0000  2.8 1.0E+30   3.3394E-07 0.0001 0.0253  3.9 2.1E+08
+      1536000   1.0695E-05 0.0000 0.0000  3.4 1.0E+30   1.3368E-06 0.0000 0.0000  3.0 1.0E+30   3.3395E-07 0.0000 0.0000  4.3 1.0E+30
+      1792000   1.0695E-05 0.0000 0.0000  3.9 1.0E+30   1.3369E-06 0.0000 0.0000  2.9 1.0E+30   3.3398E-07 0.0000 0.0000  3.9 1.0E+30
+      2048000   1.0695E-05 0.0000 0.0000  4.3 1.0E+30   1.3368E-06 0.0000 0.0000  3.2 1.0E+30   3.3398E-07 0.0000 0.0000  4.1 1.0E+30
+      2304000   1.0696E-05 0.0000 0.0000  4.6 1.0E+30   1.3368E-06 0.0000 0.0000  3.0 1.0E+30   3.3399E-07 0.0000 0.0000  4.1 1.0E+30
+      2560000   1.0696E-05 0.0000 0.0000  4.5 1.0E+30   1.3368E-06 0.0000 0.0000  3.1 1.0E+30   3.3400E-07 0.0000 0.0000  3.3 1.0E+30
+      2816000   1.0696E-05 0.0000 0.0000  3.8 1.0E+30   1.3368E-06 0.0000 0.0000  3.2 1.0E+30   3.3400E-07 0.0000 0.0000  3.0 1.0E+30
+      2867170   1.0696E-05 0.0000 0.0000  4.0 1.0E+30   1.3368E-06 0.0000 0.0000  3.3 1.0E+30   3.3400E-07 0.0000 0.0000  3.0 1.0E+30
+ 
+
+                            tally       65                          tally       75                          tally       85
+          nps      mean     error   vov  slope    fom      mean     error   vov  slope    fom      mean     error   vov  slope    fom
+       256000   2.1392E-05 0.0000 0.0000  2.2 1.0E+30   5.9443E-07 0.0007 0.6688  2.4 2.5E+07   1.4858E-07 0.0017 0.6404  2.6 3728121
+       512000   2.1393E-05 0.0000 0.0000  2.4 1.0E+30   5.9416E-07 0.0003 0.5451  2.7 4.6E+07   1.4843E-07 0.0009 0.6000  3.0 7355685
+       768000   2.1393E-05 0.0000 0.0000  3.3 1.0E+30   5.9415E-07 0.0002 0.4353  2.5 6.3E+07   1.4837E-07 0.0006 0.5779  2.9 1.1E+07
+      1024000   2.1393E-05 0.0000 0.0000  3.6 1.0E+30   5.9414E-07 0.0002 0.3351  2.7 7.3E+07   1.4834E-07 0.0004 0.5525  2.9 1.4E+07
+      1280000   2.1392E-05 0.0000 0.0000  3.8 1.0E+30   5.9412E-07 0.0002 0.2298  2.9 6.7E+07   1.4837E-07 0.0004 0.3396  2.6 1.2E+07
+      1536000   2.1392E-05 0.0000 0.0000  3.9 1.0E+30   5.9413E-07 0.0002 0.1633  3.0 6.5E+07   1.4838E-07 0.0004 0.3007  2.3 1.4E+07
+      1792000   2.1392E-05 0.0000 0.0000  3.8 1.0E+30   5.9413E-07 0.0001 0.1471  2.9 7.1E+07   1.4840E-07 0.0003 0.2665  2.4 1.5E+07
+      2048000   2.1392E-05 0.0000 0.0000  3.5 1.0E+30   5.9412E-07 0.0001 0.1361  3.0 7.8E+07   1.4839E-07 0.0003 0.2563  2.2 1.7E+07
+      2304000   2.1392E-05 0.0000 0.0000  3.3 1.0E+30   5.9415E-07 0.0001 0.1173  2.6 6.7E+07   1.4839E-07 0.0003 0.2455  2.2 1.9E+07
+      2560000   2.1392E-05 0.0000 0.0000  3.2 1.0E+30   5.9413E-07 0.0001 0.1086  2.6 7.2E+07   1.4839E-07 0.0002 0.2320  2.2 2.0E+07
+      2816000   2.1392E-05 0.0000 0.0000  3.1 1.0E+30   5.9411E-07 0.0001 0.1031  2.5 7.7E+07   1.4839E-07 0.0002 0.2186  2.2 2.2E+07
+      2867170   2.1392E-05 0.0000 0.0000  3.1 1.0E+30   5.9411E-07 0.0001 0.1022  2.6 7.8E+07   1.4838E-07 0.0002 0.2176  2.2 2.2E+07
+ 
+
+                            tally       95                          tally      105
+          nps      mean     error   vov  slope    fom      mean     error   vov  slope    fom
+       256000   7.1816E-07 0.0003 0.1597  3.7 1.6E+08   1.4895E-07 0.0005 0.3623  2.7 5.2E+07
+       512000   7.1836E-07 0.0003 0.3442  2.5 5.9E+07   1.4894E-07 0.0003 0.1979  3.2 5.6E+07
+       768000   7.1835E-07 0.0002 0.2571  2.3 7.8E+07   1.4894E-07 0.0003 0.1269  2.7 4.6E+07
+      1024000   7.1831E-07 0.0002 0.1798  2.3 8.2E+07   1.4892E-07 0.0002 0.1028  2.7 5.4E+07
+      1280000   7.1822E-07 0.0002 0.1604  2.5 9.7E+07   1.4890E-07 0.0002 0.0842  2.7 6.1E+07
+      1536000   7.1816E-07 0.0001 0.1305  2.4 1.0E+08   1.4889E-07 0.0002 0.0691  2.7 6.4E+07
+      1792000   7.1825E-07 0.0001 0.1059  2.4 8.3E+07   1.4890E-07 0.0002 0.0566  2.6 6.1E+07
+      2048000   7.1821E-07 0.0001 0.0985  2.4 9.1E+07   1.4890E-07 0.0001 0.0504  2.8 6.6E+07
+      2304000   7.1821E-07 0.0001 0.0869  2.5 9.5E+07   1.4890E-07 0.0001 0.0441  2.9 6.9E+07
+      2560000   7.1823E-07 0.0001 0.0731  2.4 9.6E+07   1.4890E-07 0.0001 0.0405  2.8 7.3E+07
+      2816000   7.1821E-07 0.0000 0.0000  2.5 1.0E+30   1.4890E-07 0.0001 0.0371  2.8 7.7E+07
+      2867170   7.1821E-07 0.0000 0.0000  2.6 1.0E+30   1.4890E-07 0.0001 0.0360  2.9 7.7E+07
+
+ ***********************************************************************************************************************
+
+ dump no.    2 on file F5a_ring_tally.r     nps =     2867170     coll =          26970     ctm =        1.03   nrn =   
+       46311960
+
+         7 warning messages so far.
+
+
+ run terminated when it had used  1.0  minutes of computer time.
+
+ computer time =    1.10 minutes
+
+ mcnp     version 6     02/20/18                     11/04/21 12:49:41                     probid =  11/04/21 12:49:31 

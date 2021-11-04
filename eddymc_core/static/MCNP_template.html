@@ -232,6 +232,37 @@
         {% endfor %}
     </table>
     {% endfor %}
+    {% for particle in f5a_tallies if f5a_tallies[particle] %}
+    <h2>F5a Tally {{particle.capitalize()[:-1]}} Values</h2>
+    <table>
+        <tr>
+            <th>Tally Number</th>
+            <th>Axis</th>
+            <th>Position on Axis (cm)</th>
+            <th>Radius (cm)</th>
+            <th>Value (uSv/h)</th>
+            <th>Error</th>
+        </tr>
+        {% for tally in f5a_tallies[particle] %}
+        {% for detector in tally.results %}
+        <tr>
+            <td>{{tally.tally_number}}</td>
+            <td>{{detector['axis']}}</td>
+            <td>{{"%.3e"|format(detector['position'])}}</td>
+            <td>{{"%.3e"|format(detector['radius'])}}</td>
+            <td>{{"%.3e"|format(detector['result'])}}</td>
+            <td style="
+                {% if detector['variance'] > 0.1 %}background-color: tomato
+                {% elif detector['variance'] == 0.0 %}background-color: orangered
+                {% endif %}
+                ">
+                {{detector['variance']}}
+            </td>
+        </tr>
+        {% endfor %} {# This was "for detector in tally.results" #}
+        {% endfor %} {# This was "for tally in f5a_tallies{particle}" #}
+    </table>
+    {% endfor %}
     {% endif %}
 
     {% if 'F6' in tally_types or 'F6+' in tally_types %}
@@ -464,6 +495,43 @@
                         <td>{{detector['x']}}</td>
                         <td>{{detector['y']}}</td>
                         <td>{{detector['z']}}</td>
+                        <td>{{"%.3e"|format(detector['result'])}}</td>
+                        <td style="
+                            {% if detector['variance'] > 0.1 %}background-color: tomato
+                            {% elif detector['variance'] == 0.0 %}background-color: orangered
+                            {% endif %}
+                            ">
+                            {{detector['variance']}}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {{ tally_check(tally=tally) }}
+        </div>
+        {% endfor %} {# This was "for tally in particle" #}
+        {% endfor %} {# This was "for particle in F5_tallies" #}
+
+        {% for particle in f5a_tallies %}
+        {% for tally in f5a_tallies[particle] %}
+        <div class="tally_breakdown">
+            <div class="tally_results">
+                <h2>Results for {{tally.particles.capitalize()[:-1]}} {{tally.tally_type[:-1].title()}}, Tally Number: {{tally.tally_number}}</h2>
+                <table>
+                    <tr>
+                        <th>Tally Number</th>
+                        <th>Axis</th>
+                        <th>Position on Axis (cm)</th>
+                        <th>Radius (cm)</th>
+                        <th>Value (uSv/h)</th>
+                        <th>Error</th>
+                    </tr>
+                    {% for detector in tally.results %}
+                    <tr>
+                        <td>{{tally.tally_number}}</td>
+                        <td>{{detector['axis']}}</td>
+                        <td>{{"%.3e"|format(detector['position'])}}</td>
+                        <td>{{"%.3e"|format(detector['radius'])}}</td>
                         <td>{{"%.3e"|format(detector['result'])}}</td>
                         <td style="
                             {% if detector['variance'] > 0.1 %}background-color: tomato
@@ -734,6 +802,7 @@
             <th>Tracks Entering</th>
             <th>Populations</th>
             <th>Collisions</th>
+            <th>Average Mean Free Path (cm)</th>
         </tr>
         {% for cell in cell_list %}
         {% if particle_name + '_population' in cell.__dict__ %}
@@ -742,6 +811,7 @@
             <td>{{cell.__dict__[particle_name + '_tracks_entering']}}</td>
             <td>{{cell.__dict__[particle_name + '_population']}}</td>
             <td>{{cell.__dict__[particle_name + '_collisions']}}</td>
+            <td>{{cell.__dict__[particle_name + '_mfp']}}</td>
         </tr>
         {% endif %}
         {% endfor %}
