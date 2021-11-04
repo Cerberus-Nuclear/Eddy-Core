@@ -237,6 +237,9 @@
     <table>
         <tr>
             <th>Tally Number</th>
+            <th>Axis</th>
+            <th>Position on Axis (cm)</th>
+            <th>Radius (cm)</th>
             <th>Value (uSv/h)</th>
             <th>Error</th>
         </tr>
@@ -244,6 +247,9 @@
         {% for detector in tally.results %}
         <tr>
             <td>{{tally.tally_number}}</td>
+            <td>{{detector['axis']}}</td>
+            <td>{{"%.3e"|format(detector['position'])}}</td>
+            <td>{{"%.3e"|format(detector['radius'])}}</td>
             <td>{{"%.3e"|format(detector['result'])}}</td>
             <td style="
                 {% if detector['variance'] > 0.1 %}background-color: tomato
@@ -514,12 +520,18 @@
                 <table>
                     <tr>
                         <th>Tally Number</th>
+                        <th>Axis</th>
+                        <th>Position on Axis (cm)</th>
+                        <th>Radius (cm)</th>
                         <th>Value (uSv/h)</th>
                         <th>Error</th>
                     </tr>
                     {% for detector in tally.results %}
                     <tr>
                         <td>{{tally.tally_number}}</td>
+                        <td>{{detector['axis']}}</td>
+                        <td>{{"%.3e"|format(detector['position'])}}</td>
+                        <td>{{"%.3e"|format(detector['radius'])}}</td>
                         <td>{{"%.3e"|format(detector['result'])}}</td>
                         <td style="
                             {% if detector['variance'] > 0.1 %}background-color: tomato

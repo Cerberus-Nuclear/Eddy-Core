@@ -246,12 +246,13 @@ class F5aTally(Tally):
         for num, line in enumerate(data):
             if "detector symmetric about" in line and "uncollided" not in data[num + 1]:
                 results.append({
-                    # "x": float(line[28:40]),
-                    # "y": float(line[40:52]),
-                    # "z": float(line[52:64]),
+                    "axis": line.split()[3][0].upper(),
+                    "position": float(line[47:59]),     # uses indices because .split() may or may not work depending in if number is -ve
+                    "radius": float(line[73:85]),       # uses indices because .split() may or may not work depending in if number is -ve
                     "result": float(data[num + 1].split()[0]),
                     "variance": float(data[num + 1].split()[1]),
                 })
+                print()
         return results
 
     def scale_result(self, scaling_factor):

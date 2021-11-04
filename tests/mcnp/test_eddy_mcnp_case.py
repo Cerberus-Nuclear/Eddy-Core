@@ -63,7 +63,7 @@ def f5_file(tmpdir):
 @pytest.fixture
 def f5a_file(tmpdir):
     # noinspection PyTypeChecker
-    f5a = pkg_resources.read_text(mcnp_examples, 'F5z_ring_tally.out')
+    f5a = pkg_resources.read_text(mcnp_examples, 'F5a_ring_tally.out')
     return f5a.split('\n')
 
 
@@ -431,10 +431,10 @@ def test_get_tallies_f5a(f5a_file):
     # act
     c.tallies = c.get_tallies()
     # assert
-    assert len(c.tallies['tally_list']) == 10
+    assert len(c.tallies['tally_list']) == 8
     assert c.tallies['f_types'] == ['F5']
     assert len(c.tallies['F5a_tallies']['neutrons']) == 0
-    assert len(c.tallies['F5a_tallies']['photons']) == 10
+    assert len(c.tallies['F5a_tallies']['photons']) == 8
     assert len(c.tallies['F5a_tallies']['electrons']) == 0
 
 
