@@ -61,6 +61,13 @@ def f5_file(tmpdir):
 
 
 @pytest.fixture
+def f5z_file(tmpdir):
+    # noinspection PyTypeChecker
+    f5z = pkg_resources.read_text(mcnp_examples, 'F5z_ring_tally.out')
+    return f5z.split('\n')
+
+
+@pytest.fixture
 def f4_f5_file(tmpdir):
     # noinspection PyTypeChecker
     f4_f5 = pkg_resources.read_text(mcnp_examples, 'F4_F5_param.out')
@@ -371,13 +378,13 @@ def test_get_tallies_f2(simple_case):
     # arrange
     c = simple_case
     # act
-    c.tally_list, c.f_types, c.F2_tallies, c.F4_tallies, c.F5_tallies, c.F6_tallies = c.get_tallies()
+    c.tallies = c.get_tallies()
     # assert
-    assert len(c.tally_list) == 3
-    assert c.f_types == ['F2']
-    assert len(c.F2_tallies['neutrons']) == 2
-    assert len(c.F2_tallies['photons']) == 1
-    assert len(c.F2_tallies['electrons']) == 0
+    assert len(c.tallies['tally_list']) == 3
+    assert c.tallies['f_types'] == ['F2']
+    assert len(c.tallies['F2_tallies']['neutrons']) == 2
+    assert len(c.tallies['F2_tallies']['photons']) == 1
+    assert len(c.tallies['F2_tallies']['electrons']) == 0
 
 
 def test_get_tallies_f4(f4_file):
@@ -388,13 +395,13 @@ def test_get_tallies_f4(f4_file):
         file=f4_file,
         crit_case=False)
     # act
-    c.tally_list, c.f_types, c.F2_tallies, c.F4_tallies, c.F5_tallies, c.F6_tallies = c.get_tallies()
+    c.tallies = c.get_tallies()
     # assert
-    assert len(c.tally_list) == 3
-    assert c.f_types == ['F4']
-    assert len(c.F4_tallies['neutrons']) == 1
-    assert len(c.F4_tallies['photons']) == 2
-    assert len(c.F4_tallies['electrons']) == 0
+    assert len(c.tallies['tally_list']) == 3
+    assert c.tallies['f_types'] == ['F4']
+    len(c.tallies['F4_tallies']['neutrons']) == 1
+    len(c.tallies['F4_tallies']['photons']) == 2
+    len(c.tallies['F4_tallies']['electrons']) == 0
 
 
 def test_get_tallies_f5(f5_file):
@@ -405,13 +412,30 @@ def test_get_tallies_f5(f5_file):
         file=f5_file,
         crit_case=False)
     # act
-    c.tally_list, c.f_types, c.F2_tallies, c.F4_tallies, c.F5_tallies, c.F6_tallies = c.get_tallies()
+    c.tallies = c.get_tallies()
     # assert
-    assert len(c.tally_list) == 3
-    assert c.f_types == ['F5']
-    assert len(c.F5_tallies['neutrons']) == 1
-    assert len(c.F5_tallies['photons']) == 2
-    assert len(c.F5_tallies['electrons']) == 0
+    assert len(c.tallies['tally_list']) == 3
+    assert c.tallies['f_types'] == ['F5']
+    assert len(c.tallies['F5_tallies']['neutrons']) == 1
+    assert len(c.tallies['F5_tallies']['photons']) == 2
+    assert len(c.tallies['F5_tallies']['electrons']) == 0
+
+
+def test_get_tallies_f5z(f5z_file):
+    # arrange
+    c = MockEddyMCNPCase(
+        filepath="mcnp_examples/F5z_ring_tally.out",
+        scaling_factor=1234,
+        file=f5z_file,
+        crit_case=False)
+    # act
+    c.tallies = c.get_tallies()
+    # assert
+    assert len(c.tallies['tally_list']) == 10
+    assert c.tallies['f_types'] == ['F5']
+    assert len(c.tallies['F5z_tallies']['neutrons']) == 0
+    assert len(c.tallies['F5z_tallies']['photons']) == 10
+    assert len(c.tallies['F5z_tallies']['electrons']) == 0
 
 
 def test_get_tallies_f6(f6_file):
@@ -422,27 +446,27 @@ def test_get_tallies_f6(f6_file):
         file=f6_file,
         crit_case=False)
     # act
-    c.tally_list, c.f_types, c.F2_tallies, c.F4_tallies, c.F5_tallies, c.F6_tallies = c.get_tallies()
+    c.tallies = c.get_tallies()
     # assert
-    assert len(c.tally_list) == 6
-    assert c.f_types == ['F6', 'F6+']
-    assert len(c.F6_tallies['neutrons']) == 2
-    assert len(c.F6_tallies['photons']) == 2
-    assert len(c.F6_tallies['electrons']) == 0
-    assert len(c.F6_tallies['Collision Heating']) == 2
+    assert len(c.tallies['tally_list']) == 6
+    assert c.tallies['f_types'] == ['F6', 'F6+']
+    assert len(c.tallies['F6_tallies']['neutrons']) == 2
+    assert len(c.tallies['F6_tallies']['photons']) == 2
+    assert len(c.tallies['F6_tallies']['electrons']) == 0    # assert
+    assert len(c.tallies['F6_tallies']['Collision Heating']) == 2
 
 
 def test_get_tallies_adds_f2_to_types_list(simple_case):
     # arrange
     c = simple_case
     # act
-    c.tally_list, c.f_types, c.F2_tallies, c.F4_tallies, c.F5_tallies, c.F6_tallies = c.get_tallies()
+    c.tallies = c.get_tallies()
     # assert
-    assert "F2" in c.f_types
-    assert "F4" not in c.f_types
-    assert "F5" not in c.f_types
-    assert "F6" not in c.f_types
-    assert "F6+" not in c.f_types
+    assert "F2" in c.tallies['f_types']
+    assert "F4" not in c.tallies['f_types']
+    assert "F5" not in c.tallies['f_types']
+    assert "F6" not in c.tallies['f_types']
+    assert "F6+" not in c.tallies['f_types']
 
 
 def test_get_tallies_adds_f4_to_types_list(f4_file):
@@ -454,13 +478,13 @@ def test_get_tallies_adds_f4_to_types_list(f4_file):
         crit_case=False
     )
     # act
-    c.tally_list, c.f_types, c.F2_tallies, c.F4_tallies, c.F5_tallies, c.F6_tallies = c.get_tallies()
+    c.tallies = c.get_tallies()
     # assert
-    assert "F2" not in c.f_types
-    assert "F4" in c.f_types
-    assert "F5" not in c.f_types
-    assert "F6" not in c.f_types
-    assert "F6+" not in c.f_types
+    assert "F2" not in c.tallies['f_types']
+    assert "F4" in c.tallies['f_types']
+    assert "F5" not in c.tallies['f_types']
+    assert "F6" not in c.tallies['f_types']
+    assert "F6+" not in c.tallies['f_types']
 
 
 def test_get_tallies_adds_f5_to_types_list(f5_file):
@@ -472,13 +496,13 @@ def test_get_tallies_adds_f5_to_types_list(f5_file):
         crit_case=False
     )
     # act
-    c.tally_list, c.f_types, c.F2_tallies, c.F4_tallies, c.F5_tallies, c.F6_tallies = c.get_tallies()
+    c.tallies = c.get_tallies()
     # assert
-    assert "F2" not in c.f_types
-    assert "F4" not in c.f_types
-    assert "F5" in c.f_types
-    assert "F6" not in c.f_types
-    assert "F6+" not in c.f_types
+    assert "F2" not in c.tallies['f_types']
+    assert "F4" not in c.tallies['f_types']
+    assert "F5" in c.tallies['f_types']
+    assert "F6" not in c.tallies['f_types']
+    assert "F6+" not in c.tallies['f_types']
 
 
 def test_get_tallies_adds_f6_to_types_list(f6_file):
@@ -490,13 +514,13 @@ def test_get_tallies_adds_f6_to_types_list(f6_file):
         crit_case=False
     )
     # act
-    c.tally_list, c.f_types, c.F2_tallies, c.F4_tallies, c.F5_tallies, c.F6_tallies = c.get_tallies()
+    c.tallies = c.get_tallies()
     # assert
-    assert "F2" not in c.f_types
-    assert "F4" not in c.f_types
-    assert "F5" not in c.f_types
-    assert "F6" in c.f_types
-    assert "F6+" in c.f_types
+    assert "F2" not in c.tallies['f_types']
+    assert "F4" not in c.tallies['f_types']
+    assert "F5" not in c.tallies['f_types']
+    assert "F6" in c.tallies['f_types']
+    assert "F6+" in c.tallies['f_types']
 
 
 def test_sort_mcnp_particle_data_photon():

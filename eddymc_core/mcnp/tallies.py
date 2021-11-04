@@ -197,6 +197,7 @@ class F4Tally(Tally):
 
 
 class F5Tally(Tally):
+    # Point tallies only; F5z ring tallies have a separate subclass
     def __init__(self, data):
         super().__init__(data)
 
@@ -214,6 +215,40 @@ class F5Tally(Tally):
                     "x": float(line[28:40]),
                     "y": float(line[40:52]),
                     "z": float(line[52:64]),
+                    "result": float(data[num + 1].split()[0]),
+                    "variance": float(data[num + 1].split()[1]),
+                })
+        return results
+
+    def scale_result(self, scaling_factor):
+        """Applies scaling factor to results
+            Args:
+                scaling_factor (float): a number by which the region results are multiplied
+            Returns: none, but modifies self.results
+        """
+        for detector in self.results:
+            detector['result'] *= scaling_factor
+
+
+class F5zTally(Tally):
+    # F5z ring tallies
+    def __init__(self, data):
+        super().__init__(data)
+
+    def get_results(self):
+        """
+            Gets the tally results from the mcnp output file
+            Args: self: the object, data: the mcnp output tally section
+            Returns: regions: a dictionary holding the results for that tally
+        """
+        data = self.data
+        results = []
+        for num, line in enumerate(data):
+            if "detector symmetric about" in line and "uncollided" not in data[num + 1]:
+                results.append({
+                    # "x": float(line[28:40]),
+                    # "y": float(line[40:52]),
+                    # "z": float(line[52:64]),
                     "result": float(data[num + 1].split()[0]),
                     "variance": float(data[num + 1].split()[1]),
                 })

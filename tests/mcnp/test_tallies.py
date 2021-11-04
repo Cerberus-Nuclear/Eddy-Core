@@ -34,6 +34,13 @@ def f5_file(tmpdir):
 
 
 @pytest.fixture
+def f5z_file(tmpdir):
+    # noinspection PyTypeChecker
+    f5z = pkg_resources.read_text(mcnp_examples, 'F5z_ring_tally.out')
+    return f5z.split('\n')
+
+
+@pytest.fixture
 def f4_f5_file(tmpdir):
     # noinspection PyTypeChecker
     f4_f5 = pkg_resources.read_text(mcnp_examples, 'F4_F5_param.out')
@@ -288,6 +295,136 @@ def f5_tally_data(tmpdir):
         "",
         " fom = (histories/minute)*(f(x) signal-to-noise ratio)**2 = (6.703E+06)*( 1.338E+00)**2 = (6.703E+06)*(1.789E+00) = 1.200E+07",
         "",
+    ]
+    return tally_data
+
+
+@pytest.fixture
+def f5z_tally_data(tmpdir):
+    tally_data = [
+        "1tally        5        nps =     1000000",
+        "           tally type 5    particle flux at a ring  detector.                                  ",
+        "           particle(s): photons  ",
+        "           this tally is modified by dose function DE5 and DF5.",
+        " ",
+        " detector symmetric about z-axis located at z = 1.00000E+02 with radius = 6.87703E+04",
+        "                 1.70186E-18 0.0094",
+        " ",
+        " detector symmetric about z-axis located at z = 1.00000E+02 with radius = 6.87703E+04",
+        " uncollided photon flux",
+        "                 5.15771E-23 0.3833",
+        " ",
+        " detector score diagnostics                  cumulative          tally         cumulative",
+        "                                             fraction of         per           fraction of",
+        "   times average score     transmissions     transmissions       history       total tally",
+        "        1.00000E-01          241202703         0.99438        1.07827E-16        0.16283",
+        "        1.00000E+00             727349         0.99738        1.39164E-16        0.37297",
+        "        2.00000E+00              61603         0.99763        5.71708E-17        0.45930",
+        "        5.00000E+00              38664         0.99779        7.87171E-17        0.57817",
+        "        1.00000E+01              12517         0.99784        5.75741E-17        0.66511",
+        "        1.00000E+02              10381         0.99788        1.75179E-16        0.92964",
+        "        1.00000E+03                334         0.99789        4.06466E-17        0.99102",
+        "        1.00000E+38                  4         0.99789        5.03886E-18        0.99863",
+        " before dd roulette             512964         1.00000        9.08689E-19        1.00000",
+        "",
+        " average tally per history = 6.62227E-16            largest score = 1.62797E-12",
+        " (largest score)/(average tally) = 2.45833E+03      nps of largest score =      666705",
+        "",
+        " score contributions by cell",
+        "        cell      misses        hits    tally per history    weight per hit",
+        "     1     1     6919666           0       0.00000E+00         0.00000E+00",
+        "     2     2      246701           0       0.00000E+00         0.00000E+00",
+        "     3     3     6464320          66       1.79851E-23         2.72501E-19",
+        "     4     4     2516351           1       5.26722E-25         5.26722E-19",
+        "     5     5     2454905           7       5.33565E-24         7.62236E-19",
+        "     6     6     1490213        2565       4.16114E-21         1.62228E-18",
+        "     8   100      991954      639926       1.02657E-18         1.60421E-18",
+        "     9   101     1397122      672247       1.22011E-18         1.81497E-18",
+        "    10   102       62101      232264       1.29484E-18         5.57485E-18",
+        "    11   103      219437      415039       1.41819E-18         3.41701E-18",
+        "    12   104      597591      665909       1.56986E-18         2.35747E-18",
+        "    13   105     1385082     1011152       1.74429E-18         1.72505E-18",
+        "    14   106     2865309     1498138       1.94748E-18         1.29993E-18",
+        "    15   107     5438579     2282985       2.28794E-18         1.00217E-18",
+        "    16   108     9651240     3651340       2.67647E-18         7.33010E-19",
+        "    17   109    16187168     6293152       3.20243E-18         5.08876E-19",
+        "    18   110    25057966    12317634       3.94119E-18         3.19963E-19",
+        "    19   133    81495895   212817270       5.17741E-16         2.43280E-18",
+        "    20   200      289213        1994       8.69542E-23         4.36079E-20",
+        "    21   201       52500         145       2.24539E-22         1.54855E-18",
+        "    22   202       71515         147       3.13648E-22         2.13366E-18",
+        "    23   203       99993         196       2.78198E-22         1.41938E-18",
+        "    24   204      139294         272       4.07236E-22         1.49719E-18",
+        "    25   205      194462         410       6.36634E-22         1.55277E-18",
+        "    26   206      264934         562       6.78619E-22         1.20751E-18",
+        "    27   207      371807         848       8.14783E-22         9.60829E-19",
+        "    28   208      508764        1260       1.25813E-21         9.98512E-19",
+        "    29   209      701997        2136       1.80415E-21         8.44640E-19",
+        "    30   210      963458        3799       3.13597E-21         8.25472E-19",
+        "    31   213     4129675       55055       1.22142E-16         2.21854E-15",
+        "    32   998      769151           0       0.00000E+00         0.00000E+00",
+        "       total   173998363   242566519       6.62227E-16         2.73008E-18",
+        "",
+        " score misses",
+        "   russian roulette on pd                        0",
+        "   psc=0.                                  2799012",
+        "   russian roulette in transmission      148508617",
+        "   underflow in transmission              22690734",
+        "   hit a zero-importance cell                    0",
+        "   energy cutoff                                 0",
+        "",
+        "",
+        " ===================================================================================================================================",
+        "",
+        "           results of 10 statistical checks for the estimated answer for the tally fluctuation chart (tfc) bin of tally        5",
+        "",
+        " tfc bin     --mean--      ---------relative error---------      ----variance of the variance----      --figure of merit--     -pdf-",
+        " behavior    behavior      value   decrease   decrease rate      value   decrease   decrease rate       value     behavior     slope",
+        "",
+        " desired      random       <0.05      yes      1/sqrt(nps)       <0.10      yes        1/nps           constant    random      >3.00",
+        " observed     random        0.01      yes          yes            0.01      yes         yes            constant    random       3.86",
+        " passed?        yes          yes      yes          yes             yes      yes         yes               yes        yes         yes",
+        "",
+        " ===================================================================================================================================",
+        "",
+        "",
+        " this tally meets the statistical criteria used to form confidence intervals: check the tally fluctuation chart to verify.",
+        " the results in other bins associated with this tally may not meet these statistical criteria.",
+        "",
+        " ----- estimated confidence intervals:  -----",
+        "",
+        " estimated asymmetric confidence interval(1,2,3 sigma): 1.6863E-18 to 1.7182E-18; 1.6703E-18 to 1.7342E-18; 1.6543E-18 to 1.7502E-18",
+        " estimated  symmetric confidence interval(1,2,3 sigma): 1.6859E-18 to 1.7178E-18; 1.6699E-18 to 1.7338E-18; 1.6539E-18 to 1.7498E-18",
+        "",
+        "analysis of the results in the tally fluctuation chart bin (tfc) for tally 5 with nps = 1000000             print table 160",
+        "",
+        "",
+        " normed average tally per history  = 1.70186E-18          unnormed average tally per history  = 1.70186E-18",
+        " estimated tally relative error    = 0.0094               estimated variance of the variance  = 0.0057",
+        " relative error from zero tallies  = 0.0016               relative error from nonzero scores  = 0.0093",
+        "",
+        " number of nonzero history tallies =      284851          efficiency for the nonzero tallies  = 0.2849",
+        " history number of largest  tally  =      203051          largest  unnormalized history tally = 3.35532E-15",
+        " (largest  tally)/(average tally)  = 1.97155E+03          (largest  tally)/(avg nonzero tally)= 5.61599E+02",
+        "",
+        " (confidence interval shift)/mean  = 0.0002               shifted confidence interval center  = 1.70224E-18",
+        "",
+        "",
+        " if the largest  history score sampled so far were to occur on the next history, the tfc bin quantities would change as follows:",
+        "",
+        "      estimated quantities           value at nps           value at nps+1           value(nps+1)/value(nps)-1.",
+        "",
+        "      mean                            1.70186E-18             1.70522E-18                     0.001971",
+        "      relative error                  9.38837E-03             9.57407E-03                     0.019780",
+        "      variance of the variance        5.74434E-03             7.05018E-03                     0.227326",
+        "      shifted center                  1.70224E-18             1.70229E-18                     0.000032",
+        "      figure of merit                 3.45146E+01             3.31887E+01                    -0.038416",
+        "",
+        " the estimated inverse power slope of the 200 largest  tallies starting at 4.24601E-16 is 3.8572",
+        " the history score probability density function appears to have an unsampled region at the largest  history scores:",
+        " please examine. see print table 161.",
+        "",
+        " fom = (histories/minute)*(f(x) signal-to-noise ratio)**2 = (3.042E+03)*( 1.065E-01)**2 = (3.042E+03)*(1.135E-02) = 3.451E+01",
     ]
     return tally_data
 
@@ -788,6 +925,39 @@ def test_f5_tally_scale_result(f5_tally_data):
     F5_object.scale_result(scaling_factor=3)
     # assert
     assert F5_object.results[0]["result"] == 4.38636E-03 * 3
+
+
+def test_f5z_init_calls_subclass_results(mocker, f5z_tally_data):
+    # arrange
+    tally_data = f5z_tally_data
+    mocked_subclass_get_results = mocker.patch('eddymc_core.mcnp.tallies.F5zTally.get_results', return_value=None)
+    mocked_superclass_get_results = mocker.patch('eddymc_core.mcnp.tallies.Tally.get_results', return_value=None)
+    # act
+    tallies.F5zTally(tally_data)
+    # assert
+    mocked_subclass_get_results.assert_any_call()
+    mocked_superclass_get_results.assert_not_called()
+
+
+def test_f5z_tally_get_results(f5z_tally_data):
+    # arrange
+    tally = tallies.F5zTally(f5z_tally_data)
+    # act
+    tally.results = tally.get_results()
+    # assert
+    assert type(tally.results) == list
+    assert type(tally.results[0]) == dict
+    assert tally.results[0]['result'] == 1.70186E-18
+    assert tally.results[0]['variance'] == 0.0094
+
+
+def test_f5z_tally_scale_result(f5z_tally_data):
+    # arrange
+    F5z_object = tallies.F5zTally(f5z_tally_data)
+    # act
+    F5z_object.scale_result(scaling_factor=3)
+    # assert
+    assert F5z_object.results[0]["result"] == 1.70186E-18 * 3
 
 
 def test_f6_init_creates_object(f6_tally_data):
