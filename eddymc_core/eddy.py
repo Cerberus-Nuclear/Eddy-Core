@@ -104,18 +104,24 @@ def get_args(filename):
 
     if 'SCALE' in output_data[2]:
         code = 'SCALE'
+        print("Case identified as SCALE output.")
     elif 'Code Name &amp; Version = MCNP' in output_data[0]:
         code = 'MCNP'
+        print("Case identified as MCNP output.")
     else:
         raise NotAcceptedFileTypeError("This file doesn't seem to be an MCNP or SCALE output?")
 
     # Check if shielding or crit case
     if code == 'MCNP':
         crit_case = check_if_crit(output_data)
+        if crit_case:
+            print("MCNP case identified as criticality calculation.")
+        else:
+            print("MCNP case identified as shielding calculation.")
+
     else:
         crit_case = False
 
-    print(f"Output file selected: {filename}")
     return output_data, code, crit_case
 
 
