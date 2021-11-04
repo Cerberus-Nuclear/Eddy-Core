@@ -232,6 +232,31 @@
         {% endfor %}
     </table>
     {% endfor %}
+    {% for particle in f5z_tallies if f5z_tallies[particle] %}
+    <h2>F5z Tally {{particle.capitalize()[:-1]}} Values</h2>
+    <table>
+        <tr>
+            <th>Tally Number</th>
+            <th>Value (uSv/h)</th>
+            <th>Error</th>
+        </tr>
+        {% for tally in f5z_tallies[particle] %}
+        {% for detector in tally.results %}
+        <tr>
+            <td>{{tally.tally_number}}</td>
+            <td>{{"%.3e"|format(detector['result'])}}</td>
+            <td style="
+                {% if detector['variance'] > 0.1 %}background-color: tomato
+                {% elif detector['variance'] == 0.0 %}background-color: orangered
+                {% endif %}
+                ">
+                {{detector['variance']}}
+            </td>
+        </tr>
+        {% endfor %} {# This was "for detector in tally.results" #}
+        {% endfor %} {# This was "for tally in f5z_tallies{particle}" #}
+    </table>
+    {% endfor %}
     {% endif %}
 
     {% if 'F6' in tally_types or 'F6+' in tally_types %}

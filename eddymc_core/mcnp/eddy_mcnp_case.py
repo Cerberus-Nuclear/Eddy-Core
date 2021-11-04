@@ -83,17 +83,21 @@ class EddyMCNPCase:
             self.F2_tallies = tallies['F2_tallies']
             self.F4_tallies = tallies['F4_tallies']
             self.F5_tallies = tallies['F5_tallies']
+            self.F5z_tallies = tallies['F5z_tallies']
             self.F6_tallies = tallies['F6_tallies']
             # apply scaling factor
             if self.scaling_factor != 1:
                 for tally in self.tally_list:
                     tally.scale_result(self.scaling_factor)
+        # if self.crit_case is True
         else:
+            # TODO: Find a way to avoid passing all this to the HTML writer for crit cases?
             self.tally_list = None
             self.f_types    = None
             self.F2_tallies = None
             self.F4_tallies = None
             self.F5_tallies = None
+            self.F5z_tallies = None
             self.F6_tallies = None
 
 
