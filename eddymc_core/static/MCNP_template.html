@@ -69,10 +69,12 @@
       <td style="background-color: #cce0ff;">HTML Output Created</td>
       <td style="white-space: pre;">{{ date }}   {{ time }}</td>
     </tr>
+    {% if not crit_case %}
     <tr>
       <td style="background-color: #cce0ff;">Scaling Factor: </td>
       <td>{{"%.3e"|format(scaling_factor)}} </td>
     </tr>
+    {% endif %}
     {% if ctme %}
     <tr>
       <td style="background-color: #cce0ff;">CTME</td>
@@ -580,12 +582,27 @@
 {% endif %}
 
 
+{% if error_log %}
+<div id="error_log">
+<details>
+    <summary>Eddy Errors</summary>
+    <div id="error_log_messages">
+        <p style="font-weight: bold">The following errors occurred while running Eddy:</p>
+        {% for error in error_log %}
+        <p>{{error}}</p>
+        {% endfor %}
+    </div>
+</details>
+</div>
+
+{% endif %}
+
 {% if warnings %}
 <div id="warnings">
 <details>
     <summary>Warnings</summary>
     <div id="warning_messages">
-        <p style="font-weight: bold">The following warning messages were generated:</p>
+        <p style="font-weight: bold">The following MCNP warning messages were generated:</p>
         {% for warning in warnings %}
         {% if "messages so far" not in warning %}
         <p>{{warning.capitalize()}}</p>

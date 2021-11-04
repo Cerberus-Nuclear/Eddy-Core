@@ -34,6 +34,7 @@ class EddyMCNPCase:
         self.scaling_factor = scaling_factor
         self.file = file
         self.crit_case = crit_case
+        self.error_log = []
 
         # start parsing output:
         self.rundate, self.runtime = self.get_date_time()
@@ -71,7 +72,8 @@ class EddyMCNPCase:
             particle_data = self.find_mcnp_particle_data(particle_type)
             if particle_data:
                 particle = self.create_particle(particle_type, particle_data)
-                self.particle_list.append(particle)
+                if particle:
+                    self.particle_list.append(particle)
 
         # Tallies
         # initialise empty variables
@@ -363,6 +365,8 @@ class EddyMCNPCase:
         """
         particle_data = None  # ensure we return None if data is not found
         PATTERN_run_terminated = re.compile(r'^\+\s+\d\d/\d\d/\d\d(.+)')
+        # above regex matches line of format "+              06/04/21 12:44:53 "
+        # which ensures final dump is being considered
         PATTERN_particle = {
             'neutron': re.compile(r'\sneutron\screation\s+tracks.+'),
             'photon': re.compile(r'\sphoton\screation\s+tracks.+'),
@@ -390,7 +394,12 @@ class EddyMCNPCase:
         Returns:
             Particle: The new particle object
         """
-        creation_data, loss_data, total_data = self.sort_mcnp_particle_data(particle, particle_data)
+        try:
+            creation_data, loss_data, total_data = self.sort_mcnp_particle_data(particle, particle_data)
+        except:
+            error = f"Unable to sort {particle} particle data"
+            self.error_log.append(error)
+            return None
         return Particle(
             particle_type=particle,
             creation_data=creation_data,
@@ -467,7 +476,7 @@ class EddyMCNPCase:
                 loss_dict: The particle loss data,
                 total_dict: The particle neutron data,
         """
-        # TODO: Make this whole method clearer
+        # TODO: Make this whole method clearer - use regexes rather than  fixed indices
 
         indices = [0, 18, 27, 41, 55]
         particle_data_table_range = {
@@ -488,21 +497,27 @@ class EddyMCNPCase:
             # Separate creation data
             creation = data[line_num][:55]
             # split the line into 4 columns
-            creation = [creation[indices[i]:indices[i + 1]].strip() for i in range(len(indices) - 1)]
-            creation_dict[creation[0]] = {'tracks': int(creation[1]),
+            try:
+                creation = [creation[indices[i]:indices[i + 1]].strip() for i in range(len(indices) - 1)]
+                creation_dict[creation[0]] = {'tracks': int(creation[1]),
                                           'weight': float(creation[2]),
                                           'energy': float(creation[3]),
                                           }
+            except ValueError:
+                print("Error: could not find all data in creation tables.")
             # Separate loss data
             loss_line = data[line_num][64:]
             # for photons there are fewer loss values than creation values, so we check if the line has contents
             if loss_line.isspace() is False:
                 # split the line into 4 columns
-                loss = [loss_line[indices[i]:indices[i + 1]].strip() for i in range(len(indices) - 1)]
-                loss_dict[loss[0]] = {'tracks': int(loss[1]),
-                                      'weight': float(loss[2]),
-                                      'energy': float(loss[3]),
-                                      }
+                try:
+                    loss = [loss_line[indices[i]:indices[i + 1]].strip() for i in range(len(indices) - 1)]
+                    loss_dict[loss[0]] = {'tracks': int(loss[1]),
+                                          'weight': float(loss[2]),
+                                          'energy': float(loss[3]),
+                                          }
+                except ValueError:
+                    print("Error: could not find all data in loss tables.")
 
         # get summary data for particle
         total_dict = {}

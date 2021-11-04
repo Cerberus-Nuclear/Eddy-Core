@@ -55,6 +55,7 @@ def get_html(case):
         runtime=case.runtime,
         date=datetime.datetime.now().strftime("%Y/%m/%d"),
         time=datetime.datetime.now().strftime("%H:%M:%S"),
+        crit_case=case.crit_case,
         scaling_factor=case.scaling_factor,
         ctme=case.ctme,
         nps=case.nps,
@@ -75,5 +76,6 @@ def get_html(case):
         particle_list=case.particle_list,
         input_deck=case.mcnp_input,
         cycles=case.cycles,
+        error_log=case.error_log,
         )
     return html

@@ -116,67 +116,6 @@ def single_mixture_multigroup(tmpdir):
 #####################################################################
 
 
-def test_get_mixture_data_ce(ce_623_file, ce_624_file):
-    # arrange
-    scale_623_file = ce_623_file
-    scale_624_file = ce_624_file
-    # act
-    output_623 = mixtures.get_mixture_data(scale_623_file)
-    output_624 = mixtures.get_mixture_data(scale_624_file)
-    # assert
-    assert len(output_623) == 57
-    assert len(output_624) == 57
-    print(output_624)
-
-
-def test_get_mixture_data_multigroup(multigroup_623_file, multigroup_624_file):
-    # arrange
-    scale_623_file = multigroup_623_file
-    scale_624_file = multigroup_624_file
-    # act
-    output_623 = mixtures.get_mixture_data(scale_623_file)
-    output_624 = mixtures.get_mixture_data(scale_624_file)
-    # assert
-    assert len(output_623) == 100
-    assert len(output_624) == 100
-
-
-def test_create_mixtures_ce_623(ce_623_file, single_mixture_ce_623, mocker):
-    # arrange
-    mixtures_623 = mixtures.get_mixture_data(ce_623_file)
-    mocked_Mixture_init = mocker.patch('eddymc_core.scale.mixtures.Mixture')
-    # act
-    mixtures.create_mixtures(mixtures_623)
-    # assert
-    mocked_Mixture_init.assert_called()
-    assert mocked_Mixture_init.call_count == 3
-    assert mocked_Mixture_init.call_args_list[0][0][0] == single_mixture_ce_623
-
-
-def test_create_mixtures_ce_624(ce_624_file, single_mixture_ce_624, mocker):
-    # arrange
-    mixtures_624 = mixtures.get_mixture_data(ce_624_file)
-    mocked_Mixture_init = mocker.patch('eddymc_core.scale.mixtures.Mixture')
-    # act
-    mixtures.create_mixtures(mixtures_624)
-    # assert
-    mocked_Mixture_init.assert_called()
-    assert mocked_Mixture_init.call_count == 3
-    assert mocked_Mixture_init.call_args_list[0][0][0] == single_mixture_ce_624
-
-
-def test_create_mixtures_multigroup_623(multigroup_623_file, single_mixture_multigroup, mocker):
-    # arrange
-    mixtures_623 = mixtures.get_mixture_data(multigroup_623_file)
-    mocked_Mixture_init = mocker.patch('eddymc_core.scale.mixtures.Mixture')
-    # act
-    mixtures.create_mixtures(mixtures_623)
-    # assert
-    mocked_Mixture_init.assert_called()
-    assert mocked_Mixture_init.call_count == 3      # checks correct number of mixtures found
-    assert mocked_Mixture_init.call_args_list[0][0][0] == single_mixture_multigroup  # checks first mixture is correct
-
-
 def test_mixture_init_ce_623(single_mixture_ce_623):
     # arrange
     # act
@@ -222,3 +161,13 @@ def test_mixture_init_multigroup(single_mixture_multigroup):
     assert mix_1.isotopes[24050]["title"] == 'Cr50'
     assert mix_1.isotopes[28061]["atom-density"] == 7.35058E-05
     assert mix_1.isotopes[26056]["atomic weight"] == 55.9349
+
+
+def test_get_isotope_data_multigroup_format():
+    # todo: implement
+    pass
+
+
+def test_get_isotope_data_continuous_format():
+    # todo: implement
+    pass

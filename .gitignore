@@ -1,0 +1,6 @@
+__pycache__
+/dist/
+/build/
+/.idea/
+/tests/scale_examples/*.html
+/tests/mcnp_examples/*.html
