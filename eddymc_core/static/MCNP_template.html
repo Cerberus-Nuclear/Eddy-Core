@@ -505,6 +505,37 @@
         </div>
         {% endfor %} {# This was "for tally in particle" #}
         {% endfor %} {# This was "for particle in F5_tallies" #}
+
+        {% for particle in f5z_tallies %}
+        {% for tally in f5z_tallies[particle] %}
+        <div class="tally_breakdown">
+            <div class="tally_results">
+                <h2>Results for {{tally.particles.capitalize()[:-1]}} {{tally.tally_type[:-1].title()}}, Tally Number: {{tally.tally_number}}</h2>
+                <table>
+                    <tr>
+                        <th>Tally Number</th>
+                        <th>Value (uSv/h)</th>
+                        <th>Error</th>
+                    </tr>
+                    {% for detector in tally.results %}
+                    <tr>
+                        <td>{{tally.tally_number}}</td>
+                        <td>{{"%.3e"|format(detector['result'])}}</td>
+                        <td style="
+                            {% if detector['variance'] > 0.1 %}background-color: tomato
+                            {% elif detector['variance'] == 0.0 %}background-color: orangered
+                            {% endif %}
+                            ">
+                            {{detector['variance']}}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {{ tally_check(tally=tally) }}
+        </div>
+        {% endfor %} {# This was "for tally in particle" #}
+        {% endfor %} {# This was "for particle in F5_tallies" #}
     </div>
     {% endif %} {# This was "if F5 in tally_types" #}
 
