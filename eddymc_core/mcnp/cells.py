@@ -12,7 +12,6 @@
     which is assigned to each cell object as they are created.
 """
 # imports from standard library
-import re
 # local imports
 
 
@@ -52,6 +51,7 @@ class Cell:
                     self.neutron_tracks_entering = line[2]
                     self.neutron_population = line[3]
                     self.neutron_collisions = line[4]
+                    self.neutron_mfp = line[9]
         # Assign photon population data to cell
         if photon_pop:
             for line in photon_pop[6:-2]:
@@ -61,6 +61,7 @@ class Cell:
                     self.photon_tracks_entering = line[2]
                     self.photon_population = line[3]
                     self.photon_collisions = line[4]
+                    self.photon_mfp = line[9]
         # Assign electron population data to cell
         if electron_pop:
             for line in electron_pop[6:-2]:
@@ -70,6 +71,7 @@ class Cell:
                     self.electron_tracks_entering = line[2]
                     self.electron_population = line[3]
                     self.electron_collisions = line[4]
+                    self.electron_mfp = line[9]
 
     def __repr__(self):
         """Print a description of the cell object to the terminal (for debugging purposes)
@@ -97,4 +99,3 @@ class Cell:
         except AttributeError:
             pass
         return description
-

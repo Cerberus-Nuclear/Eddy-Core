@@ -734,6 +734,7 @@
             <th>Tracks Entering</th>
             <th>Populations</th>
             <th>Collisions</th>
+            <th>Average Mean Free Path (cm)</th>
         </tr>
         {% for cell in cell_list %}
         {% if particle_name + '_population' in cell.__dict__ %}
@@ -742,6 +743,7 @@
             <td>{{cell.__dict__[particle_name + '_tracks_entering']}}</td>
             <td>{{cell.__dict__[particle_name + '_population']}}</td>
             <td>{{cell.__dict__[particle_name + '_collisions']}}</td>
+            <td>{{cell.__dict__[particle_name + '_mfp']}}</td>
         </tr>
         {% endif %}
         {% endfor %}
