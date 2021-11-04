@@ -532,6 +532,10 @@ class EddyMCNPCase:
             loss_line = data[line_num][64:]
             # for photons there are fewer loss values than creation values, so we check if the line has contents
             if loss_line.isspace() is False:
+                # One of the electron lines has an '>' character; sanitizing the input will
+                # change this to '&gt;' which will interfere with the fixed indices, so we need to change it back
+                if '&gt;' in loss_line:
+                    loss_line = loss_line.replace('&gt;', '>')
                 # split the line into 4 columns
                 try:
                     loss = [loss_line[indices[i]:indices[i + 1]].strip() for i in range(len(indices) - 1)]
