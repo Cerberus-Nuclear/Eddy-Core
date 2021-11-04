@@ -69,10 +69,12 @@
       <td style="background-color: #cce0ff;">HTML Output Created</td>
       <td style="white-space: pre;">{{ date }}   {{ time }}</td>
     </tr>
+    {% if not crit_case %}
     <tr>
       <td style="background-color: #cce0ff;">Scaling Factor: </td>
       <td>{{"%.3e"|format(scaling_factor)}} </td>
     </tr>
+    {% endif %}
     {% if ctme %}
     <tr>
       <td style="background-color: #cce0ff;">CTME</td>
