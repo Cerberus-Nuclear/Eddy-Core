@@ -26,11 +26,23 @@ class Tally:
         self.f_type = 'F' + data[1].split()[2]
         self.tally_type = data[1].split()[3:]
         self.tally_type = ' '.join(self.tally_type)
-        self.particles = data[2].split()[1]
+        self.particles = self.get_particle_type()
         self.dose_functions = self.get_dose_functions()
         self.results = self.get_results()
         self.statistical_checks = self.get_statistical_checks()
         self.passes = self.get_passes()
+
+    def get_particle_type(self):
+        data_line = self.data[2]
+        if "neutrons" in data_line:
+            particles = "neutrons"
+        elif "photons" in data_line:
+            particles = "photons"
+        elif "electrons" in data_line:
+            particles = "electrons"
+        else:
+            raise ValueError(f"Particle type not recognised in Tally {self.tally_number}")
+        return particles
 
     def get_dose_functions(self):
         """Gets the dose function, if any, that the results of this tally are multiplied by

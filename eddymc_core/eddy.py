@@ -105,7 +105,7 @@ def get_args(filename):
     if 'SCALE' in output_data[2]:
         code = 'SCALE'
         print("Case identified as SCALE output.")
-    elif 'Code Name &amp; Version = MCNP' in output_data[0]:
+    elif 'Code Name &amp; Version = MCNP' in output_data[0] or '1mcnp     version' in output_data[0]:
         code = 'MCNP'
         print("Case identified as MCNP output.")
     else:
