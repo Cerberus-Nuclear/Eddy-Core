@@ -19,6 +19,12 @@ def f2_file(tmpdir):
 
 
 @pytest.fixture
+def mcnp4c_file(tmpdir):
+    mcnp4c = pkg_resources.read_text(mcnp_examples, 'mcnp4c.out')
+    return mcnp4c.split('\n')
+
+
+@pytest.fixture
 def scale_file(tmpdir):
     file = pkg_resources.read_text(scale_examples, 'cylinder_ce.out')
     return file.split('\n')
@@ -153,6 +159,26 @@ def test_main_calls_eddy_mcnp_case(mocker, f2_file):
     # arrange
     name = 'mcnp_examples/F2.out'
     data = f2_file
+    sf = 3.141592
+    crit = False
+    code = 'MCNP'
+    mocker.patch('eddymc_core.eddy.get_args', return_value=(data, code, crit,))
+    mocked_eddy_scale_case = mocker.patch('eddymc_core.scale.eddy_scale_case.EddySCALECase.__init__')
+    mocked_eddy_mcnp_case = mocker.patch('eddymc_core.mcnp.eddy_mcnp_case.EddyMCNPCase.__init__', return_value=None)
+    mocker.patch('eddymc_core.mcnp.mcnp_html_writer.get_html', return_value='test_html')
+    mocker.patch('eddymc_core.eddy.write_output')
+    # act
+    eddy.main(filename=name, scaling_factor=sf)
+    # assert
+    mocked_eddy_mcnp_case.assert_called()
+    mocked_eddy_scale_case.assert_not_called()
+
+
+def test_main_calls_eddy_mcnp_case_for_mcnp4c(mocker, mcnp4c_file):
+    # arrange
+    name = 'mcnp_examples/mcnp4c.out'
+    data = mcnp4c_file
+    data = eddy.sanitize_list(data)  # not ideal re-using this in test
     sf = 3.141592
     crit = False
     code = 'MCNP'

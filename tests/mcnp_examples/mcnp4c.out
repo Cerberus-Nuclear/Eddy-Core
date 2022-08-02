@@ -1,0 +1,410 @@
+1mcnp     version 4c2   ld=01/20/01                      07/12/22 10:10:20
+ *************************************************************************                 probid =   07/12/22 10:10:20
+ inp=wall.ip outp=outb.txt                                                       
+
+    1-       c Cerberus Shielding Tutorial - 1 GBq Cs137 with 300 mm concrete + 50 mm hole   
+    2-       c                                                                               
+    3-       c ============================================================================= 
+    4-       c o---------------------------- Cells Card ----------------------------------o  
+    5-       c ==============================================================================
+    6-       c                                                                               
+    7-       c Universe                                                                      
+    8-       101   1  -0.001205    (-101 102 201)                                            
+    9-             imp:n=1 imp:p=1                                                           
+   10-       c Concrete wall                                                                 
+   11-       102   2  -2.18    (-102 103)                                                    
+   12-             imp:n=1 imp:p=1                                                           
+   13-       c Crack(hole)                                                                   
+   14-       103   1  -0.001205    (-103)                                                    
+   15-             imp:n=1 imp:p=1                                                           
+   16-       c Scoring Region                                                                
+   17-       201   1  -0.001205    (-201)                                                    
+   18-             imp:n=1 imp:p=1                                                           
+   19-       c Outer Void                                                                    
+   20-       999   0  (101)                                                                  
+   21-             imp:n=0 imp:p=0                                                           
+   22-                                                                                       
+   23-       c ============================== Surfaces Card ================================ 
+   24-       c                                                                               
+   25-       c Universe                                                                      
+   26-       101       RPP     -110 62 -100 100 -100 100                                     
+   27-       c Concrete                                                                      
+   28-       102       RPP     0 30 -100 100 -100 100                                        
+   29-       c Crack(hole)     X Y Z Xh Yh Zh R                                              
+   30-       103       RCC     0 0 0 30 0  0  2                                              
+   31-       c Scoring Region                                                                
+   32-       201       RPP     60 61 -15 15 -15 15                                           
+   33-                                                                                       
+   34-       c o-------------------------- Materials Card --------------------------------o  
+   35-       c                                                                               
+   36-       c Name=Air_Dry_Near_Sea_Level                                                   
+   37-       c Density=0.001205                                                              
+   38-       M1    6000   -0.000124                                                          
+   39-             7000   -0.755268                                                          
+   40-             8000   -0.231781                                                          
+   41-             18000  -0.012827                                                          
+   42-       c                                                                               
+   43-       c Name = Hanford Dry concrete                                                   
+   44-       c Density=2.180000                                                              
+   45-       M2    1000   -0.004000                                                          
+   46-             8000   -0.482102                                                          
+   47-             11000  -0.002168                                                          
+   48-             12000  -0.014094                                                          
+   49-             13000  -0.069387                                                          
+   50-             14000  -0.277549                                                          
+   51-             19000  -0.013010                                                          
+   52-             20000  -0.080229                                                          
+   53-             26000  -0.057461                                                          
+   54-       c                                                                               
+   55-       c                                                                               
+   56-       c =========================== END MATERIAL SECTION =============================
+   57-       c =========================== START OF PHYSICS DATA ============================
+   58-       MODE P                                                                          
+   59-       c ============================ END OF PHYSICS DATA =============================
+   60-       c ========================== START OF SOURCE SECTION ===========================
+   61-       c                                                                               
+   62-       c 1 GBq Cs137 Source                                                            
+   63-       c Branching ratio to Ba137m is 94.69945 %                                       
+   64-       c Ba137m gamma intensity is 89.9 %                                              
+   65-       c So total source intensity is 1e9 * 0.9469945 * 0.899                          
+   66-       c and normalisation factor should be 8.513480555e8                              
+   67-       SDEF PAR=2                                                                      
+   68-            ERG=0.661657                                                               
+   69-            POS=-100 0 0                                                               
+   70-       c                                                                               
+   71-       c                                                                               
+   72-       c =========================== END OF SOURCE SECTION ============================
+   73-       c ================================= TALLY DATA =================================
+   74-       c                                                                               
+   75-       F4:p   201  $ Score in region 201                                               
+   76-       c                                                                               
+   77-       c                                                                               
+   78-       c  ICRP H*(10) GAMMA FLUX TO DOSE CONVERSION FACTORS                            
+   79-       DE00 1.000E-02 1.500E-02 2.000E-02 3.000E-02 4.000E-02 5.000E-02 6.000E-02    & 
+   80-            8.000E-02 1.000E-01 1.500E-01 2.000E-01 3.000E-01 4.000E-01 5.000E-01     &
+   81-            6.000E-01 8.000E-01 1.000E+00 1.500E+00 2.000E+00 3.000E+00 4.000E+00     &
+   82-            5.000E+00 6.000E+00 8.000E+00 1.000E+01                                    
+   83-       DF00 2.196E-04 2.988E-03 3.780E-03 2.916E-03 2.304E-03 1.980E-03 1.836E-03    & 
+   84-            1.908E-03 2.196E-03 3.204E-03 4.320E-03 6.480E-03 8.568E-03 1.055E-02     &
+   85-            1.238E-02 1.577E-02 1.872E-02 2.484E-02 3.096E-02 3.996E-02 4.824E-02     &
+   86-            5.580E-02 6.336E-02 7.776E-02 9.216E-02                                    
+   87-       c                                                                               
+   88-       c ============================ END OF TALLY DATA ===============================
+   89-       c                                                                               
+   90-       c                                                                               
+   91-       CTME 1                                                                          
+   92-       c                                                                               
+   93-       c                                                                               
+   94-       c ==============================================================================
+   95-       c ========================== RANDOM NUMBER GENERATOR ===========================
+   96-       c ==============================================================================
+   97-       C RAND SEED= 4880714062571                                                      
+   98-       c ==============================================================================
+   99-       c ========================== RANDOM NUMBER GENERATOR ===========================
+  100-       c ==============================================================================
+  101-       c                                                                               
+  102-                                                                                       
+
+ surface    101.3 and surface    102.3 are the same.    102.3 will be deleted.
+
+ surface    101.4 and surface    102.4 are the same.    102.4 will be deleted.
+
+ surface    101.5 and surface    102.5 are the same.    102.5 will be deleted.
+
+ surface    101.6 and surface    102.6 are the same.    102.6 will be deleted.
+
+ surface    102.1 and surface    103.2 are the same.    103.2 will be deleted.
+
+ surface    102.2 and surface    103.3 are the same.    103.3 will be deleted.
+ 
+ warning.     6 surfaces were deleted for being the same as others.
+1cells                                                                                                  print table 60
+
+                      atom        gram                                     neutron    photon                           
+        cell  mat    density     density     volume       mass     pieces importance importance                        
+
+     1   101    1  4.98817E-05 1.20500E-03 5.67910E+06 6.84332E+03     0  1.0000E+00 1.0000E+00                        
+     2   102    2  6.64183E-02 2.18000E+00 0.00000E+00 0.00000E+00     0  1.0000E+00 1.0000E+00                        
+     3   103    1  4.98817E-05 1.20500E-03 3.76991E+02 4.54274E-01     1  1.0000E+00 1.0000E+00                        
+     4   201    1  4.98817E-05 1.20500E-03 9.00000E+02 1.08450E+00     0  1.0000E+00 1.0000E+00                        
+     5   999    0  0.00000E+00 0.00000E+00 0.00000E+00 0.00000E+00     0  0.0000E+00 0.0000E+00                        
+
+ total                                     5.68038E+06 6.84485E+03
+
+
+ random number control    0.727343232450560E+14
+
+    minimum source weight = 1.0000E+00    maximum source weight = 1.0000E+00
+
+          1 warning message so far.
+1cross-section tables                                                                                   print table 100
+
+     table    length
+
+                        tables from file mcplib02                                                        
+
+   1000.02p     623                                                                                            01/15/93
+   6000.02p     623                                                                                            01/15/93
+   7000.02p     623                                                                                            01/15/93
+   8000.02p     623                                                                                            01/15/93
+  11000.02p     635                                                                                            01/15/93
+  12000.02p     643                                                                                            01/15/93
+  13000.02p     643                                                                                            01/15/93
+  14000.02p     643                                                                                            01/15/93
+  18000.02p     643                                                                                            01/15/93
+  19000.02p     643                                                                                            01/15/93
+  20000.02p     651                                                                                            01/15/93
+  26000.02p     651                                                                                            01/15/93
+
+  total        7644
+
+ maximum photon energy set to  100.0 mev (maximum electron energy)
+
+                        tables from file el03                                                            
+
+   1000.03e    2329                                                                                          6/6/98    
+   6000.03e    2333                                                                                          6/6/98    
+   7000.03e    2333                                                                                          6/6/98    
+   8000.03e    2333                                                                                          6/6/98    
+  11000.03e    2337                                                                                          6/6/98    
+  12000.03e    2337                                                                                          6/6/98    
+  13000.03e    2337                                                                                          6/6/98    
+  14000.03e    2339                                                                                          6/6/98    
+  18000.03e    2341                                                                                          6/6/98    
+  19000.03e    2343                                                                                          6/6/98    
+  20000.03e    2343                                                                                          6/6/98    
+  26000.03e    2345                                                                                          6/6/98    
+
+
+
+
+
+ decimal words of dynamically allocated storage
+
+     general             263180
+     tallies               6512
+     bank                 46724
+     cross sections       15288
+
+     total               327840     =     1311360 bytes
+
+     available (mdas)   4000000
+
+ ***********************************************************************************************************************
+ dump no.    1 on file runtpi       nps =         0     coll =              0     ctm =    0.00     nrn =              0
+
+
+          1 warning message so far.
+1problem summary                                                                                                       
+
+      run terminated when it had used    1 minutes of computer time.
++                                                                                                     07/12/22 10:11:21
+      c Cerberus Shielding Tutorial - 1 GBq Cs137 with 300 mm concrete + 50 mm hole        probid =   07/12/22 10:10:20
+0
+ photon creation     tracks      weight        energy            photon loss         tracks      weight        energy
+                                 (per source particle)                                           (per source particle)
+
+ source             7126939    1.0000E+00    6.6166E-01          escape             6399910    8.9799E-01    5.6770E-01
+                                                                 energy cutoff            0    0.            3.7276E-06
+                                                                 time cutoff              0    0.            0.        
+ weight window            0    0.            0.                  weight window            0    0.            0.        
+ cell importance          0    0.            0.                  cell importance          0    0.            0.        
+ weight cutoff            0    0.            0.                  weight cutoff            0    0.            0.        
+ energy importance        0    0.            0.                  energy importance        0    0.            0.        
+ dxtran                   0    0.            0.                  dxtran                   0    0.            0.        
+ forced collisions        0    0.            0.                  forced collisions        0    0.            0.        
+ exp. transform           0    0.            0.                  exp. transform           0    0.            0.        
+ from neutrons            0    0.            0.                  compton scatter          0    0.            8.4534E-02
+ bremsstrahlung       88077    1.2358E-02    2.1163E-04          capture             949089    1.3317E-01    9.7276E-03
+ p-annihilation           0    0.            0.                  pair production          0    0.            0.        
+ photonuclear             0    0.            0.                  photonuclear abs         0    0.            0.        
+ electron x-rays          0    0.            0.                                                                        
+ 1st fluorescence    133983    1.8800E-02    9.8457E-05                                                                
+ 2nd fluorescence         0    0.            0.                                                                        
+     total          7348999    1.0312E+00    6.6197E-01              total          7348999    1.0312E+00    6.6197E-01
+
+   number of photons banked                    88077        average time of (shakes)              cutoffs
+   photon tracks per source particle      1.0312E+00          escape            2.6677E-01          tco   1.0000E+34
+   photon collisions per source particle  1.0704E+00          capture           4.1750E-01          eco   1.0000E-03
+   total photon collisions                   7628644          capture or escape 2.8624E-01          wc1  -5.0000E-01
+                                                              any termination   2.8624E-01          wc2  -2.5000E-01
+
+ computer time so far in this run     2.02 minutes            maximum number ever in bank         3
+ computer time in mcrun               1.01 minutes            bank overflows to backup file       0
+ source particles per minute            7.0656E+06            dynamic storage    327844 words,    1311376 bytes.
+ random numbers generated                114266561            most random numbers used was      349 in history  6878789
+
+ range of sampled source weights = 1.0000E+00 to 1.0000E+00
+1photon   activity in each cell                                                                         print table 126
+
+                 tracks     population   collisions   collisions     number        flux        average      average
+        cell    entering                               * weight     weighted     weighted   track weight   track mfp
+                                                    (per history)    energy       energy     (relative)      (cm)
+
+     1   101     7476848      7128502        57968    8.1336E-03   6.3207E-01   6.3207E-01   1.0000E+00   1.0502E+04
+     2   102     1190471      1273490      7570669    1.0623E+00   3.5517E-01   3.5517E-01   1.0000E+00   4.2389E+00
+     3   103        3628         3065            6    8.4188E-07   4.9560E-01   4.9560E-01   1.0000E+00   9.2680E+03
+     4   201        1919         1919            1    1.4031E-07   3.9788E-01   3.9788E-01   1.0000E+00   8.4259E+03
+
+     total       8672866      8406976      7628644    1.0704E+00
+1tally   4        nps =  7126939
+           tally type 4    track length estimate of particle flux.                        
+           tally for  photons  
+
+           this tally is modified by a dose function.
+
+           volumes 
+                   cell:      201                                                                                  
+                         9.00000E+02
+ 
+ cell  201                                                                                                             
+                 2.89974E-09 0.0249
+1analysis of the results in the tally fluctuation chart bin (tfc) for tally   4 with nps =   7126939    print table 160
+
+
+ normed average tally per history  = 2.89974E-09          unnormed average tally per history  = 2.60977E-06
+ estimated tally relative error    = 0.0249               estimated variance of the variance  = 0.0007
+ relative error from zero tallies  = 0.0228               relative error from nonzero scores  = 0.0100
+
+ number of nonzero history tallies =        1919          efficiency for the nonzero tallies  = 0.0003
+ history number of largest  tally  =     3010224          largest  unnormalized history tally = 2.58812E-02
+ (largest  tally)/(average tally)  = 9.91705E+03          (largest  tally)/(avg nonzero tally)= 2.67027E+00
+
+ (confidence interval shift)/mean  = 0.0003               shifted confidence interval center  = 2.90071E-09
+
+
+ if the largest  history score sampled so far were to occur on the next history, the tfc bin quantities would change as follows:
+
+      estimated quantities           value at nps           value at nps+1           value(nps+1)/value(nps)-1.
+
+      mean                            2.89974E-09             2.90378E-09                     0.001391
+      relative error                  2.49303E-02             2.49344E-02                     0.000164
+      variance of the variance        7.46191E-04             7.51204E-04                     0.006718
+      shifted center                  2.90071E-09             2.90072E-09                     0.000001
+      figure of merit                 1.59511E+03             1.59458E+03                    -0.000329
+
+ the estimated inverse power slope of the 104 largest  tallies starting at 1.34807E-02 is 1.5159
+ the empirical history score probability density function appears to be increasing at the largest  history scores: please examine.
+ the large score tail of the empirical history score probability density function appears to have no unsampled regions.
+
+
+ ===================================================================================================================================
+
+           results of 10 statistical checks for the estimated answer for the tally fluctuation chart (tfc) bin of tally   4
+
+ tfc bin     --mean--      ---------relative error---------      ----variance of the variance----      --figure of merit--     -pdf-
+ behavior    behavior      value   decrease   decrease rate      value   decrease   decrease rate       value     behavior     slope
+
+ desired      random       <0.10      yes      1/sqrt(nps)       <0.10      yes        1/nps           constant    random      >3.00
+ observed     random        0.02      yes          yes            0.00      yes         yes            constant    random       1.52
+ passed?        yes          yes      yes          yes             yes      yes         yes               yes        yes          no
+
+ ===================================================================================================================================
+
+
+ warning.  the tally in the tally fluctuation chart bin did not pass  1 of the 10 statistical checks.
+
+ fom = (histories/minute)*(f(x) signal-to-noise ratio)**2 = (7.066E+06)*( 1.503E-02)**2 = (7.066E+06)*(2.258E-04) = 1.595E+03
+1unnormed tally density for tally   4            nonzero tally mean(m) = 9.692E-03   nps =   7126939    print table 161
+
+ abscissa              ordinate   log plot of tally probability density function in tally fluctuation chart bin(d=decade,slope= 1.5)
+  tally  number num den log den:d-----------------------------d-----------------------------d------------------------------d--------
+ 1.58-04      1 4.30-03  -2.366 ******************************|*****************************|***********                   |        
+ 2.00-04      1 3.42-03  -2.466 ******************************|*****************************|********                      |        
+ 2.51-04      0 0.00+00   0.000                               |                             |                              |        
+ 3.16-04      0 0.00+00   0.000                               |                             |                              |        
+ 3.98-04      0 0.00+00   0.000                               |                             |                              |        
+ 5.01-04      1 1.36-03  -2.866 ******************************|*************************    |                              |        
+ 6.31-04      0 0.00+00   0.000                               |                             |                              |        
+ 7.94-04      1 8.59-04  -3.066 ******************************|*******************          |                              |        
+ 1.00-03      3 2.05-03  -2.689 ******************************|*****************************|*                             |        
+ 1.26-03      2 1.08-03  -2.965 ******************************|**********************       |                              |        
+ 1.58-03      2 8.61-04  -3.065 ******************************|*******************          |                              |        
+ 2.00-03     13 4.44-03  -2.352 ******************************|*****************************|***********                   |        
+ 2.51-03     99 2.69-02  -1.570 ******************************|*****************************|******************************|****    
+ 3.16-03    105 2.27-02  -1.645 ******************************|*****************************|******************************|**      
+ 3.98-03    103 1.77-02  -1.753 ******************************|*****************************|***************************** |        
+ 5.01-03    104 1.42-02  -1.849 ******************************|*****************************|***************************   |        
+ 6.31-03     98 1.06-02  -1.975 ******************************|*****************************|***********************       |        
+ 7.94-03    129 1.11-02  -1.955 ******************************|*****************************|***********************       |        
+ 1.00-02    144 9.82-03  -2.008 mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm|mmmmmmmmmmmmmmmmmmmmmmmmmmmmm|mmmmmmmmmmmmmmmmmmmmmm        |        
+ 1.26-02    271 1.47-02  -1.833 ******************************|*****************************|***************************   |        
+ 1.58-02    836 3.60-02  -1.444 ******************************|*****************************|******************************|*******s
+ 2.00-02      4 1.37-04  -3.864 **************************    |                             |                              |  s     
+ 2.51-02      1 2.72-05  -4.566 ****                          |                             |                             s|        
+ 3.16-02      1 2.16-05  -4.666 *                             |                             |                        s     |        
+  total    1919 2.69-04         d-----------------------------d-----------------------------d------------------------------d--------
+
+
+ cumulative tally number for tally   4           nonzero tally mean(m) = 9.692E-03   nps =   7126939    print table 162
+
+   abscissa     cum   ordinate    plot of the cumulative number of tallies in the tally fluctuation chart bin from 0 to 100 percent
+    tally      number  cum pct:--------10--------20--------30--------40--------50--------60--------70--------80--------90-------100
+ 1.58490E-04        1    0.052|         |         |         |         |         |         |         |         |         |         |
+ 1.99527E-04        2    0.104|         |         |         |         |         |         |         |         |         |         |
+ 2.51188E-04        2    0.104|         |         |         |         |         |         |         |         |         |         |
+ 3.16228E-04        2    0.104|         |         |         |         |         |         |         |         |         |         |
+ 3.98108E-04        2    0.104|         |         |         |         |         |         |         |         |         |         |
+ 5.01188E-04        3    0.156|         |         |         |         |         |         |         |         |         |         |
+ 6.30959E-04        3    0.156|         |         |         |         |         |         |         |         |         |         |
+ 7.94328E-04        4    0.208|         |         |         |         |         |         |         |         |         |         |
+ 1.00000E-03        7    0.365|         |         |         |         |         |         |         |         |         |         |
+ 1.25893E-03        9    0.469|         |         |         |         |         |         |         |         |         |         |
+ 1.58490E-03       11    0.573|*        |         |         |         |         |         |         |         |         |         |
+ 1.99527E-03       24    1.251|*        |         |         |         |         |         |         |         |         |         |
+ 2.51188E-03      123    6.410|******   |         |         |         |         |         |         |         |         |         |
+ 3.16228E-03      228   11.881|*********|**       |         |         |         |         |         |         |         |         |
+ 3.98108E-03      331   17.249|*********|*******  |         |         |         |         |         |         |         |         |
+ 5.01188E-03      435   22.668|*********|*********|***      |         |         |         |         |         |         |         |
+ 6.30959E-03      533   27.775|*********|*********|******** |         |         |         |         |         |         |         |
+ 7.94328E-03      662   34.497|*********|*********|*********|****     |         |         |         |         |         |         |
+ 1.00000E-02      806   42.001|mmmmmmmmm|mmmmmmmmm|mmmmmmmmm|mmmmmmmmm|mm       |         |         |         |         |         |
+ 1.25893E-02     1077   56.123|*********|*********|*********|*********|*********|******   |         |         |         |         |
+ 1.58490E-02     1913   99.687|*********|*********|*********|*********|*********|*********|*********|*********|*********|*********|
+ 1.99527E-02     1917   99.896|*********|*********|*********|*********|*********|*********|*********|*********|*********|*********|
+ 2.51188E-02     1918   99.948|*********|*********|*********|*********|*********|*********|*********|*********|*********|*********|
+ 3.16228E-02     1919  100.000|*********|*********|*********|*********|*********|*********|*********|*********|*********|*********|
+    total        1919  100.000:--------10--------20--------30--------40--------50--------60--------70--------80--------90-------100
+1status of the statistical checks used to form confidence intervals for the mean for each tally bin
+
+
+ tally   result of statistical checks for the tfc bin (the first check not passed is listed) and error magnitude check for all bins
+
+     4   missed  1 of 10 tfc bin checks: the slope of decrease of largest tallies is less than the minimum acceptable value of 3.0 
+         passed all bin error check:     1 tally bins all have relative errors less than 0.10 with no zero bins
+
+
+ the 10 statistical checks are only for the tally fluctuation chart bin and do not apply to other tally bins.
+
+ warning.     1 of the   1 tally fluctuation chart bins did not pass all 10 statistical checks.
+1tally fluctuation charts                         
+
+                       tally    4
+       nps      mean     error   vov  slope    fom
+    512000   2.9634E-09 0.0928 0.0099  0.0    1586
+   1024000   3.1251E-09 0.0638 0.0048  0.0    1681
+   1536000   2.8949E-09 0.0540 0.0034  0.0    1575
+   2048000   2.9207E-09 0.0466 0.0026  1.7    1600
+   2560000   2.9422E-09 0.0415 0.0020  1.5    1615
+   3072000   2.9492E-09 0.0380 0.0017  1.5    1613
+   3584000   2.9430E-09 0.0351 0.0015  1.5    1618
+   4096000   2.9258E-09 0.0328 0.0013  1.5    1620
+   4608000   2.9144E-09 0.0310 0.0012  1.4    1611
+   5120000   2.9027E-09 0.0295 0.0010  1.5    1599
+   5632000   2.9076E-09 0.0281 0.0009  1.5    1600
+   6144000   2.8916E-09 0.0269 0.0009  1.5    1590
+   6656000   2.8974E-09 0.0258 0.0008  1.5    1591
+   7126939   2.8997E-09 0.0249 0.0007  1.5    1595
+
+ ***********************************************************************************************************************
+ dump no.    2 on file runtpi       nps =   7126939     coll =        7628644     ctm =    1.01     nrn =      114266561
+
+
+         3 warning messages so far.
+
+
+ run terminated when it had used    1 minutes of computer time.
+
+ computer time =    1.01 minutes
+
+ mcnp     version 4c2   01/20/01                      07/12/22 10:11:21                    probid =   07/12/22 10:10:20
