@@ -14,7 +14,7 @@ try:
 except ImportError:
     import importlib_resources as pkg_resources
 # Third party imports:
-from jinja2 import Template, escape
+from jinja2 import Template
 # local imports
 try:
     from .. import static

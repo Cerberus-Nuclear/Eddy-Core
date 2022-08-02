@@ -5,7 +5,7 @@ with open("README.md", "r") as readme:
 
 setuptools.setup(
     name="eddy-mc-core",
-    version="0.4.3",
+    version="0.4.4",
     author="Cerberus Nuclear",
     author_email="nuclear@cerberusnuclear.com",
     description="Eddy, the MCNP and SCALE HTML output converter",
